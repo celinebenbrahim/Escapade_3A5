@@ -11,6 +11,7 @@ import java.util.*;
  * @author Meryem
  */
 public class Hotel {
+    
     private int id;
     private String matriculeFiscale;
     private String nom;
@@ -18,21 +19,27 @@ public class Hotel {
     private int nbrEtoile;
     private String description;
     private int nbChambreTotal;
-    private int idDestination;
-    private enum type {}; 
+    private  int maxChambre;
+    private  Destination destination;
+     
 
     public Hotel() {
     }
 
-    public Hotel(String matriculeFiscale, String nom, String adresse, int nbrEtoile, String description, int nbChambreTotal, int idDestination) {
+    public Hotel(String matriculeFiscale, String nom, String adresse, 
+            int nbrEtoile, String description, int nbChambreTotal, int maxChambre, 
+            Destination destination) {
         this.matriculeFiscale = matriculeFiscale;
         this.nom = nom;
         this.adresse = adresse;
         this.nbrEtoile = nbrEtoile;
         this.description = description;
         this.nbChambreTotal = nbChambreTotal;
-        this.idDestination = idDestination;
+        this.maxChambre = maxChambre;
+        this.destination = destination;
     }
+
+   
 
     public int getId() {
         return id;
@@ -82,6 +89,14 @@ public class Hotel {
         this.description = description;
     }
 
+    public int getMaxChambre() {
+        return maxChambre;
+    }
+
+    public void setMaxChambre(int maxChambre) {
+        this.maxChambre = maxChambre;
+    }
+
     public int getNbChambreTotal() {
         return nbChambreTotal;
     }
@@ -90,23 +105,27 @@ public class Hotel {
         this.nbChambreTotal = nbChambreTotal;
     }
 
-    public int getIdDestination() {
-        return idDestination;
+    public Destination getDestination() {
+        return destination;
     }
 
-    public void setIdDestination(int idDestination) {
-        this.idDestination = idDestination;
+    public void setDestination(Destination destination) {
+        this.destination = destination;
     }
 
     @Override
     public String toString() {
-        return "Hotel{" + "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom + ", adresse=" + adresse + ", nbrEtoile=" + nbrEtoile + ", description=" + description + ", nbChambreTotal=" + nbChambreTotal +  '}';
+        return "Hotel{" + "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom 
+                + ", adresse=" + adresse + ", nbrEtoile=" + nbrEtoile + ", description=" +
+                description + ", nbChambreTotal=" + nbChambreTotal +
+                "nb max chambre: " + maxChambre + "Emplacement:  Ville: " +destination.getVille()+
+                "Pays: "+destination.getPays()+'}';
     }
 
     @Override
     public int hashCode() {
       
-        return id+nbrEtoile+matriculeFiscale.hashCode();
+        return id+nbrEtoile+matriculeFiscale.hashCode()+maxChambre;
     }
 
     @Override

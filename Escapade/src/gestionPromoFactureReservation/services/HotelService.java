@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package gestionPromoFactureReservation.services;
+
 import gestionHotelDestination.entities.IService;
 import escapade.utils.DataSource;
+import gestionPromoFactureReservation.entities.Destination;
 import gestionPromoFactureReservation.entities.Hotel;
 import java.util.List;
 import java.util.ArrayList;
@@ -18,11 +20,11 @@ import java.util.logging.Logger;
  *
  * @author Meryem
  */
-public class HotelService implements IService<Hotel>{
-    
-      private Connection conn;
-    private PreparedStatement pst ;
-    
+public class HotelService implements IService<Hotel> {
+
+    private Connection conn;
+    private PreparedStatement pst;
+
     public HotelService() {
         conn = DataSource.getInstance().getCnx();
     }
@@ -30,7 +32,7 @@ public class HotelService implements IService<Hotel>{
     @Override
     public void supprimerId(int id) {
 
-      String req = "delete from hotel where id=" + id;
+        String req = "delete from hotel where id=" + id;
         try {
             PreparedStatement pst = conn.prepareStatement(req);
             pst.executeUpdate(req);
@@ -39,25 +41,25 @@ public class HotelService implements IService<Hotel>{
             System.out.println(ex.getMessage());
         }
 
-
     }
 
     @Override
     public void ajouter(Hotel h) {
 
-       
-    String req = "insert into hotel  ( matriculeFiscale,nom,adresse,nbrEtoile,description,nbChambreTotal,idDestination)"
-            + " values(?,?,?,?,?,?,6)";
+        String req = "insert into hotel  ( matriculeFiscale,nom,adresse,nbrEtoile,description,"
+                + "nbChambreTotal,idDestination,maxChambre)"
+                + " values(?,?,?,?,?,?,?,?)";
 
         try {
             pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, h.getMatriculeFiscale());
             pst.setString(2, h.getNom());
-             pst.setString(3, h.getAdresse());
+            pst.setString(3, h.getAdresse());
             pst.setInt(4, h.getNbrEtoile());
             pst.setString(5, h.getDescription());
-             pst.setInt(6, h.getNbChambreTotal());
-        
+            pst.setInt(6, h.getNbChambreTotal());
+            pst.setInt(7, h.getDestination().getId());
+            pst.setInt(8, h.getMaxChambre());
             pst.executeUpdate();
             ResultSet generatedKeys = pst.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -72,10 +74,9 @@ public class HotelService implements IService<Hotel>{
 
     @Override
     public void supprimer(Hotel h) {
- String req = "delete from hotel where id = " + h.getId();
+        String req = "delete from hotel where id = " + h.getId();
         try {
             pst = conn.prepareStatement(req);
-            //  pst.setInt(1, p.getId());
             pst.executeUpdate();
             System.out.println("Hotel supprimé");
         } catch (SQLException ex) {
@@ -85,18 +86,20 @@ public class HotelService implements IService<Hotel>{
     }
 
     @Override
-    public void modifier(Hotel h,int id) {
+    public void modifier(Hotel h, int id) {
 
- String req = "update `hotel` SET matriculeFiscale=? ,nom=?,adresse=?,"
-         + "nbrEtoile=?,description=?,nbChambreTotal=?,idDestination=6 where id="+id;
+        String req = "update `hotel` SET matriculeFiscale=? ,nom=?,adresse=?,"
+                + "nbrEtoile=?,description=?,nbChambreTotal=?,idDestination=? ,maxChambre=? where id=" + id;
         try {
             pst = conn.prepareStatement(req);
-          pst.setString(1, h.getMatriculeFiscale());
+            pst.setString(1, h.getMatriculeFiscale());
             pst.setString(2, h.getNom());
-             pst.setString(3, h.getAdresse());
+            pst.setString(3, h.getAdresse());
             pst.setInt(4, h.getNbrEtoile());
             pst.setString(5, h.getDescription());
-             pst.setInt(6, h.getNbChambreTotal());
+            pst.setInt(6, h.getNbChambreTotal());
+            pst.setInt(7, h.getDestination().getId());
+            pst.setInt(8, h.getMaxChambre());
             pst.executeUpdate();
             pst.close();
             System.out.println("Hotel ajouté");
@@ -109,7 +112,7 @@ public class HotelService implements IService<Hotel>{
     @Override
     public List<Hotel> afficher() {
 
-  List<Hotel> LHotel = new ArrayList<>();
+        List<Hotel> LHotel = new ArrayList<>();
         String req = " select * from `hotel`";
         try {
             pst = conn.prepareStatement(req);
@@ -117,6 +120,19 @@ public class HotelService implements IService<Hotel>{
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+
+                Destination d = new Destination();
+                String req1 = " select * from `destination` where id=" + rs.getInt(8);
+                PreparedStatement pst1 = conn.prepareStatement(req1);
+                ResultSet rs1 = pst1.executeQuery();
+               
+
+                    if (rs1.getInt("id") == rs.getInt(8)) 
+                    {
+                        d = (Destination) rs1.getObject(1);
+                    }
+                
+
                 Hotel h = new Hotel();
                 h.setId(rs.getInt("id"));
                 h.setMatriculeFiscale(rs.getString(2));
@@ -125,8 +141,8 @@ public class HotelService implements IService<Hotel>{
                 h.setNbrEtoile(rs.getInt(5));
                 h.setDescription(rs.getString(6));
                 h.setNbChambreTotal(rs.getInt(7));
-                h.setIdDestination(rs.getInt(8));
-             
+                h.setDestination(d);
+                h.setMaxChambre(rs.getInt(9));
                 LHotel.add(h);
             }
         } catch (SQLException ex) {
@@ -135,7 +151,4 @@ public class HotelService implements IService<Hotel>{
         return LHotel;
 
     }
-
-    
-    
 }

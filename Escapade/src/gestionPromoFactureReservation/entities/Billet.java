@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package gestionPromoFactureReservation.entities;
+import gestionUserReclamation.entities.Utilisateur;
 
-import java.sql.*;
-import java.util.Objects;
+import java.util.*;
 
 /**
  *
@@ -17,10 +17,10 @@ public class Billet {
     private int id;
     private Date dateAller;
     private Date dateRetour;
-    private int type; //faut changer ca dans la bd en enum
+    private TypeBillet type; 
     private double prix;
     private String compagnieAerienne;
-    private int idClient;
+    private Utilisateur client;
 
     public int getId() {
         return id;
@@ -46,11 +46,11 @@ public class Billet {
         this.dateRetour = dateRetour;
     }
 
-    public int getType() {
+    public TypeBillet getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(TypeBillet type) {
         this.type = type;
     }
 
@@ -70,25 +70,30 @@ public class Billet {
         this.compagnieAerienne = compagnieAerienne;
     }
 
-    public int getIdClient() {
-        return idClient;
-    }
-
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
-    }
+  
 
     public Billet() {
     }
 
-    public Billet(Date dateAller, Date dateRetour, int type, double prix, String compagnieAerienne, int idClient) {
+    public Billet(Date dateAller, Date dateRetour, TypeBillet type, double prix, 
+            String compagnieAerienne, Utilisateur client) {
         this.dateAller = dateAller;
         this.dateRetour = dateRetour;
         this.type = type;
         this.prix = prix;
         this.compagnieAerienne = compagnieAerienne;
-        this.idClient = idClient;
+        this.client = client;
     }
+
+    public Utilisateur getClient() {
+        return client;
+    }
+
+    public void setClient(Utilisateur client) {
+        this.client = client;
+    }
+
+   
 
     @Override
     public String toString() {
@@ -98,7 +103,7 @@ public class Billet {
     @Override
     public int hashCode() {
       
-        return id+idClient;
+        return id;
     }
 
     @Override
@@ -122,9 +127,6 @@ public class Billet {
         if (Double.doubleToLongBits(this.prix) != Double.doubleToLongBits(other.prix)) {
             return false;
         }
-        if (this.idClient != other.idClient) {
-            return false;
-        }
         if (!Objects.equals(this.compagnieAerienne, other.compagnieAerienne)) {
             return false;
         }
@@ -134,7 +136,12 @@ public class Billet {
         if (!Objects.equals(this.dateRetour, other.dateRetour)) {
             return false;
         }
+        if (!Objects.equals(this.client, other.client)) {
+            return false;
+        }
         return true;
     }
+
+  
 
 }

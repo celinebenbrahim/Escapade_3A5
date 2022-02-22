@@ -12,29 +12,48 @@ package gestionPromoFactureReservation.entities;
 public class Chambre {
     private int id;
     private  int num;
-    private enum type {simplee,doublee,triple,quadruple,suite};
-    private enum vueSurMer {yes,no };
+    private Type type ;
+    private VueSurMer vueSurMer ;
     private String description ;
-    private double prixNuitée ;
-    private enum status {disponible,indisponible};
-    private int idHotel;
+    private double prixNuit ;
+    private Status status ;
+    private Hotel hotel;
 
     public Chambre() {
     }
 
-    public Chambre(int num, String description, double prixNuitée, int idHotel) {
+    public Chambre(int num, Type type, VueSurMer vueSurMer, String description, double prixNuitée, Status status, Hotel hotel) {
         this.num = num;
+        this.type = type;
+        this.vueSurMer = vueSurMer;
         this.description = description;
-        this.prixNuitée = prixNuitée;
-        this.idHotel = idHotel;
+        this.prixNuit = prixNuitée;
+        this.status = status;
+        this.hotel = hotel;
     }
 
-    public Chambre(int id, int num, String description, double prixNuitée, int idHotel) {
-        this.id = id;
-        this.num = num;
-        this.description = description;
-        this.prixNuitée = prixNuitée;
-        this.idHotel = idHotel;
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public VueSurMer getVueSurMer() {
+        return vueSurMer;
+    }
+
+    public void setVueSurMer(VueSurMer vueSurMer) {
+        this.vueSurMer = vueSurMer;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getId() {
@@ -62,25 +81,28 @@ public class Chambre {
     }
 
     public double getPrixNuitée() {
-        return prixNuitée;
+        return prixNuit;
     }
 
     public void setPrixNuitée(double prixNuitée) {
-        this.prixNuitée = prixNuitée;
+        this.prixNuit = prixNuitée;
     }
 
-    public int getIdHotel() {
-        return idHotel;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setIdHotel(int idHotel) {
-        this.idHotel = idHotel;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     @Override
     public String toString() {
-        return "Chambre{" + "id=" + id + ", num=" + num + ", description=" + description + ", prixNuit\u00e9e=" + prixNuitée + ", idHotel=" + idHotel + '}';
+        return "Chambre{" + "num=" + num + ", type=" + type + ", vueSurMer=" + vueSurMer + ", description=" + description + ", prixNuit=" + prixNuit + 
+                ", status=" + status + ",Hotel: " + hotel.getNom() +  " } ";
     }
+
+  
     
     
     

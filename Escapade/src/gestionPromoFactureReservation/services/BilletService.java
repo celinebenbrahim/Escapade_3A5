@@ -8,6 +8,7 @@ package gestionPromoFactureReservation.services;
 import gestionHotelDestination.entities.IService;
 import escapade.utils.DataSource;
 import gestionPromoFactureReservation.entities.Billet;
+import gestionPromoFactureReservation.entities.TypeBillet;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,19 +45,22 @@ public class BilletService implements IService<Billet> {
     @Override
     public void ajouter(Billet b) {
 
-        String req = "insert into billet  (dateAller,dateRetour,type,prix,compagnieAerienne) values(?,?,?,?,?)";
+        String req = "insert into billet  (dateAller,dateRetour,type,prix,compagnieAerienne,idClient)"
+                + " values(?,?,?,?,?,?)";
 
         try {
             pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
-            pst.setDate(1, b.getDateAller());
-            pst.setDate(2, b.getDateRetour());
-            pst.setInt(3, b.getType());
+            pst.setDate(1,new java.sql.Date( b.getDateAller().getTime()));
+            pst.setDate(2, new java.sql.Date(b.getDateRetour().getTime()));
+            pst.setString(3, b.getType().toString());          
             pst.setDouble(4, b.getPrix());
             pst.setString(5, b.getCompagnieAerienne());
-
+            pst.setInt(6, b.getClient().getId());
             pst.executeUpdate();
             ResultSet generatedKeys = pst.getGeneratedKeys();
-            if (generatedKeys.next()) {
+            
+            if (generatedKeys.next()) 
+            {
                 b.setId(generatedKeys.getInt(1));
             }
             System.out.println("Billet ajoutée");
@@ -72,7 +76,6 @@ public class BilletService implements IService<Billet> {
         String req = "delete from billet where id = " + b.getId();
         try {
             pst = conn.prepareStatement(req);
-            //  pst.setInt(1, p.getId());
             pst.executeUpdate();
             System.out.println("Billet supprimée");
         } catch (SQLException ex) {
@@ -87,12 +90,12 @@ public class BilletService implements IService<Billet> {
         String req = "update `billet` SET dateAller=?,dateRetour=?,type=?,prix=?,compagnieAerienne=? where id=" + id;
         try {
             pst = conn.prepareStatement(req);
-            pst.setDate(1, b.getDateAller());
-            pst.setDate(2, b.getDateRetour());
-            pst.setInt(3, b.getType());
+            pst.setDate(1,new java.sql.Date( b.getDateAller().getTime()));
+            pst.setDate(2, new java.sql.Date(b.getDateRetour().getTime()));
+            pst.setString(3, b.getType().toString());
             pst.setDouble(4, b.getPrix());
             pst.setString(5, b.getCompagnieAerienne());
-
+            pst.setInt(6, b.getClient().getId());
             pst.executeUpdate();
             pst.close();
             System.out.println("Billet ajoutée");
@@ -113,11 +116,10 @@ public class BilletService implements IService<Billet> {
 
             while (rs.next()) {
                 Billet b = new Billet();
-
                 b.setId(rs.getInt("id"));
                 b.setDateAller(rs.getDate(2));
                 b.setDateRetour(rs.getDate(3));
-                b.setType(rs.getInt(4));
+                b.setType(TypeBillet.valueOf(rs.getString(4)));
                 b.setPrix(rs.getFloat(5));
                 b.setCompagnieAerienne(rs.getString(6));
                 LBillet.add(b);

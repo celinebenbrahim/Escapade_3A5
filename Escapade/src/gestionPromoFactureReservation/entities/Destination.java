@@ -11,6 +11,7 @@ import java.util.*;
  * @author Meryem
  */
 public class Destination {
+   
     private int id;
     private String pays;
     private String ville;
