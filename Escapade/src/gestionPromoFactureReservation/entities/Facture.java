@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package gestionPromoFactureReservation.entities;
+import gestionUserReclamation.entities.Utilisateur;
 
 import java.util.Date;
 
@@ -16,29 +17,32 @@ public class Facture {
     private int id;
     private float prixTotal;
     private Date date;
-    private int idClient;
+    private Utilisateur client;
     private float prixFinal;
-    private int idPromotion;
+    private Promotion promotion;
 
     public Facture() {
     }
 
-    public Facture(int id, float prixTotal, Date date, int idClient, float prixFinal, int idPromotion) {
+    public Facture(int id, float prixTotal, Date date, Utilisateur client, float prixFinal, Promotion promotion) {
         this.id = id;
         this.prixTotal = prixTotal;
         this.date = date;
-        this.idClient = idClient;
+        this.client = client;
         this.prixFinal = prixFinal;
-        this.idPromotion = idPromotion;
+        this.promotion = promotion;
     }
 
-    public Facture(float prixTotal, Date date, int idClient, float prixFinal, int idPromotion) {
+    public Facture(float prixTotal, Date date, Utilisateur client, float prixFinal, Promotion promotion) {
         this.prixTotal = prixTotal;
         this.date = date;
-        this.idClient = idClient;
+        this.client = client;
         this.prixFinal = prixFinal;
-        this.idPromotion = idPromotion;
+        this.promotion = promotion;
     }
+
+    
+
 
     public int getId() {
         return id;
@@ -64,13 +68,15 @@ public class Facture {
         this.date = date;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public Utilisateur getClient() {
+        return client;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public void setClient(Utilisateur client) {
+        this.client = client;
     }
+
+  
 
     public float getPrixFinal() {
         return prixFinal;
@@ -80,17 +86,23 @@ public class Facture {
         this.prixFinal = prixFinal;
     }
 
-    public int getIdPromotion() {
-        return idPromotion;
+    public Promotion getPromotion() {
+        return promotion;
     }
 
-    public void setIdPromotion(int idPromotion) {
-        this.idPromotion = idPromotion;
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
     }
 
     @Override
     public String toString() {
-        return "Facture{" + "id=" + id + ", prixTotal=" + prixTotal + ", date=" + date + ", idClient=" + idClient + ", prixFinal=" + prixFinal + ", idPromotion=" + idPromotion + '}';
+        return "Facture{" + "id=" + id + ", prixTotal=" + prixTotal + ", date=" + date + ", client=" + client + ", prixFinal=" + prixFinal + ", promotion=" + promotion + '}';
     }
+
+    
+
+    
+
+   
 
 }

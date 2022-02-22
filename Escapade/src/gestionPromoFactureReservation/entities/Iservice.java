@@ -20,6 +20,8 @@ public interface Iservice<T> {
     void supprimer(T entity);
 
     void modifier(T entity,int id);
+    
+   
 
     List<T> afficher();
 }
