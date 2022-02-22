@@ -36,8 +36,8 @@ public class PromotionService implements Iservice<Promotion> {
 
             pst = conn.prepareStatement(req, ste.RETURN_GENERATED_KEYS);
             pst.setFloat(1, p.getTaux());
-            pst.setDate(2, p.getDateDebut());
-            pst.setDate(3, p.getDateFin());
+            pst.setDate(2, new java.sql.Date(p.getDateDebut().getTime()));
+            pst.setDate(3, new java.sql.Date(p.getDateFin().getTime()));
             pst.executeUpdate();
             ResultSet generatedKeys = pst.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -73,8 +73,8 @@ public class PromotionService implements Iservice<Promotion> {
         try {
             pst = conn.prepareStatement(req);
             pst.setFloat(1, p.getTaux());
-            pst.setDate(2, p.getDateDebut());
-            pst.setDate(3, p.getDateFin());
+            pst.setDate(2, new java.sql.Date(p.getDateDebut().getTime()));
+            pst.setDate(3, new java.sql.Date(p.getDateFin().getTime()));
             pst.executeUpdate();
             pst.close();
             System.out.println("personne ajoutée");

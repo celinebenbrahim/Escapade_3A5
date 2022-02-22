@@ -5,36 +5,39 @@
  */
 package gestionPromoFactureReservation.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
  * @author asus
  */
 public class Facture {
-    
+
     private int id;
     private float prixTotal;
-    private Date date ;
+    private Date date;
     private int idClient;
     private float prixFinal;
+    private int idPromotion;
 
     public Facture() {
     }
 
-    public Facture(int id, float prixTotal, Date date, int idClient, float prixFinal) {
+    public Facture(int id, float prixTotal, Date date, int idClient, float prixFinal, int idPromotion) {
         this.id = id;
         this.prixTotal = prixTotal;
         this.date = date;
         this.idClient = idClient;
         this.prixFinal = prixFinal;
+        this.idPromotion = idPromotion;
     }
 
-    public Facture(float prixTotal, Date date, int idClient, float prixFinal) {
+    public Facture(float prixTotal, Date date, int idClient, float prixFinal, int idPromotion) {
         this.prixTotal = prixTotal;
         this.date = date;
         this.idClient = idClient;
         this.prixFinal = prixFinal;
+        this.idPromotion = idPromotion;
     }
 
     public int getId() {
@@ -77,14 +80,17 @@ public class Facture {
         this.prixFinal = prixFinal;
     }
 
-   
+    public int getIdPromotion() {
+        return idPromotion;
+    }
+
+    public void setIdPromotion(int idPromotion) {
+        this.idPromotion = idPromotion;
+    }
 
     @Override
     public String toString() {
-        return "Facture{" + "id=" + id + ", prixTotal=" + prixTotal + ", date=" + date + ", idClient=" + idClient + ", prixFinal=" + prixFinal + '}';
+        return "Facture{" + "id=" + id + ", prixTotal=" + prixTotal + ", date=" + date + ", idClient=" + idClient + ", prixFinal=" + prixFinal + ", idPromotion=" + idPromotion + '}';
     }
-    
-    
-    
-    
+
 }
