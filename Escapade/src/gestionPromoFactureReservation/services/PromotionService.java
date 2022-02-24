@@ -14,6 +14,7 @@ import escapade.utils.DataSource;
 import gestionPromoFactureReservation.entities.Iservice;
 import gestionPromoFactureReservation.entities.Promotion;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -96,7 +97,6 @@ public class PromotionService implements Iservice<Promotion> {
             while (rs.next()) {
                 Promotion p = new Promotion();
                 p.setId(rs.getInt("id"));
-
                 p.setTaux(rs.getFloat(2));
                 p.setDateDebut(rs.getDate(3));
                 p.setDateFin(rs.getDate(3));
@@ -119,7 +119,36 @@ public class PromotionService implements Iservice<Promotion> {
             System.out.println(ex.getMessage());
         }
     }
+public List<Promotion> Tri() {
+        List<Promotion> Promotions = new ArrayList<>();
+        String req = " select * from `promotion`order by taux ASC";
 
-    
+        try {
+            pst = conn.prepareStatement(req);
 
-}
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Promotion p = new Promotion();
+                p.setId(rs.getInt("id"));
+                p.setTaux(rs.getFloat(2));
+                p.setDateDebut(rs.getDate(3));
+                p.setDateFin(rs.getDate(3));
+                Promotions.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Promotions;
+    }
+
+    public void rechercher(float taux){
+List<Promotion> result = afficher().stream().
+        filter(line -> taux==line.getTaux()).collect(Collectors.toList());
+                    System.out.println("----------");
+                    result.forEach(System.out::println);
+    }
+
+
+
+  }

@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 /**
  *
  * @author Meryem
@@ -40,22 +41,29 @@ public class Escapade {
         Date dateD = format.parse("2022-02-18");
         Date dateF = format.parse("2022-02-19");
         PromotionService promotionService = new PromotionService();
-        Promotion p = new Promotion(10, dateD, dateF);
+//        Promotion p = new Promotion(10, dateD, dateF);
 //        promotionService.ajouter(p);
 //        Promotion p1 = new Promotion(20, dateD, dateF);
-//        ps.ajouter(p1);
-//        System.out.println(ps.afficher());
-//        ps.modifier(p, 1);
-//        ps.supprimer(p1);
-//        ps.supprimerId(8);
+//       promotionService.ajouter(p1);
+//        Promotion p2 = new Promotion(5, dateD, dateF);
+//       promotionService.ajouter(p2);
+//        System.out.println(promotionService.afficher());
+//        System.out.println(promotionService.Tri());
+         // promotionService.rechercher(10);
+        
+//        promotionService.modifier(p, 1);
+//        promotionService.supprimer(p1);
+//       promotionService.supprimerId(8);
 
         //Facture    
         FactureService factureService = new FactureService();
-        Facture f = new Facture(100, date, u, 500, p);
-          factureService.ajouter(f);
-        Facture f1 = new Facture(200, date, u, 1000, p);
-        factureService.ajouter(f1);
-   System.out.println(factureService.afficher());
+//        Facture f = new Facture(100, date, u, 500, p);
+//          factureService.ajouter(f);
+//        Facture f1 = new Facture(200, date, u, 1000, p);
+//        factureService.ajouter(f1);
+   //System.out.println(factureService.afficher());
+  // System.out.println(factureService.Tri());
+ factureService.rechercher(format.parse("2022-02-23"));
 //        fs.supprimerId(5);
 //        fs.supprimer(f);
 //        fs.modifier(f, 5);

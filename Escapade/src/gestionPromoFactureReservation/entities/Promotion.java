@@ -68,8 +68,10 @@ public class Promotion {
 
     @Override
     public String toString() {
-        return "Promotion{" + "id=" + id + ", taux=" + taux + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + '}';
+        return "Promotion{" + "taux=" + taux + '}';
     }
+
+   
     
     
     

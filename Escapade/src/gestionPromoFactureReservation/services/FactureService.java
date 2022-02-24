@@ -16,7 +16,9 @@ import gestionPromoFactureReservation.entities.Facture;
 import gestionPromoFactureReservation.entities.Iservice;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionUserReclamation.entities.Utilisateur;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -98,17 +100,36 @@ public class FactureService implements Iservice<Facture> {
 
         try {
             pst = conn.prepareStatement(req);
-
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
+                String req1 = " select prenom,nom from `Utilisateur` where id=" + rs.getInt(4);
+                PreparedStatement pst1 = conn.prepareStatement(req1);
+                ResultSet rss = pst1.executeQuery();
                 Facture f = new Facture();
+                Utilisateur u=new Utilisateur();
+                if (rss.next())
+                {
+                InputStream stream = rss.getBinaryStream(1);
+                u.setNom(rss.getString(1));
+                u.setPrenom(rss.getString(2));
+                }
+                String req2 = " select taux from `promotion` where id=" + rs.getInt(6);
+                PreparedStatement pst2 = conn.prepareStatement(req2);
+                ResultSet rss1 = pst2.executeQuery();
+                Promotion p= new Promotion();
+                 if (rss1.next())
+                {
+                InputStream stream = rss.getBinaryStream(1);
+                p.setTaux(rss1.getFloat(1));
+                }
                 f.setId(rs.getInt("id"));
                 f.setPrixTotal((rs.getFloat(2)));
                 f.setDate(rs.getDate(3));
-                f.setClient((Utilisateur)rs.getObject(4));
+               // f.setClient((Utilisateur)rs.getObject(4));
+               f.setClient(u);
                 f.setPrixFinal(rs.getFloat(5));
-                f.setPromotion((Promotion) rs.getObject(6));
+                f.setPromotion(p);
                 Factures.add(f);
             }
         } catch (SQLException ex) {
@@ -128,20 +149,57 @@ public class FactureService implements Iservice<Facture> {
             System.out.println(ex.getMessage());
         }
     }
-  /*public List<Facture> chercherPointDeVente(List<Facture> initialList, String input) {
-        List<Facture> strList = initialList.stream()
-                           .map( Facture::concat )
-                           .filter(pt -> pt.contains(input))
-                           .map(pt -> new Facture(Integer.parseInt(pt.split(".@.")[0]),pt.split(".@.")[1],pt.split(".@.")[2],pt.split(".@.")[3],pt.split(".@.")[4],"yyyy-M-d"))
-                           .collect( Collectors.toList() );
-        
-        return strList;
+
+public List<Facture> Tri() {
+        List<Facture> Factures = new ArrayList<>();
+        String req = " select * from `facture` order by date desc";
+
+        try {
+            pst = conn.prepareStatement(req);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                String req1 = " select prenom,nom from `Utilisateur` where id=" + rs.getInt(4);
+                PreparedStatement pst1 = conn.prepareStatement(req1);
+                ResultSet rss = pst1.executeQuery();
+                Facture f = new Facture();
+                Utilisateur u=new Utilisateur();
+                if (rss.next())
+                {
+                InputStream stream = rss.getBinaryStream(1);
+                u.setNom(rss.getString(1));
+                u.setPrenom(rss.getString(2));
+                }
+                String req2 = " select taux from `promotion` where id=" + rs.getInt(6);
+                PreparedStatement pst2 = conn.prepareStatement(req2);
+                ResultSet rss1 = pst2.executeQuery();
+                Promotion p= new Promotion();
+                 if (rss1.next())
+                {
+                InputStream stream = rss.getBinaryStream(1);
+                p.setTaux(rss1.getFloat(1));
+                }
+                f.setId(rs.getInt("id"));
+                f.setPrixTotal((rs.getFloat(2)));
+                f.setDate(rs.getDate(3));
+               // f.setClient((Utilisateur)rs.getObject(4));
+               f.setClient(u);
+                f.setPrixFinal(rs.getFloat(5));
+                f.setPromotion(p);
+                Factures.add(f);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Factures;
     }
-  public String concat(){
-        return reference + ".@." + name + ".@." + proprietaire + ".@." + adresse + ".@." + date_ouverture ;
-    }
- */
    
+    public void rechercher(java.util.Date date) {
+        List<Facture> result = afficher().stream().filter(line -> date.equals(line.getDate())).collect(Collectors.toList());
+                    System.out.println("----------");
+                    result.forEach(System.out::println);}
 
-
+   
 }
+
+
