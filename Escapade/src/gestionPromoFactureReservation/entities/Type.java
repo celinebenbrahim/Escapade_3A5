@@ -10,6 +10,6 @@ package gestionPromoFactureReservation.entities;
  * @author Meryem
  */
 public enum Type {
-    simple,doublee,triple,quadruple,suite
+    simple,doublee;
     
 }

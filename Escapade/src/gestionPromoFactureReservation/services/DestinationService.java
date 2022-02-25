@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -115,6 +116,39 @@ public class DestinationService implements IService<Destination> {
             System.out.println(ex.getMessage());
         }
         return LDestination;
+    }
+    
+     @Override
+    public List<Destination> tri() {
+
+        List<Destination> LDestination = new ArrayList<>();
+        String req = " select * from `destination` order by pays DESC";
+        try {
+            pst = conn.prepareStatement(req);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Destination d = new Destination();
+                d.setId(rs.getInt("id"));
+                d.setPays(rs.getString(2));
+                d.setVille(rs.getString(3));
+                LDestination.add(d);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return LDestination;
+    }
+    
+      @Override
+    public void rechercher(String pays )
+            
+    {
+        List<Destination> result = afficher().stream().
+                filter(line -> pays.equals(line.getPays())).collect(Collectors.toList());
+                    System.out.println("----------");
+                    result.forEach(System.out::println);
     }
 
 }

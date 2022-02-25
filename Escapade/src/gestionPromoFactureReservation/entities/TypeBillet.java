@@ -11,6 +11,6 @@ package gestionPromoFactureReservation.entities;
  */
 public enum TypeBillet {
     
-    tarifAffaires,prepaid,openEtRetourModifiable,AllerOuRetourSimple,StandBy ;
+    tarifAffaires,AllerOuRetourSimple ;
     
 }

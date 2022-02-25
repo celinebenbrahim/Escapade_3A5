@@ -18,5 +18,6 @@ public interface IService  <T>{
     void supprimer(T entity);
     void modifier(T entity,int id);
     List<T> afficher();
-    
+    List<T> tri();
+    void rechercher(String pays );
 }

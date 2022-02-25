@@ -80,11 +80,11 @@ public class Chambre {
         this.description = description;
     }
 
-    public double getPrixNuitée() {
+    public double getPrixNuit() {
         return prixNuit;
     }
 
-    public void setPrixNuitée(double prixNuitée) {
+    public void setPrixNuit(double prixNuitée) {
         this.prixNuit = prixNuitée;
     }
 
