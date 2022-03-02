@@ -26,6 +26,10 @@ public class Promotion {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
     }
+     public Promotion(float taux) {
+        this.taux = taux;
+       
+    }
 
     public Promotion(int id, float taux, Date dateDebut, Date dateFin) {
         this.id = id;
@@ -71,6 +75,7 @@ public class Promotion {
         return "Promotion{" + "taux=" + taux + '}';
     }
 
+    
    
     
     

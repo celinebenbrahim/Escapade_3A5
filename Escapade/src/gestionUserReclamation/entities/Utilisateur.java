@@ -50,6 +50,16 @@ public class Utilisateur {
         this.role = role;
     }
 
+    public Utilisateur(String nom, String prenom, String email, int numTel, String ville) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+      
+        this.numTel = numTel;
+        this.ville = ville;
+        
+    }
+
     public int getId() {
         return id;
     }
@@ -130,7 +140,7 @@ public class Utilisateur {
         this.role = role;
     }
 
-    @Override
+     @Override
     public String toString() {
         return "Utilisateur{"  + "nom=" + nom + ", prenom=" + prenom + '}';
     }

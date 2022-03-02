@@ -5,7 +5,7 @@
 package gestionUserReclamation.services;
 
 import escapade.utils.DataSource;
-import gestionPromoFactureReservation.entities.Iservice;
+import gestionHotelDestination.entities.IService;
 import gestionUserReclamation.entities.Role;
 import gestionUserReclamation.entities.Utilisateur;
 import java.sql.Connection;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author mahdi
  */
-public class UtilisateurService implements Iservice<Utilisateur> {
+public class UtilisateurService implements IService<Utilisateur> {
 
     private Connection conn;
     private PreparedStatement pst;
@@ -33,10 +33,12 @@ public class UtilisateurService implements Iservice<Utilisateur> {
 
     @Override
     public void ajouter(Utilisateur user) {
+        
         String req = "INSERT INTO `utilisateur` (`nom`,`prenom`,`email`,`dateDeNaissance`,`numTel`,`ville`,`login`,`mdp`,`role`) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
-            pst = conn.prepareStatement(req, ste.RETURN_GENERATED_KEYS);
+            
+            pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, user.getNom());
             pst.setString(2, user.getPrenom());
             pst.setString(3, user.getEmail());
@@ -49,11 +51,10 @@ public class UtilisateurService implements Iservice<Utilisateur> {
             pst.executeUpdate();
             
             ResultSet generatedKeys = pst.getGeneratedKeys();
+            
             if (generatedKeys.next()) {
-
                 user.setId(generatedKeys.getInt(1));
             }
-            
             System.out.println("utilisateur ajoutée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -141,6 +142,16 @@ public class UtilisateurService implements Iservice<Utilisateur> {
 
     @Override
     public void modifier(Utilisateur entity, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Utilisateur> tri() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void rechercher(String pays) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

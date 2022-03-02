@@ -14,6 +14,8 @@ import escapade.utils.DataSource;
 import gestionPromoFactureReservation.entities.Iservice;
 import gestionPromoFactureReservation.entities.Promotion;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -149,6 +151,65 @@ List<Promotion> result = afficher().stream().
                     result.forEach(System.out::println);
     }
 
+//taatik list kemla 
+ /*public boolean chercher(int id) throws SQLException {
+        String req="select * from promotion";
+        List<Integer> list = new ArrayList<>();
+        
+        try {
+            ste=conn.createStatement();
+            ResultSet rs = ste.executeQuery(req);
+            while(rs.next()){
+                list.add(rs.getInt(1));
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Promotion.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        list.forEach(System.out::println);
+        return list.contains(id);
+    }*/
+    
+     public Promotion FindById(int id) throws SQLException {
+        String req = "select * from promotion where id = ?";
+        Promotion promotion = null;
+        try {
+            pst = conn.prepareStatement(req);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
 
+                promotion = new Promotion(rs.getInt(1), rs.getFloat(2), rs.getDate(3), rs.getDate(4));
+                System.out.println(promotion);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return promotion;
+    }
 
+          public Promotion FindByTaux(float taux)  {
+        String req = "select * from promotion where taux = ?";
+        Promotion promotion = null;
+        try {
+            pst = conn.prepareStatement(req);
+            pst.setFloat(1, taux);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+
+                promotion = new Promotion(rs.getInt(1), rs.getFloat(2), rs.getDate(3), rs.getDate(4));
+                System.out.println(promotion);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return promotion;
+    }
+          
+      
+       
+      
+       
+    
   }

@@ -5,7 +5,7 @@
 package gestionUserReclamation.services;
 
 import escapade.utils.DataSource;
-import gestionPromoFactureReservation.entities.Iservice;
+import gestionHotelDestination.entities.IService;
 import gestionUserReclamation.entities.Reclamation;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author mahdi
  */
-public class ReclamationService implements Iservice<Reclamation> {
+public class ReclamationService implements IService<Reclamation> {
 
     private Connection conn;
     private PreparedStatement pst;
@@ -112,6 +112,16 @@ public class ReclamationService implements Iservice<Reclamation> {
 
     @Override
     public void modifier(Reclamation entity, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Reclamation> tri() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void rechercher(String pays) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
