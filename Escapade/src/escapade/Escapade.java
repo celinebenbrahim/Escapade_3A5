@@ -31,6 +31,7 @@ import gestionPromoFactureReservation.entities.Facture;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionPromoFactureReservation.services.PromotionService;
 import gestionPromoFactureReservation.services.FactureService;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -43,7 +44,7 @@ public class Escapade {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, SQLException {
         // TODO code application logic here
 
         //Date
@@ -143,13 +144,13 @@ public class Escapade {
         Date dateD = format.parse("2022-02-18");
         Date dateF = format.parse("2022-02-19");
        PromotionService promotionService = new PromotionService();
-       Promotion p = new Promotion(10, dateD, dateF);
-    //   promotionService.ajouter(p);
+//       Promotion p = new Promotion(10, dateD, dateF);
+//       promotionService.ajouter(p);
 //        Promotion p1 = new Promotion(20, dateD, dateF);
 //       promotionService.ajouter(p1);
 //        Promotion p2 = new Promotion(5, dateD, dateF);
 //       promotionService.ajouter(p2);
-System.out.println(promotionService.afficher());
+//System.out.println(promotionService.afficher());
 //        System.out.println(promotionService.Tri());
         // promotionService.rechercher(10);
         //promotionService.chercher(3);
@@ -164,20 +165,22 @@ System.out.println(promotionService.afficher());
         //Facture   
         Date date = format.parse("2022-02-17");
      Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
-     //  userService.ajouter(u);
-        Promotion p1 = new Promotion(10, dateD, dateF);
-      //  promotionService.ajouter(p1);
+       userService.ajouter(u);
+        Promotion p1 = new Promotion(5, dateD, dateF);
+        promotionService.ajouter(p1);
         FactureService factureService = new FactureService();
-      Facture f = new Facture(100, date, u, 500, p1);
-     // factureService.ajouter(f);
-        Facture f1 = new Facture(200, date, u, 1000, p1);
+        Facture f = new Facture(100, date, u,0,p1);
+        factureService.ajouter(f);
+       // Facture f1 = new Facture(200, date, u, 1000, p1);
       // factureService.ajouter(f1);
       //  System.out.println(factureService.CalculerPrixF(f));
       System.out.println(factureService.afficher());
+      factureService.CalculerPrixF();
+       System.out.println(factureService.afficher());
         // System.out.println(factureService.Tri());
         //factureService.rechercher(format.parse("2022-02-23"));
        // factureService.chercher(3);
-//        fs.supprimerId(5);
+     //  factureService.supprimerId(85);
 //        fs.supprimer(f);
 //        fs.modifier(f, 5);
 

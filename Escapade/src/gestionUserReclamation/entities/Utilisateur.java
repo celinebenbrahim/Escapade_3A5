@@ -11,7 +11,9 @@ import java.util.Date;
  * @author mahdi
  */
 public class Utilisateur {
-    private int id;
+
+    
+    private int idU;
     private String nom;
     private String prenom;
     private String email;
@@ -25,8 +27,8 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(int id, String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String login, String mdp, Role role) {
-        this.id = id;
+    public Utilisateur(int idU, String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String login, String mdp, Role role) {
+        this.idU = idU;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -37,6 +39,8 @@ public class Utilisateur {
         this.mdp = mdp;
         this.role = role;
     }
+
+   
 
     public Utilisateur(String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String login, String mdp, Role role) {
         this.nom = nom;
@@ -60,13 +64,31 @@ public class Utilisateur {
         
     }
 
-    public int getId() {
-        return id;
+    public Utilisateur(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Utilisateur(int idU, String nom, String prenom) {
+        this.idU = idU;
+        this.nom = nom;
+        this.prenom = prenom;
     }
+
+    public Utilisateur(int idU) {
+        this.idU = idU;
+    }
+
+    public int getIdU() {
+        return idU;
+    }
+
+    public void setIdU(int idU) {
+        this.idU = idU;
+    }
+
+  
+
 
     public String getNom() {
         return nom;
@@ -142,7 +164,7 @@ public class Utilisateur {
 
      @Override
     public String toString() {
-        return "Utilisateur{"  + "nom=" + nom + ", prenom=" + prenom + '}';
+        return  nom +" " + prenom ;
     }
     
     

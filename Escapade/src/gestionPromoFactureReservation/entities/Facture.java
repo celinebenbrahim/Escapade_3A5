@@ -7,6 +7,7 @@ package gestionPromoFactureReservation.entities;
 import gestionUserReclamation.entities.Utilisateur;
 
 import java.util.Date;
+import javafx.scene.control.DatePicker;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.Date;
  */
 public class Facture {
 
-    private int id;
+    private int idF;
     private float prixTotal;
     private Date date;
     private Utilisateur client;
@@ -24,14 +25,20 @@ public class Facture {
     public Facture() {
     }
 
-    public Facture(int id, float prixTotal, Date date, Utilisateur client, float prixFinal, Promotion promotion) {
-        this.id = id;
+    public Facture(int idF) {
+        this.idF = idF;
+    }
+
+    public Facture(int idF, float prixTotal, Date date, Utilisateur client, float prixFinal, Promotion promotion) {
+        this.idF = idF;
         this.prixTotal = prixTotal;
         this.date = date;
         this.client = client;
         this.prixFinal = prixFinal;
         this.promotion = promotion;
     }
+
+    
 
     public Facture(float prixTotal, Date date, Utilisateur client, float prixFinal, Promotion promotion) {
         this.prixTotal = prixTotal;
@@ -43,22 +50,14 @@ public class Facture {
 
     
 
-
-    public int getId() {
-        return id;
+    public int getIdF() {
+        return idF;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdF(int idF) {
+        this.idF = idF;
     }
 
-    public float getPrixTotal() {
-        return prixTotal;
-    }
-
-    public void setPrixTotal(float prixTotal) {
-        this.prixTotal = prixTotal;
-    }
 
     public Date getDate() {
         return date;
@@ -76,7 +75,13 @@ public class Facture {
         this.client = client;
     }
 
-  
+    public float getPrixTotal() {
+        return prixTotal;
+    }
+
+    public void setPrixTotal(float prixTotal) {
+        this.prixTotal = prixTotal;
+    }
 
     public float getPrixFinal() {
         return prixFinal;
@@ -85,6 +90,12 @@ public class Facture {
     public void setPrixFinal(float prixFinal) {
         this.prixFinal = prixFinal;
     }
+
+  
+
+  
+
+   
 
     public Promotion getPromotion() {
         return promotion;

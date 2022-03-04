@@ -13,6 +13,8 @@ import java.util.Date;
  * @author asus
  */
 public class Promotion {
+
+   
     private int id;
     private float taux;
     private Date dateDebut;
@@ -26,6 +28,7 @@ public class Promotion {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
     }
+    
      public Promotion(float taux) {
         this.taux = taux;
        
@@ -72,8 +75,17 @@ public class Promotion {
 
     @Override
     public String toString() {
-        return "Promotion{" + "taux=" + taux + '}';
+        return   taux + ""; 
     }
+
+    public Promotion(int id, float taux) {
+        this.id = id;
+        this.taux = taux;
+    }
+
+    
+
+    
 
     
    

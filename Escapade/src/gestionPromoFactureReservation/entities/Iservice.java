@@ -6,6 +6,7 @@
 package gestionPromoFactureReservation.entities;
 
 import java.util.List;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,15 +14,15 @@ import java.util.List;
  */
 public interface Iservice<T> {
 
-    void supprimerId(int id);
+    void supprimerId(int id) throws SQLException;
 
-    void ajouter(T entity);
+    void ajouter(T entity) throws SQLException;
 
-    void supprimer(T entity);
+    void supprimer(T entity) throws SQLException ;
 
-    void modifier(T entity,int id);
+    void modifier(T entity,int id) throws SQLException;
     
    
 
-    List<T> afficher();
+    List<T> afficher() throws SQLException;
 }

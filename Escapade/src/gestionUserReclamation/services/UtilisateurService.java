@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class UtilisateurService implements IService<Utilisateur> {
 
-    private Connection conn;
+    public Connection conn;
     private PreparedStatement pst;
     private Statement ste;
 
@@ -53,7 +53,7 @@ public class UtilisateurService implements IService<Utilisateur> {
             ResultSet generatedKeys = pst.getGeneratedKeys();
             
             if (generatedKeys.next()) {
-                user.setId(generatedKeys.getInt(1));
+                user.setIdU(generatedKeys.getInt(1));
             }
             System.out.println("utilisateur ajoutée");
         } catch (SQLException ex) {
@@ -65,8 +65,8 @@ public class UtilisateurService implements IService<Utilisateur> {
     @Override
     public void supprimer(Utilisateur user) {
         try {
-            PreparedStatement pre = conn.prepareStatement("Delete from utilisateur where id=? ;");
-            pre.setInt(1, user.getId());
+            PreparedStatement pre = conn.prepareStatement("Delete from utilisateur where idU=? ;");
+            pre.setInt(1, user.getIdU());
             if (pre.executeUpdate() != 0) {
                 System.out.println("user Deleted");
 
@@ -81,7 +81,7 @@ public class UtilisateurService implements IService<Utilisateur> {
     public void modifier(Utilisateur user) {
         String req;
 
-        req = "UPDATE `utilisateur` SET `nom`=?,`prenom`=?,`email`=?,`dateDeNaissance`=?,`numTel`=?,`ville`=?,`login`=? ,`mdp`=? ,`role`=? WHERE id =?";
+        req = "UPDATE `utilisateur` SET `nom`=?,`prenom`=?,`email`=?,`dateDeNaissance`=?,`numTel`=?,`ville`=?,`login`=? ,`mdp`=? ,`role`=? WHERE idU =?";
 
         try {
             PreparedStatement ps = conn.prepareStatement(req);
@@ -94,7 +94,7 @@ public class UtilisateurService implements IService<Utilisateur> {
             ps.setString(7, user.getLogin());
             ps.setString(8, user.getMdp());
             ps.setString(9, user.getRole().toString());
-            ps.setInt(10, user.getId());
+            ps.setInt(10, user.getIdU());
             ps.executeUpdate();
             System.out.println("utilisateur modifié");
             
@@ -115,7 +115,7 @@ public class UtilisateurService implements IService<Utilisateur> {
 
             while (us.next()) {
                 Utilisateur user = new Utilisateur();
-                user.setId(us.getInt("id"));
+                user.setIdU(us.getInt("id"));
                 user.setNom(us.getString(2));
                 user.setPrenom(us.getString(3));
                 user.setEmail(us.getString(4));

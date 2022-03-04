@@ -5,15 +5,49 @@
  */
 package view.gestion;
 
+import gestionPromoFactureReservation.entities.Promotion;
+import gestionPromoFactureReservation.services.PromotionService;
 import java.io.IOException;
 import java.net.URL;
+//import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Callback;
+
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -22,42 +56,217 @@ import javafx.scene.control.Button;
  */
 public class PromotionFXMLController implements Initializable {
 
-     @FXML
+    @FXML
     private Button Menu;
-     @FXML
+    @FXML
     private Button Facture;
-     @FXML
+    @FXML
     private Button Promotion;
+    @FXML
+    private Button Home;
+    @FXML
+    private ImageView home;
+
+    @FXML
+    private Button AjoutP;
+    @FXML
+    private Button AfficherP;
+    @FXML
+    private Button btnCustomers;
+    @FXML
+    private Button btnSettings;
+    @FXML
+    private Button btnSignout;
+    @FXML
+    private Pane pnlCustomer;
+    @FXML
+    private Pane pnlOrders;
+    @FXML
+    private Pane pnlMenus;
+    @FXML
+    private Pane pnlOverview;
+    @FXML
+    private Button SupPromo;
+    @FXML
+    private TableView<Promotion> tablePromo;
+    @FXML
+    private TableColumn<Promotion, Float> taux;
+    @FXML
+    private TableColumn<Promotion, Date> dateD;
+    @FXML
+    private TableColumn<Promotion, Date> dateF;
+
+    public static Promotion promo;
+    @FXML
+    private Button Modifier;
+  
+    @FXML
+    private Button rechercheP;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    } 
+
+        try {
+
+            Afficher();
+        } catch (SQLException ex) {
+            Logger.getLogger(PromotionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     @FXML
     private void Menu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(getClass().getResource("MenuFXML.fxml"));
         Parent root = loader.load();
         Menu.getScene().setRoot(root);
     }
+
     @FXML
     private void Facture(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(getClass().getResource("FactureFXML.fxml"));
         Parent root = loader.load();
         Facture.getScene().setRoot(root);
     }
-     @FXML
+
+    @FXML
     private void Promotion(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        
         loader.setLocation(getClass().getResource("PromotionFXML.fxml"));
         Parent root = loader.load();
         Promotion.getScene().setRoot(root);
     }
+
+    @FXML
+    private void Home(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("BackFXML.fxml"));
+        Parent root = loader.load();
+        Home.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void AjoutP(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("PromotionAjouterFXML.fxml"));
+        Parent root = loader.load();
+        // AjoutP.getScene().setRoot(root);
+
+        PromotionAjouterFXMLController pm = loader.getController();
+
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.showAndWait();
+        try {
+
+            Afficher();
+        } catch (SQLException ex) {
+            Logger.getLogger(FactureFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void SupPromo(ActionEvent event) throws SQLException {
+        if (tablePromo.getSelectionModel().getSelectedItem() != null) {
+            try {
+                int id = tablePromo.getSelectionModel().getSelectedItem().getId();
+                System.out.println(id);
+                PromotionService promotionService = new PromotionService();
+
+                promotionService.supprimerId(id);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("information Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("supression avec succes");
+                alert.show();
+            } catch (SQLException ex) {
+                Logger.getLogger(PromotionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Afficher();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Vous devez selectionner une promotion");
+            alert.show();
+        }
+    }
+
+    @FXML
+    public void Afficher() throws SQLException {
+        PromotionService promotionService = new PromotionService();
+
+        ObservableList<Promotion> listePromo = FXCollections.observableArrayList(promotionService.afficher());
+        tablePromo.setItems(listePromo);
+
+        taux.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Promotion, Float>, ObservableValue<Float>>() {
+            @Override
+            public ObservableValue<Float> call(TableColumn.CellDataFeatures<Promotion, Float> param) {
+                return new ReadOnlyObjectWrapper(param.getValue().getTaux());
+            }
+        });
+        dateD.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Promotion, Date>, ObservableValue<Date>>() {
+            @Override
+            public ObservableValue<Date> call(TableColumn.CellDataFeatures<Promotion, Date> param) {
+                return new ReadOnlyObjectWrapper(param.getValue().getDateDebut());
+            }
+        });
+        dateF.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Promotion, Date>, ObservableValue<Date>>() {
+            @Override
+            public ObservableValue<Date> call(TableColumn.CellDataFeatures<Promotion, Date> param) {
+                return new ReadOnlyObjectWrapper(param.getValue().getDateFin());
+            }
+        });
+
+    }
+
+    @FXML
+    private void Modifier(ActionEvent event) throws IOException, SQLException {
+
+        if (tablePromo.getSelectionModel().getSelectedItem() != null) {
+            Promotion p = tablePromo.getSelectionModel().getSelectedItem();
+            promo = p;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PromotionModifierFXML.fxml"));
+            Parent root = loader.load();
+            PromotionModifierFXMLController pm = loader.getController();
+            pm.setPromo(p);
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+            Afficher();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Vous devez selectionner une promotion");
+            alert.show();
+        }
+    }
+
+    @FXML
+    private void rechercheP(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getResource("RecherchePFXML.fxml"));
+        Parent root = loader.load();
+        rechercheP.getScene().setRoot(root);
+       
+
+    }
+   
+     
+
     
+
 }

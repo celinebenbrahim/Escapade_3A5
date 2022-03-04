@@ -33,21 +33,23 @@ public class EscapadeMain extends Application {
 
         this.stage = primaryStage;
         try {
-            
+
             parent = FXMLLoader.load(getClass().getResource("/view/gestion/BackFXML.fxml"));
-           //parent = FXMLLoader.load(getClass().getResource("/view/gestion/AcceuilFXML.fxml"));
-            
+            // parent = FXMLLoader.load(getClass().getResource("/view/gestion/AcceuilFXML.fxml"));
+            // parent = FXMLLoader.load(getClass().getResource("/view/gestion/DestinationFXML.fxml"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Add and Show Persons");
+        stage.setTitle("ESCAPADE");
         stage.show();
     }
 
     /**
-     * @param args the command line arguments
+     * @param args the command line
+     *
      */
     public static void main(String[] args) {
         launch(args);

@@ -4,18 +4,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.gestion.FactureFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gestion.FactureFXMLController">
   <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #7eccc6;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -130,56 +130,36 @@
             <Pane fx:id="pnlMenus" prefHeight="200.0" prefWidth="200.0" />
             <Pane fx:id="pnlOverview" prefHeight="554.0" prefWidth="793.0" style="-fx-background-image: #7eccc6;">
                <children>
-                  <TextField layoutX="258.0" layoutY="95.0" prefHeight="27.0" prefWidth="183.0" promptText="search" style="-fx-background-color: #ffff; -fx-border-color: #0000; -fx-border-radius: 2em;" />
                   <Label layoutX="57.0" layoutY="25.0" text="Facture" textFill="#ffefd9">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" layoutX="119.0" layoutY="172.0" prefHeight="42.0" prefWidth="666.0" spacing="80.0" style="-fx-background-color: #fe7950;">
-                     <children>
-                        <Label text="Id" textFill="#e7e5e5">
-                           <HBox.margin>
-                              <Insets left="50.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label text="Prix Total" textFill="#e7e5e5">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <Label text="Date " textFill="#e7e5e5">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <Label text="Client" textFill="#e7e5e5">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <Label text="Prix Final" textFill="#e7e5e5" />
-                        <Label text="Taux" textFill="#e7e5e5" />
-                     </children>
-                  </HBox>
-                  <ScrollPane layoutX="117.0" layoutY="221.0" prefHeight="320.0" prefWidth="666.0" style="-fx-background-color: #7eccc6;" stylesheets="@style.css">
+                  <ScrollPane layoutX="189.0" layoutY="227.0" prefHeight="284.0" prefWidth="590.0" style="-fx-background-color: #7eccc6;" stylesheets="@style.css">
                      <content>
-                        <VBox fx:id="pnItems" prefHeight="319.0" prefWidth="586.0" spacing="5.0" style="-fx-background-color: #0000;">
+                        <VBox fx:id="pnItems" prefHeight="284.0" prefWidth="591.0" spacing="5.0" style="-fx-background-color: #0000;">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
+                           <children>
+                              <TableView fx:id="ListF" prefHeight="260.0" prefWidth="525.0">
+                                <columns>
+                                  <TableColumn fx:id="PrixT" prefWidth="86.0" text="Prix Total" />
+                                  <TableColumn fx:id="date" prefWidth="95.0" text="Date" />
+                                    <TableColumn fx:id="idC" prefWidth="154.0" text="Client" />
+                                    <TableColumn fx:id="PrixF" prefWidth="104.0" text="Prix Final" />
+                                    <TableColumn fx:id="Taux" prefWidth="130.0" text="Taux" />
+                                </columns>
+                              </TableView>
+                           </children>
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <ImageView fitHeight="17.0" fitWidth="16.0" layoutX="417.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../ressources/images/icons8_Search_52px.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="14.0" layoutY="214.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Ajouter" />
-                  <Button layoutX="14.0" layoutY="263.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Modifier " />
-                  <Button layoutX="14.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Supprimer " />
-                  <Button layoutX="14.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Afficher " />
+                  <Button fx:id="AjouterF" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#AjouterF" prefHeight="25.0" prefWidth="141.0" text="Ajouter une facture" />
+                  <Button fx:id="Modif" layoutX="14.0" layoutY="263.0" mnemonicParsing="false" onAction="#Modifier" prefHeight="25.0" prefWidth="141.0" text="Modifier une facture" />
+                  <Button fx:id="SupFac" layoutX="14.0" layoutY="313.0" mnemonicParsing="false" onAction="#SupFac" prefHeight="25.0" prefWidth="141.0" text="Supprimer une facture" />
+                  <Button fx:id="AfficheF" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="25.0" prefWidth="141.0" text="Afficher une facture " />
+                  <Button fx:id="RechercheF" layoutX="351.0" layoutY="132.0" mnemonicParsing="false" onAction="#RechercheF" text="Rechercher Facture" />
                </children>
             </Pane>
          </children>
