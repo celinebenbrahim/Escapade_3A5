@@ -66,7 +66,7 @@ public class PromotionModifierFXMLController implements Initializable {
     @FXML
     private ImageView home;
  
-public static Promotion p;
+    public static Promotion p;
     /**
      * Initializes the controller class.
      */
@@ -110,9 +110,11 @@ public static Promotion p;
     }
     
 public void setVol(Promotion promo){
+      
+    
     p=promo;
     
-      this.Taux.setText(p.getTaux()+"");
+     this.Taux.setText(p.getTaux()+"");
       
       
 

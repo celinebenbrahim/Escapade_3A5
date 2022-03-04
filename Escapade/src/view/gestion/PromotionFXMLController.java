@@ -136,12 +136,8 @@ public class PromotionFXMLController implements Initializable {
         Home.getScene().setRoot(root);
     }
 
-   /* @FXML
-    private void AfficheP(ActionEvent event) throws SQLException {
-        PromotionService promotionService = new PromotionService();
-        ListP.setText(promotionService.afficher().toString());
-
-    }*/
+  
+    
      @FXML
     private void AjoutP(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -162,7 +158,7 @@ public class PromotionFXMLController implements Initializable {
                  Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("information Dialog");
             alert.setHeaderText(null);
-            alert.setContentText("supression avec succes");
+            alert.setContentText("Supression avec succes");
             alert.show();
             } catch (SQLException ex) {
             Logger.getLogger(PromotionFXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,9 +173,9 @@ public class PromotionFXMLController implements Initializable {
         }
     }
     public void Afficher() throws SQLException {
+        
         PromotionService promotionService=new PromotionService();
-
-        /* add column to the tableview and set its items */
+        
         ObservableList<Promotion> listePromo = FXCollections.observableArrayList(promotionService.afficher());
         tablePromo.setItems(listePromo);
 
@@ -208,8 +204,9 @@ public class PromotionFXMLController implements Initializable {
         
                  
         if (tablePromo.getSelectionModel().getSelectedItem() != null) {
+            
          Promotion promo = tablePromo.getSelectionModel().getSelectedItem();
-        p= promo;
+         p= promo;
                FXMLLoader loader = new FXMLLoader(getClass().getResource("PromotionModifierFXML.fxml"));
         Parent root = loader.load();
         PromotionModifierFXMLController PM = loader.getController();

@@ -21,13 +21,17 @@ import javafx.scene.control.Button;
  * @author AH-INFO
  */
 public class BackFXMLController implements Initializable {
-    
-     @FXML
+
+    @FXML
     private Button Menu;
-          @FXML
+    @FXML
+    private Button Home;
+    @FXML
     private Button Facture;
-     @FXML
+    @FXML
     private Button Promotion;
+    @FXML
+    private Button Hotel;
 
     /**
      * Initializes the controller class.
@@ -35,31 +39,51 @@ public class BackFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    } 
-    
+    }
+
     @FXML
     private void Menu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(getClass().getResource("MenuFXML.fxml"));
         Parent root = loader.load();
         Menu.getScene().setRoot(root);
     }
-      @FXML
+
+    @FXML
     private void Facture(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(getClass().getResource("FactureFXML.fxml"));
         Parent root = loader.load();
         Facture.getScene().setRoot(root);
     }
-     @FXML
+
+    @FXML
     private void Promotion(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(getClass().getResource("PromotionFXML.fxml"));
         Parent root = loader.load();
         Promotion.getScene().setRoot(root);
     }
-    
+
+    @FXML
+    private void Home(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getResource("BackFXML.fxml"));
+        Parent root = loader.load();
+        Home.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void Hotel(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getResource("HotelBackFXML.fxml"));
+        Parent root = loader.load();
+        Home.getScene().setRoot(root);
+    }
+
 }

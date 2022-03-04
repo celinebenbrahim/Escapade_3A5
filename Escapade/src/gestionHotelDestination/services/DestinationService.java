@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
 import java.util.stream.Collectors;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -23,15 +24,15 @@ import java.util.stream.Collectors;
  */
 public class DestinationService implements IService<Destination> {
 
-    private Connection conn;
-    private PreparedStatement pst;
+    public Connection conn;
+    public PreparedStatement pst;
 
     public DestinationService() {
         conn = DataSource.getInstance().getCnx();
     }
 
     @Override
-    public void supprimerId(int id) {
+    public void supprimerId(int id) throws SQLException {
         String req = "delete from destination where id=" + id;
         try {
             PreparedStatement pst = conn.prepareStatement(req);
@@ -43,14 +44,15 @@ public class DestinationService implements IService<Destination> {
     }
 
     @Override
-    public void ajouter(Destination d) {
+    public void ajouter(Destination d) throws SQLException {
 
-        String req = "insert into destination  (pays,ville) values(?,?)";
+        String req = "insert into destination  (pays,ville,img) values(?,?,?)";
 
         try {
             pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, d.getPays());
             pst.setString(2, d.getVille());
+            pst.setString(3, d.getImg());
             pst.executeUpdate();
             ResultSet generatedKeys = pst.getGeneratedKeys();
             if (generatedKeys.next()) {
@@ -64,7 +66,7 @@ public class DestinationService implements IService<Destination> {
     }
 
     @Override
-    public void supprimer(Destination d) {
+    public void supprimer(Destination d) throws SQLException {
 
         String req = "delete from destination where id = " + d.getId();
         try {
@@ -79,13 +81,14 @@ public class DestinationService implements IService<Destination> {
     }
 
     @Override
-    public void modifier(Destination d, int id) {
+    public void modifier(Destination d, int id) throws SQLException {
 
-        String req = "update `destination` SET pays=?,ville=? where id="+id;
+        String req = "update `destination` SET pays=?,ville=?,img=? where id=" + id;
         try {
             pst = conn.prepareStatement(req);
             pst.setString(1, d.getPays());
             pst.setString(2, d.getVille());
+            pst.setString(3, d.getImg());
             pst.executeUpdate();
             pst.close();
             System.out.println("Destination ajoutée");
@@ -95,7 +98,7 @@ public class DestinationService implements IService<Destination> {
     }
 
     @Override
-    public List<Destination> afficher() {
+    public List<Destination> afficher() throws SQLException {
 
         List<Destination> LDestination = new ArrayList<>();
         String req = " select * from `destination`";
@@ -109,6 +112,7 @@ public class DestinationService implements IService<Destination> {
                 d.setId(rs.getInt("id"));
                 d.setPays(rs.getString(2));
                 d.setVille(rs.getString(3));
+                d.setImg(rs.getString(4));
                 LDestination.add(d);
             }
         } catch (SQLException ex) {
@@ -116,9 +120,33 @@ public class DestinationService implements IService<Destination> {
         }
         return LDestination;
     }
-    
-     @Override
-    public List<Destination> tri() {
+
+    public Destination afficherDestination(int id) throws SQLException {
+
+        List<Destination> LDestination = new ArrayList<>();
+        Destination d = new Destination();
+        String req = " select * from `destination` where id=" + id;
+        try {
+            pst = conn.prepareStatement(req);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+
+                d.setId(rs.getInt("id"));
+                d.setPays(rs.getString(2));
+                d.setVille(rs.getString(3));
+                d.setImg(rs.getString(4));
+                //  LDestination.add(d);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return d;
+    }
+
+    @Override
+    public List<Destination> tri() throws SQLException {
 
         List<Destination> LDestination = new ArrayList<>();
         String req = " select * from `destination` order by pays DESC";
@@ -132,6 +160,7 @@ public class DestinationService implements IService<Destination> {
                 d.setId(rs.getInt("id"));
                 d.setPays(rs.getString(2));
                 d.setVille(rs.getString(3));
+                d.setImg(rs.getString(4));
                 LDestination.add(d);
             }
         } catch (SQLException ex) {
@@ -139,15 +168,43 @@ public class DestinationService implements IService<Destination> {
         }
         return LDestination;
     }
-    
-      @Override
-    public void rechercher(String pays )
-            
-    {
+
+    @Override
+    public void rechercher(String pays) throws SQLException {
         List<Destination> result = afficher().stream().
                 filter(line -> pays.equals(line.getPays())).collect(Collectors.toList());
-                    System.out.println("----------");
-                    result.forEach(System.out::println);
+        System.out.println("----------");
+        result.forEach(System.out::println);
+    }
+
+    public List<Destination> findDestination( String Pays, String Ville) throws SQLException {
+
+        String req = "SELECT * FROM Destination WHERE  pays=? or ville=?  ";
+
+        List<Destination> LDestination = new ArrayList<>();
+
+        pst = conn.prepareStatement(req);
+
+       
+        pst.setString(1, Pays);
+        pst.setString(2, Ville);
+        ResultSet rs = pst.executeQuery();
+
+        while (rs.next()) {
+            
+            pst = conn.prepareStatement(req);
+        
+            pst.setString(1, Pays);
+            pst.setString(2, Ville);
+            Destination d = new Destination();
+            d.setId(rs.getInt("id"));
+            d.setPays(rs.getString(2));
+            d.setVille(rs.getString(3));
+            d.setImg(rs.getString(4));
+            LDestination.add(d);
+
+        }
+        return LDestination;
     }
 
 }

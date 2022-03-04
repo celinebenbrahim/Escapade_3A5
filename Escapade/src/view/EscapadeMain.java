@@ -34,15 +34,15 @@ public class EscapadeMain extends Application {
         this.stage = primaryStage;
         try {
 
+            // parent = FXMLLoader.load(getClass().getResource("/view/gestion/DestinationFXML.fxml"));
             parent = FXMLLoader.load(getClass().getResource("/view/gestion/BackFXML.fxml"));
-            //parent = FXMLLoader.load(getClass().getResource("/view/gestion/AcceuilFXML.fxml"));
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Add and Show Persons");
+        stage.setTitle("Escapade");
         stage.show();
     }
 

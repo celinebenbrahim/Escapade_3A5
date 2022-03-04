@@ -78,16 +78,17 @@ public class FactureAjouterFXMLController implements Initializable {
     @FXML
     private Spinner<Class> Promo;
    
-
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
-     @FXML
+    
+    @FXML
     private void Menu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         
@@ -95,6 +96,7 @@ public class FactureAjouterFXMLController implements Initializable {
         Parent root = loader.load();
         Menu.getScene().setRoot(root);
     }
+    
     @FXML
     private void Facture(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
@@ -103,7 +105,8 @@ public class FactureAjouterFXMLController implements Initializable {
         Parent root = loader.load();
         Facture.getScene().setRoot(root);
     }
-     @FXML
+   
+    @FXML
     private void Promotion(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         
@@ -124,30 +127,30 @@ public class FactureAjouterFXMLController implements Initializable {
 
     @FXML
     private void AjoutFacture(ActionEvent event) throws SQLException{
-        SpinnerValueFactory<Class> gradesvaluefactory1=new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
-        SpinnerValueFactory<Integer> gradesvaluefactory2=new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
-        
-        
-        
-        this.Client.setValueFactory(gradesvaluefactory1);
-        this.Promo.setValueFactory(gradesvaluefactory2);
-        
-        Client.setEditable(true);
-        Promo.setEditable(true);
-        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        
-        FactureService factureService = new FactureService();
-         Facture f = new Facture(Double.parseDouble(PrixT.getText()),date,Client.getId().getClass(),Double.parseDouble(PrixF.getText()),Promo.getId().getClass());
-          try {
-         factureService.ajouter(f); 
-         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-         alert.setTitle("Success");
-         alert.setContentText("Promotion ajouté avec succées!");
-         alert.show();
-         } catch (SQLException ex) {
-                        Logger.getLogger(PromotionAjouterFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-        
+//        SpinnerValueFactory<Class> gradesvaluefactory1=new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
+//        SpinnerValueFactory<Integer> gradesvaluefactory2=new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999, 0);
+//        
+//        
+//        
+//        this.Client.setValueFactory(gradesvaluefactory1);
+//        this.Promo.setValueFactory(gradesvaluefactory2);
+//        
+//        Client.setEditable(true);
+//        Promo.setEditable(true);
+//        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+//        
+//        FactureService factureService = new FactureService();
+//         Facture f = new Facture(Double.parseDouble(PrixT.getText()),date,Client.getId().getClass(),Double.parseDouble(PrixF.getText()),Promo.getId().getClass());
+//          try {
+//         factureService.ajouter(f); 
+//         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//         alert.setTitle("Success");
+//         alert.setContentText("Promotion ajouté avec succées!");
+//         alert.show();
+//         } catch (SQLException ex) {
+//                        Logger.getLogger(PromotionAjouterFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//        
     }
     
 }

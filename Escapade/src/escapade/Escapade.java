@@ -31,6 +31,7 @@ import gestionPromoFactureReservation.entities.Facture;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionPromoFactureReservation.services.PromotionService;
 import gestionPromoFactureReservation.services.FactureService;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -43,7 +44,7 @@ public class Escapade {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws ParseException, SQLException {
         // TODO code application logic here
 
         //Date
@@ -52,17 +53,18 @@ public class Escapade {
         Date dateRetour = format.parse("2022-02-19");
 
         //DESTINATION
-//        System.out.println("LISTE DESTINATION \n \n \n");
-//        DestinationService destinationService = new DestinationService();
-//        Destination d = new Destination("Hong Kong", "Delta de la Rivière des Perles");
-//        Destination d1 = new Destination("Japon", "Tokyo");
-//        Destination d2 = new Destination("Brésil", "São Paulo");
+        System.out.println("LISTE DESTINATION \n \n \n");
+        DestinationService destinationService = new DestinationService();
+        Destination d = new Destination("Hong Kong", "Delta de la Rivière des Perles");
+        Destination d1 = new Destination("Japon", "Tokyo");
+        Destination d2 = new Destination("Brésil", "São Paulo");
 //
-//        destinationService.ajouter(d);
+        destinationService.ajouter(d);
 //        System.out.println(destinationService.afficher());
-//        destinationService.ajouter(d1);
+destinationService.ajouter(d1);
 //        System.out.println(destinationService.afficher());
-//        destinationService.ajouter(d2);
+      destinationService.ajouter(d2);
+        System.out.println(destinationService.afficherDestination(324));
 //        System.out.println(destinationService.afficher());
 //        destinationService.supprimer(d2);
 //        System.out.println(destinationService.afficher());
@@ -71,12 +73,12 @@ public class Escapade {
 //        destinationService.rechercher("Hong Kong");
 
         ///////////HOTEL///////////
-//         System.out.println("\n \n LISTE HOTEL \n \n \n");
+         System.out.println("\n \n LISTE HOTEL \n \n \n");
 //        Hotel h = new Hotel("123", "laico", "hammamet", 1, "bon hotel", 500, 150, d);
 //        Hotel h1 = new Hotel("456", "mavenpick", "hammamet", 5, "bon hotel", 500, 200, d);
 //        Hotel h2 = new Hotel("456", "mavenpick", "hammamet", 2, "bon hotel", 500, 200, d);
 //        Hotel h3 = new Hotel("789", "Radison", "hammamet", 5, "bon hotel", 500, 250, d1);
-//        HotelService hotelService = new HotelService();
+    HotelService hotelService = new HotelService();
 //        hotelService.ajouter(h);
 //        System.out.println(hotelService.afficher());
 //        hotelService.ajouter(h1);
@@ -91,12 +93,13 @@ public class Escapade {
 //        System.out.println(hotelService.tri());
 //        hotelService.rechercher("laico");
 //         hotelService.ajouter(h);
+         System.out.println(hotelService.countHotel(5));
 
 //Utilisateur
 //System.out.println("\n \n LISTE UTILISATEUR \n \n \n");
-        Utilisateur c1 = new Utilisateur("daghrour", "myriam", "myriam@", dateAller, 55989026,
-                "nabeul", "mimi", "221017", Role.client);
-        UtilisateurService userService = new UtilisateurService();
+//        Utilisateur c1 = new Utilisateur("daghrour", "myriam", "myriam@", dateAller, 55989026,
+//                "nabeul", "mimi", "221017", Role.client);
+//        UtilisateurService userService = new UtilisateurService();
      //   userService.ajouter(c1);
 
 //        //BILLET
@@ -140,9 +143,9 @@ public class Escapade {
         
         
          ////Promotion 
-        Date dateD = format.parse("2022-02-18");
-        Date dateF = format.parse("2022-02-19");
-       PromotionService promotionService = new PromotionService();
+//        Date dateD = format.parse("2022-02-18");
+//        Date dateF = format.parse("2022-02-19");
+//       PromotionService promotionService = new PromotionService();
 //       Promotion p = new Promotion(10, dateD, dateF);
 //       promotionService.ajouter(p);
 //        Promotion p1 = new Promotion(20, dateD, dateF);
@@ -162,18 +165,18 @@ public class Escapade {
 //       promotionService.supprimerId(8);
 
         //Facture   
-        Date date = format.parse("2022-02-17");
-     Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
-       userService.ajouter(u);
-        Promotion p1 = new Promotion(10, dateD, dateF);
-        promotionService.ajouter(p1);
-        FactureService factureService = new FactureService();
-      Facture f = new Facture(100.0, date, u, 50.0,p1);
-      factureService.ajouter(f);
-        Facture f1 = new Facture(200.0, date, u, 1000.0, p1);
-      // factureService.ajouter(f1);
-      //  System.out.println(factureService.CalculerPrixF(f));
-      System.out.println(factureService.afficher());
+//        Date date = format.parse("2022-02-17");
+//     Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
+//       userService.ajouter(u);
+//        Promotion p1 = new Promotion(10, dateD, dateF);
+//        promotionService.ajouter(p1);
+//        FactureService factureService = new FactureService();
+//      Facture f = new Facture(100.0, date, u, 50.0,p1);
+//      factureService.ajouter(f);
+//        Facture f1 = new Facture(200.0, date, u, 1000.0, p1);
+//      // factureService.ajouter(f1);
+//      //  System.out.println(factureService.CalculerPrixF(f));
+//      System.out.println(factureService.afficher());
         // System.out.println(factureService.Tri());
         //factureService.rechercher(format.parse("2022-02-23"));
        // factureService.chercher(3);

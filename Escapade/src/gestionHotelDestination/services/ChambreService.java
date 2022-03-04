@@ -61,7 +61,7 @@ public class ChambreService implements IService<Chambre> {
             pst.setString(4, ch.getDescription());
             pst.setDouble(5, ch.getPrixNuit());
             pst.setString(6, ch.getStatus().toString());
-            pst.setInt(7, ch.getHotel().getId());
+            pst.setInt(7, ch.getHotel().getIdHotel());
             pst.executeUpdate();
 
             ResultSet generatedKeys = pst.getGeneratedKeys();
@@ -102,7 +102,7 @@ public class ChambreService implements IService<Chambre> {
             pst.setString(4, ch.getDescription());
             pst.setDouble(5, ch.getPrixNuit());
             pst.setString(6, ch.getStatus().toString());
-            pst.setInt(7, ch.getHotel().getId());
+            pst.setInt(7, ch.getHotel().getIdHotel());
             pst.executeUpdate();
             pst.close();
             System.out.println("Chambre modifiée");
@@ -128,7 +128,7 @@ public class ChambreService implements IService<Chambre> {
                 Hotel h = new Hotel();
                 if (rss.next()) {
                     InputStream stream = rss.getBinaryStream(1);
-                    h.setAdresse(rss.getString(3));
+                 
                     h.setMatriculeFiscale(rss.getString(1));
                     h.setNom(rss.getString(2));
                     h.setNbrEtoile(rss.getInt(4));
@@ -169,7 +169,7 @@ public class ChambreService implements IService<Chambre> {
 
                 if (rss.next()) {
                     InputStream stream = rss.getBinaryStream(1);
-                    h.setAdresse(rss.getString(3));
+                   
                     h.setMatriculeFiscale(rss.getString(1));
                     h.setNom(rss.getString(2));
                     h.setNbrEtoile(rss.getInt(4));
