@@ -47,7 +47,7 @@ public class UtilisateurService implements IService<Utilisateur> {
     }
 
     @Override
-    public void ajouter(Utilisateur user) {
+    public boolean ajouter(Utilisateur user) {
         if (emailExiste(user.getEmail())) {
             System.out.println("existe");
 
@@ -70,30 +70,34 @@ public class UtilisateurService implements IService<Utilisateur> {
                 System.out.println("aaaa2");
                 pst.executeUpdate();
                 System.out.println("utilisateur ajoutée");
+                return true;
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
+        return false;
 
     }
 
     @Override
-    public void supprimer(Utilisateur user) {
+    public boolean supprimer(Utilisateur user) {
         try {
             PreparedStatement pre = conn.prepareStatement("Delete from utilisateur where id=? ;");
             pre.setInt(1, user.getId());
             if (pre.executeUpdate() != 0) {
                 System.out.println("user Deleted");
+                return true;
 
             }
 
         } catch (SQLException ex) {
             ex.getMessage();
         }
+        return false;
     }
 
     @Override
-    public void modifier(Utilisateur user) {
+    public boolean modifier(Utilisateur user) {
         String req;
 
         req = "UPDATE `utilisateur` SET `nom`=?,`prenom`=?,`email`=?,`dateDeNaissance`=?,`numTel`=?,`ville`=?  WHERE id =?";
@@ -111,10 +115,12 @@ public class UtilisateurService implements IService<Utilisateur> {
             ps.setInt(7, user.getId());
             ps.executeUpdate();
             System.out.println("utilisateur modifié");
+            return true;
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -148,41 +154,41 @@ public class UtilisateurService implements IService<Utilisateur> {
 
         return utilisateurs;
     }
-
-    public List<Utilisateur> recherche(String valeur, String colonne, String tri) {
-        List<Utilisateur> utilisateurs = new ArrayList<>();
-
-        //String req = "SELECT * FROM `utilisateur` WHERE CONCAT(`id`, `nom`, `prenom`, `email`, `dateDeNaissance`, `numTel`, `ville`, `login`, `role`) LIKE '%"+input+"%'";
-        //String req = "SELECT * FROM `utilisateur` WHERE "+colonne+" LIKE '%"+valeur+"%' order by "+colonne+" "+tri+" ";
-        String req = "SELECT * FROM `utilisateur` WHERE " + colonne + " LIKE ? order by ? ";
-
-        try {
-            pst = conn.prepareStatement(req);
-            pst.setString(1, valeur);
-            pst.setString(2, tri);
-            ResultSet us = pst.executeQuery();
-
-            while (us.next()) {
-                Utilisateur user = new Utilisateur();
-                user.setId(us.getInt("id"));
-                user.setNom(us.getString(2));
-                user.setPrenom(us.getString(3));
-                user.setEmail(us.getString(4));
-                user.setDateNaissance(us.getDate(5));
-                user.setNumTel(us.getInt(6));
-                user.setVille(us.getString(7));
-                user.setMdp(us.getString(8));
-                user.setRole(Role.valueOf(us.getString(10)));
-
-                utilisateurs.add(user);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return utilisateurs;
-
-    }
+//
+//    public List<Utilisateur> recherche(String valeur, String colonne, String tri) {
+//        List<Utilisateur> utilisateurs = new ArrayList<>();
+//
+//        //String req = "SELECT * FROM `utilisateur` WHERE CONCAT(`id`, `nom`, `prenom`, `email`, `dateDeNaissance`, `numTel`, `ville`, `login`, `role`) LIKE '%"+input+"%'";
+//        //String req = "SELECT * FROM `utilisateur` WHERE "+colonne+" LIKE '%"+valeur+"%' order by "+colonne+" "+tri+" ";
+//        String req = "SELECT * FROM `utilisateur` WHERE " + colonne + " LIKE ? order by ? ";
+//
+//        try {
+//            pst = conn.prepareStatement(req);
+//            pst.setString(1, valeur);
+//            pst.setString(2, tri);
+//            ResultSet us = pst.executeQuery();
+//
+//            while (us.next()) {
+//                Utilisateur user = new Utilisateur();
+//                user.setId(us.getInt("id"));
+//                user.setNom(us.getString(2));
+//                user.setPrenom(us.getString(3));
+//                user.setEmail(us.getString(4));
+//                user.setDateNaissance(us.getDate(5));
+//                user.setNumTel(us.getInt(6));
+//                user.setVille(us.getString(7));
+//                user.setMdp(us.getString(8));
+//                user.setRole(Role.valueOf(us.getString(10)));
+//
+//                utilisateurs.add(user);
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//
+//        return utilisateurs;
+//
+//    }
 
     public boolean emailExiste(String email) {
 
@@ -252,21 +258,51 @@ public class UtilisateurService implements IService<Utilisateur> {
 
     public boolean blockUtilisateur(Utilisateur user) {
 
-        String req = "SELECT `blocked` FROM `utilisateur` WHERE id=?";
+        String req = "SELECT `blocked` FROM `utilisateur` WHERE email=?";
         try {
             pst = conn.prepareStatement(req);
-            pst.setInt(1, user.getId());
+            pst.setString(1, user.getEmail());
             ResultSet us = pst.executeQuery();
 
             if ((us.next()) && (us.getString(1).equals("non"))) {
-                String req2 = "UPDATE `utilisateur` SET `blocked`=? WHERE id=?";
+                String req2 = "UPDATE `utilisateur` SET `blocked`=? WHERE email=?";
 
                 try {
                     PreparedStatement ps = conn.prepareStatement(req2);
                     ps.setString(1, "oui");
-                    ps.setInt(2, user.getId());
+                    ps.setString(2, user.getEmail());
                     ps.executeUpdate();
                     System.out.println("utilisateur bloqué");
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return false;
+
+    }
+     public boolean unBlockUtilisateur(Utilisateur user) {
+
+        String req = "SELECT `blocked` FROM `utilisateur` WHERE email=?";
+        try {
+            pst = conn.prepareStatement(req);
+            pst.setString(1, user.getEmail());
+            ResultSet us = pst.executeQuery();
+
+            if ((us.next()) && (us.getString(1).equals("oui"))) {
+                String req2 = "UPDATE `utilisateur` SET `blocked`=? WHERE email=?";
+
+                try {
+                    PreparedStatement ps = conn.prepareStatement(req2);
+                    ps.setString(1, "non");
+                    ps.setString(2, user.getEmail());
+                    ps.executeUpdate();
+                    System.out.println("utilisateur non bloqué");
 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -363,28 +399,4 @@ public class UtilisateurService implements IService<Utilisateur> {
          
      }
 
-//    public static String encrypt(String  motDePasse){
-//    String result="";
-//    String alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-//    int i=0;
-//    while(i<motDePasse.length())
-//    {
-//        char c=motDePasse.charAt(i);
-//        int j=alphabet.indexOf(c);
-//        if(j!=-1)
-//        {
-//            if(i+j>51)
-//            {
-//                int k=i+j-52;
-//                result+= alphabet.charAt(k);
-//            }
-//            else
-//                result+= alphabet.charAt(i+j);
-//        }
-//        else
-//            result+= c;
-//        i++;
-//    }
-//    return  result;
-//    }
 }

@@ -33,7 +33,7 @@ public class ReclamationService implements IService<Reclamation> {
     }
 
     @Override
-    public void ajouter(Reclamation r) {
+    public boolean ajouter(Reclamation r) {
         String req = "INSERT INTO `reclamation` (`description`,`idClient`) VALUES (?,?)";
 
         try {
@@ -44,29 +44,31 @@ public class ReclamationService implements IService<Reclamation> {
             pst.setInt(2, r.getUtilisateur().getId());
             pst.executeUpdate();
             System.out.println("Reclamation ajoutée");
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+            return false;
     }
 
     @Override
-    public void supprimer(Reclamation r) {
+    public boolean supprimer(Reclamation r) {
         try {
             PreparedStatement pre = conn.prepareStatement("Delete from reclamation where id=? ;");
             pre.setInt(1, r.getId());
             if (pre.executeUpdate() != 0) {
                 System.out.println("reclamation Deleted");
-
+                return true;
             }
 
         } catch (SQLException ex) {
             ex.getMessage();
         }
+        return false;
     }
 
     @Override
-    public void modifier(Reclamation r) {
+    public boolean modifier(Reclamation r) {
         String req;
 
         req = "UPDATE `reclamation` SET `description`=? WHERE id =?";
@@ -76,9 +78,11 @@ public class ReclamationService implements IService<Reclamation> {
             ps.setString(1, r.getDescription());
             ps.setInt(2, r.getId());
             ps.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return false;
     }
 
     @Override

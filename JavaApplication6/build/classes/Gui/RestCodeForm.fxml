@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="320.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.RestCodeFormController">
+<AnchorPane id="AnchorPane" prefHeight="320.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RestCodeFormController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <TextField fx:id="tfEmail" layoutX="200.0" layoutY="80.0" prefHeight="25.0" prefWidth="201.0" />
-      <TextField fx:id="tfCode" layoutX="316.0" layoutY="144.0" onKeyTyped="#checkNumberOnly" prefHeight="25.0" prefWidth="85.0" />
+      <TextField fx:id="tfCode" layoutX="316.0" layoutY="144.0" prefHeight="25.0" prefWidth="85.0" />
       <Button fx:id="boutonEnvoyer" layoutX="422.0" layoutY="80.0" mnemonicParsing="false" onAction="#envoyerCode" text="Envoyer" />
       <Button fx:id="boutonValider" layoutX="422.0" layoutY="144.0" mnemonicParsing="false" onAction="#validerCode" prefHeight="25.0" prefWidth="58.0" text="Vailder" />
       <Label fx:id="label" layoutX="202.0" layoutY="99.0" prefHeight="39.0" prefWidth="213.0" />
