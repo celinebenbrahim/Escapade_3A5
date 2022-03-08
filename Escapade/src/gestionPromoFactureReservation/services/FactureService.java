@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
  */
 public class FactureService implements Iservice<Facture> {
 
-    private Connection conn;
+    public Connection conn;
     private PreparedStatement pst;
     private Statement ste;
 
@@ -43,7 +43,7 @@ public class FactureService implements Iservice<Facture> {
             pst = conn.prepareStatement(req, pst.RETURN_GENERATED_KEYS);
             pst.setFloat(1, f.getPrixTotal());
             pst.setDate(2, new java.sql.Date(f.getDate().getTime()));
-            pst.setInt(3, f.getClient().getIdU());
+            pst.setInt(3, f.getClient().getId());
             pst.setFloat(4, f.getPrixFinal());
             pst.setInt(5, f.getPromotion().getId());
             ResultSet generatedKeys = pst.getGeneratedKeys();
@@ -86,7 +86,7 @@ public class FactureService implements Iservice<Facture> {
             pst = conn.prepareStatement(req);
             pst.setFloat(1, f.getPrixTotal());
             pst.setDate(2, new java.sql.Date(f.getDate().getTime()));
-            pst.setInt(3, f.getClient().getIdU());
+            pst.setInt(3, f.getClient().getId());
 
             pst.setInt(4, f.getPromotion().getId());
 
@@ -140,7 +140,7 @@ public class FactureService implements Iservice<Facture> {
         List<Facture> factures = new ArrayList<>();
         String req = "SELECT `idF`, `prixTotal`, `date`, `prixFinal`,`nom`, `prenom`, "
                 + "`email`, `numTel`, `ville` ,`taux` FROM `facture`  INNER JOIN `utilisateur`"
-                + " ON facture.idclient = utilisateur.idU LEFT JOIN `promotion` on facture.idPromotion ="
+                + " ON facture.idclient = utilisateur.id LEFT JOIN `promotion` on facture.idPromotion ="
                 + " promotion.id";
         try {
             pst = conn.prepareStatement(req);

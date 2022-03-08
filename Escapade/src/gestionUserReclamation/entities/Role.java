@@ -9,7 +9,7 @@ package gestionUserReclamation.entities;
  * @author mahdi
  */
 public enum Role {
-   client,admin;
+    CLIENT,ADMIN
     
     
 }

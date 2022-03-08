@@ -5,6 +5,8 @@
  */
 package view.gestion;
 
+import gestionUserReclamation.entities.Utilisateur;
+import gestionUserReclamation.services.UtilisateurService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,12 +23,28 @@ import javafx.scene.control.Button;
  * @author AH-INFO
  */
 public class Acceuil4FXMLController implements Initializable {
-     @FXML
     private Button inscrire;
-    @FXML
     private Button authentifier;
-  @FXML
     private Button Back;
+    @FXML
+    private Button btnSignout;
+    @FXML
+    private Button Home;
+    @FXML
+    private Button Profil;
+    @FXML
+    private Button Reclamation;
+    @FXML
+    private Button Reservation;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
      * Initializes the controller class.
@@ -35,34 +53,55 @@ public class Acceuil4FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
-    @FXML
-    private void Back(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(getClass().getResource("AcceuilFXML.fxml"));
-        Parent root = loader.load();
-        Back.getScene().setRoot(root);
-    }
+ 
     
     
-     @FXML
     private void Conx(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
         
-        loader.setLocation(getClass().getResource("ConxFXML.fxml"));
-        Parent root = loader.load();
-        authentifier.getScene().setRoot(root);
+       
     }
     
         
-  @FXML
-    private void Ajouter(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        
-        loader.setLocation(getClass().getResource("AjouterFXML.fxml"));
+ 
+    @FXML
+    private void Home(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Acceuil4FXML.fxml"));
         Parent root = loader.load();
-        inscrire.getScene().setRoot(root);
+        Home.getScene().setRoot(root);
+        
     }
+
+    @FXML
+    private void Profil(ActionEvent event) throws IOException {
+        UtilisateurService us= new UtilisateurService();
+          FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ProfilFXML.fxml"));
+        Parent root = loader.load();
+        ProfilFXMLController controller = loader.getController();
+                    controller.setId(id);
+                    controller.Profil();
+        Profil.getScene().setRoot(root);
+        
+    }
+
+    @FXML
+    private void Reclamation(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ReclamationFXML.fxml"));
+        Parent root = loader.load();
+        Reclamation.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void Reservation(ActionEvent event) throws IOException {
+          FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ReservationFXML.fxml"));
+        Parent root = loader.load();
+        Reservation.getScene().setRoot(root);
+        
+    }
+    
     
     
 }

@@ -160,6 +160,7 @@
                   <Button fx:id="SupFac" layoutX="14.0" layoutY="313.0" mnemonicParsing="false" onAction="#SupFac" prefHeight="25.0" prefWidth="141.0" text="Supprimer une facture" />
                   <Button fx:id="AfficheF" layoutX="14.0" layoutY="360.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="25.0" prefWidth="141.0" text="Afficher une facture " />
                   <Button fx:id="RechercheF" layoutX="351.0" layoutY="132.0" mnemonicParsing="false" onAction="#RechercheF" text="Rechercher Facture" />
+                  <Button fx:id="imprimerfacture" layoutX="219.0" layoutY="107.0" mnemonicParsing="false" onAction="#imprimerfacture" text="imprimer facture" />
                </children>
             </Pane>
          </children>

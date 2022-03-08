@@ -11,84 +11,119 @@ import java.util.Date;
  * @author mahdi
  */
 public class Utilisateur {
-
-    
-    private int idU;
+    private int id;
     private String nom;
     private String prenom;
     private String email;
     private Date dateNaissance;
     private int numTel;
     private String ville;
-    private String login;
     private String mdp;
+    private String image;
+    private Blocked blocked;
     private Role role;
 
     public Utilisateur() {
     }
 
-    public Utilisateur(int idU, String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String login, String mdp, Role role) {
-        this.idU = idU;
+    public Utilisateur(int id, String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String mdp, String image, Blocked blocked, Role role) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.dateNaissance = dateNaissance;
         this.numTel = numTel;
         this.ville = ville;
-        this.login = login;
         this.mdp = mdp;
+        this.image = image;
+        this.blocked = blocked;
         this.role = role;
     }
 
-   
-
-    public Utilisateur(String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String login, String mdp, Role role) {
+    public Utilisateur(String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String mdp, String image, Blocked blocked, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.dateNaissance = dateNaissance;
         this.numTel = numTel;
         this.ville = ville;
-        this.login = login;
         this.mdp = mdp;
+        this.image = image;
+        this.blocked = blocked;
         this.role = role;
+    }
+
+    public Utilisateur(String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String mdp, String image) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.dateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.ville = ville;
+        this.mdp = mdp;
+        this.image = image;
+    }
+
+    public Utilisateur(int id,String nom, String prenom, String email, Date dateNaissance, int numTel, String ville, String mdp) {
+        this.id=id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.dateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.ville = ville;
+        this.mdp = mdp;
+    }
+
+    
+
+    
+
+    public Utilisateur(String nom, String prenom, String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+    }
+
+    public Utilisateur(int id, String nom, String prenom, String email, Date dateNaissance, int numTel, String ville) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.dateNaissance = dateNaissance;
+        this.numTel = numTel;
+        this.ville = ville;
     }
 
     public Utilisateur(String nom, String prenom, String email, int numTel, String ville) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-      
         this.numTel = numTel;
         this.ville = ville;
-        
     }
 
-    public Utilisateur(String nom, String prenom) {
+    
+
+    public Utilisateur(int id, String nom, String prenom) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
     }
 
-    public Utilisateur(int idU, String nom, String prenom) {
-        this.idU = idU;
-        this.nom = nom;
-        this.prenom = prenom;
+    
+
+
+    
+    
+
+    public int getId() {
+        return id;
     }
 
-    public Utilisateur(int idU) {
-        this.idU = idU;
+    public void setId(int id) {
+        this.id = id;
     }
-
-    public int getIdU() {
-        return idU;
-    }
-
-    public void setIdU(int idU) {
-        this.idU = idU;
-    }
-
-  
-
 
     public String getNom() {
         return nom;
@@ -138,14 +173,6 @@ public class Utilisateur {
         this.ville = ville;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getMdp() {
         return mdp;
     }
@@ -162,10 +189,28 @@ public class Utilisateur {
         this.role = role;
     }
 
-     @Override
-    public String toString() {
-        return  nom +" " + prenom ;
+    public String getImage() {
+        return image;
+    }
+
+    public Blocked getBlocked() {
+        return blocked;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setBlocked(Blocked blocked) {
+        this.blocked = blocked;
     }
     
+    
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" + "nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", dateNaissance=" + dateNaissance + ", numTel=" + numTel + ", ville=" + ville + ", image=" + image + '}';
+    }
+
     
 }

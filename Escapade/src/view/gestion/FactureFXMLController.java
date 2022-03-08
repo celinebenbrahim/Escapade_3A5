@@ -5,6 +5,14 @@
  */
 package view.gestion;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import gestionPromoFactureReservation.entities.Facture;
@@ -12,8 +20,14 @@ import gestionPromoFactureReservation.entities.Promotion;
 import gestionPromoFactureReservation.services.FactureService;
 import gestionPromoFactureReservation.services.PromotionService;
 import gestionUserReclamation.entities.Utilisateur;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -27,6 +41,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -39,6 +54,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javax.swing.JOptionPane;
 //import static view.gestion.PromotionFXMLController.p;
 
 /**
@@ -99,6 +115,8 @@ public class FactureFXMLController implements Initializable {
     private Button AjouterF;
     @FXML
     private Button RechercheF;
+    @FXML
+    private Button imprimerfacture;
 
     /**
      * Initializes the controller class.
@@ -292,5 +310,102 @@ public class FactureFXMLController implements Initializable {
         Parent root = loader.load();
         RechercheF.getScene().setRoot(root);
     }
+
+     @FXML
+    private void imprimerfacture(ActionEvent event) throws DocumentException, SQLException, ClassNotFoundException {
+        
+               try {
+              Class.forName("com.mysql.jdbc.Driver");
+                  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escapade", "root", "");
+      PreparedStatement pt = con.prepareStatement("select * from facture");
+            ResultSet rs = pt.executeQuery();
+            
+                       /* Step-2: Initialize PDF documents - logical objects */
+
+                       Document my_pdf_report = new Document();
+
+                       PdfWriter.getInstance(my_pdf_report, new FileOutputStream("Table_des_factures.pdf"));
+                       
+                        my_pdf_report.open();  
+                       my_pdf_report.add(new Paragraph(new Date().toString()));
+//                            Image img = Image.getInstance("C:\image.png");
+//                            my_pdf_report.add(img);
+                             my_pdf_report.add(new Paragraph("Listes des factures"));
+                       my_pdf_report.addCreationDate();
+              
+                       
+                       //we have four columns in our table
+                       PdfPTable my_report_table = new PdfPTable(6);
+                             
+                       //create a cell object
+                       PdfPCell table_cell;
+                                          table_cell=new PdfPCell(new Phrase("idF"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                         table_cell=new PdfPCell(new Phrase("prixTotal"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                       table_cell=new PdfPCell(new Phrase("date"));
+                                      table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                       table_cell=new PdfPCell(new Phrase("idClient"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                               
+                                      table_cell=new PdfPCell(new Phrase("prixFinal"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                        table_cell=new PdfPCell(new Phrase("idPromotion"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       
+                                       
+                                      while(rs.next()){
+                                         // int d=rs.getInt("idF");
+                                          String d=rs.getString("idF");
+                                       table_cell=new PdfPCell(new Phrase(d));
+                                       my_report_table.addCell(table_cell);
+                                          String de=rs.getString("prixTotal");
+                                       table_cell=new PdfPCell(new Phrase(de));
+                                       my_report_table.addCell(table_cell);
+                                       String idRdv= rs.getString("date");
+                                       table_cell=new PdfPCell(new Phrase(idRdv));
+                                       my_report_table.addCell(table_cell);
+                                       String type=rs.getString("idClient");
+                                       table_cell=new PdfPCell(new Phrase(type));
+                                       my_report_table.addCell(table_cell);
+                                       String ds=rs.getString("prixFinal");
+                                       table_cell=new PdfPCell(new Phrase(ds));
+                                       my_report_table.addCell(table_cell);
+                                        String dn=rs.getString("idPromotion");
+                                       table_cell=new PdfPCell(new Phrase(dn));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       
+                                               
+                       }
+                       /* Attach report table to PDF */
+                       
+                       my_pdf_report.add(my_report_table); 
+                       
+             System.out.println(my_pdf_report);
+                       my_pdf_report.close();
+                       JOptionPane.showMessageDialog(null, "imprimer avec succés");
+
+                       /* Close all DB related objects */
+                       rs.close();
+                       pt.close(); 
+                       con.close();               
+
+
+       } catch (FileNotFoundException e) {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+       }
+    }
+
+
+    
 
 }

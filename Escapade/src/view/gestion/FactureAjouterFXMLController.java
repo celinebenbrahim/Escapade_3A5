@@ -19,8 +19,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -179,7 +181,7 @@ public class FactureAjouterFXMLController implements Initializable {
         UtilisateurService utilisateurService = new UtilisateurService();
         ObservableList<Utilisateur> list = FXCollections.observableArrayList();
         try {
-            String req = " select idU,`nom`,`prenom` from `utilisateur` ";
+            String req = " select id,`nom`,`prenom` from `utilisateur` ";
             PreparedStatement pst = utilisateurService.conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -193,7 +195,7 @@ public class FactureAjouterFXMLController implements Initializable {
         idC.setItems(null);
         idC.setItems(list);
     }
-
+   
     private void ListerPromotion() {
         PromotionService destinationService = new PromotionService();
         ObservableList<Promotion> list = FXCollections.observableArrayList();

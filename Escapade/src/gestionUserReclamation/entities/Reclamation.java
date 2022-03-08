@@ -15,37 +15,25 @@ public class Reclamation {
     private int id;
     private Date date;
     private String description;
-    private int idClient;
-
-    public Reclamation(int id, String description) {
-        this.id = id;
-        this.description = description;
-    }
-
-    public Reclamation(int id, Date date, String description) {
-        this.id = id;
-        this.date = date;
-        this.description = description;
-    }
-
-
-
-
+    private Utilisateur utilisateur;
+    
     public Reclamation() {
     }
 
-    public Reclamation(int id, Date date, String description, int idClient) {
+    public Reclamation(int id, Date date, String description, Utilisateur utilisateur) {
         this.id = id;
         this.date = date;
         this.description = description;
-        this.idClient = idClient;
+        this.utilisateur = utilisateur;
     }
 
-    public Reclamation(Date date, String description, int idClient) {
+    public Reclamation(Date date, String description, Utilisateur utilisateur) {
         this.date = date;
         this.description = description;
-        this.idClient = idClient;
+        this.utilisateur = utilisateur;
     }
+    
+    
 
     public int getId() {
         return id;
@@ -72,17 +60,19 @@ public class Reclamation {
         this.description = description;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
     @Override
     public String toString() {
-        return "reclamation{" + "id=" + id + ", date=" + date + ", description=" + description + ", idClient=" + idClient + '}';
+        return "Reclamation{" + "date=" + date + ", description=" + description + ", nom=" + utilisateur.getNom() +", prenom=" + utilisateur.getPrenom() +", email=" + utilisateur.getEmail() + '}';
     }
+
+
 
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.gestion.PromotionAjouterFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gestion.PromotionAjouterFXMLController">
      <children>
       <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #7eccc6;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -153,6 +153,9 @@
                   <TextField fx:id="Taux" layoutX="326.0" layoutY="215.0" prefHeight="25.0" prefWidth="174.0" />
                   <DatePicker fx:id="dateD" layoutX="331.0" layoutY="276.0" />
                   <DatePicker fx:id="dateF" layoutX="331.0" layoutY="338.0" />
+                  <ImageView fx:id="checkTaux" fitHeight="27.0" fitWidth="34.0" layoutX="540.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="checkDD" fitHeight="27.0" fitWidth="34.0" layoutX="539.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="checkDF" fitHeight="27.0" fitWidth="34.0" layoutX="537.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
          </children>

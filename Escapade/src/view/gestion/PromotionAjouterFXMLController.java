@@ -6,6 +6,7 @@
 package view.gestion;
 
 
+//import com.itextpdf.text.Image;
 import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.length;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionPromoFactureReservation.services.PromotionService;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
 
 /**
  * FXML Controller class
@@ -69,6 +72,14 @@ public class PromotionAjouterFXMLController implements Initializable {
     private Pane pnlOverview;
     @FXML
     private Button AjoutPromo;
+    @FXML
+    private ImageView checkTaux;
+    @FXML
+    private ImageView checkDD;
+    @FXML
+    private ImageView checkDF;
+     
+    String erreur;
 
     /**
      * Initializes the controller class.
@@ -116,7 +127,7 @@ public class PromotionAjouterFXMLController implements Initializable {
     @FXML
     private void AjoutPromo(ActionEvent event) throws SQLException {
         
-        
+        if(testSaisie()){
         int year = dateD.getValue().getYear()-1900;
         int month = dateD.getValue().getMonthValue()-1;
         int day = dateD.getValue().getDayOfMonth();
@@ -132,8 +143,9 @@ public class PromotionAjouterFXMLController implements Initializable {
         
      //   PromotionService promotionService = new PromotionService();
          Promotion p = new Promotion(Float.parseFloat(Taux.getText()),dateD,dateF);
-
+      
           try {
+           
 
      if (Float.parseFloat(Taux.getText())<=0 || Float.parseFloat(Taux.getText()) >= 100) {
          Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -142,7 +154,8 @@ public class PromotionAjouterFXMLController implements Initializable {
             alert.setContentText("Le taux doit être entre 0 et 100");
             alert.show();
      }
-      else  if (dateF.compareTo(dateD) < 0) {
+      else  if (dateF.compareTo(dateD) < 0)  {
+       
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Echec de l'ajout");
         alert.setHeaderText(null);
@@ -163,6 +176,45 @@ public class PromotionAjouterFXMLController implements Initializable {
                         Logger.getLogger(PromotionAjouterFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                     }
           
+   
+        }}
+    
+     private Boolean testTaux() {
+
+        String nomReg = "^[0-9]*";
+
+        Pattern pat = Pattern.compile(nomReg);
+        if (Taux.getText() == null) {
+            return false;
+        }
+
+        if (pat.matcher(Taux.getText()).matches() == false || Taux.getText().length()==0) {
+            checkTaux.setImage(new Image("/view/ressources/images/ErreurcheckMark.png"));
+            erreur = erreur + ("Veuillez verifier votre nom\n");
+            return false;       
+
+        } else {
+            checkTaux.setImage(new Image("/view/ressources/images/checkMark.png"));
+        }
+        return true;
+
+    }
+     
+ 
+     
+     
+      private Boolean testSaisie() {
+        erreur = "";
+       
+       
+        if (!testTaux()) {
+            erreur = erreur + ("Veuillez verifier votre taux \n");
+        }
+        
+         
+       
+
+        return   testTaux()    ;
     }
     
 }

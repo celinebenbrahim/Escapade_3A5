@@ -31,6 +31,8 @@ import gestionPromoFactureReservation.entities.Facture;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionPromoFactureReservation.services.PromotionService;
 import gestionPromoFactureReservation.services.FactureService;
+import static gestionUserReclamation.entities.Blocked.non;
+import static gestionUserReclamation.entities.Role.ADMIN;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -95,9 +97,31 @@ public class Escapade {
 
 //Utilisateur
 //System.out.println("\n \n LISTE UTILISATEUR \n \n \n");
-        Utilisateur c1 = new Utilisateur("daghrour", "myriam", "myriam@", dateAller, 55989026,
-                "nabeul", "mimi", "221017", Role.client);
-        UtilisateurService userService = new UtilisateurService();
+       UtilisateurService us = new UtilisateurService();
+        //**********addUser*************
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateNaissance = simpleDateFormat.parse("2000-09-02");
+        Utilisateur u1 = new Utilisateur(98,"kk", "hemriti", "nour.boujmil@esprit.tn", dateNaissance, 26596, "tunis", "2000", "kkk", non, ADMIN);
+        //us.ajouter(u1);
+       //us.supprimer(u1);
+        //**********showUser*************
+     //   us.modifier(u1);
+       // System.out.println(us.afficher());
+
+       // System.out.println(us.authentification("nour.boujmil@esprit.tn","2000"));
+
+         
+        //System.out.println(us.recherche("1","id","asc"));
+//        String h=Crypt.hash("2000");
+//        String b=Crypt.hash("2000");
+//        System.out.println(b.equals(h));
+//        System.out.println(h);
+//        System.out.println(b);
+        //us.envoyerCodeVerif("houssem.riahi@esprit.tn");
+        //System.out.println(us.getRandomCode());
+        //us.modifierMotDePasse(u1, "kkk", "kkk");
+        //System.out.println(us.getUser(9));
      //   userService.ajouter(c1);
 
 //        //BILLET
@@ -164,13 +188,13 @@ public class Escapade {
 
         //Facture   
         Date date = format.parse("2022-02-17");
-     Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
-       userService.ajouter(u);
+    // Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
+     //  userService.ajouter(u);
         Promotion p1 = new Promotion(5, dateD, dateF);
         promotionService.ajouter(p1);
         FactureService factureService = new FactureService();
-        Facture f = new Facture(100, date, u,0,p1);
-        factureService.ajouter(f);
+      //  Facture f = new Facture(100, date, u,0,p1);
+       // factureService.ajouter(f);
        // Facture f1 = new Facture(200, date, u, 1000, p1);
       // factureService.ajouter(f1);
       //  System.out.println(factureService.CalculerPrixF(f));

@@ -35,8 +35,10 @@ public class EscapadeMain extends Application {
         try {
 
             parent = FXMLLoader.load(getClass().getResource("/view/gestion/BackFXML.fxml"));
-            // parent = FXMLLoader.load(getClass().getResource("/view/gestion/AcceuilFXML.fxml"));
+            // parent = FXMLLoader.load(getClass().getResource("/view/gestion/Acceuil4FXML.fxml"));
+               //parent = FXMLLoader.load(getClass().getResource("/view/gestion/ConxFXML.fxml"));
             // parent = FXMLLoader.load(getClass().getResource("/view/gestion/DestinationFXML.fxml"));
+          //  parent = FXMLLoader.load(getClass().getResource("/view/gestion/FactureFrontFXML.fxml"));
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

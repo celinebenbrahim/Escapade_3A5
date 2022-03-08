@@ -61,7 +61,7 @@ public class BilletService implements IService<Billet> {
             pst.setString(3, b.getType().toString());
             pst.setDouble(4, b.getPrix());
             pst.setString(5, b.getCompagnieAerienne());
-            pst.setInt(6, b.getClient().getIdU());
+            pst.setInt(6, b.getClient().getId());
             pst.executeUpdate();
             ResultSet generatedKeys = pst.getGeneratedKeys();
 
@@ -100,7 +100,7 @@ public class BilletService implements IService<Billet> {
             pst.setString(3, b.getType().toString());
             pst.setDouble(4, b.getPrix());
             pst.setString(5, b.getCompagnieAerienne());
-            pst.setInt(6, b.getClient().getIdU());
+            pst.setInt(6, b.getClient().getId());
             pst.executeUpdate();
             pst.close();
             System.out.println("Billet modifiée");
@@ -127,14 +127,14 @@ public class BilletService implements IService<Billet> {
                  if (rss.next())
                 {
                 InputStream stream = rss.getBinaryStream(1);
-                user.setIdU(rss.getInt("id"));
+                user.setId(rss.getInt("id"));
                 user.setNom(rss.getString(2));
                 user.setPrenom(rss.getString(3));
                 user.setEmail(rss.getString(4));
                 user.setDateNaissance(rss.getDate(5));
                 user.setNumTel(rss.getInt(6));
                 user.setVille(rss.getString(7));
-                user.setLogin(rss.getString(8));
+             //   user.setLogin(rss.getString(8));
                 user.setMdp(rss.getString(9));
                 user.setRole(Role.valueOf(rss.getString(10)));
                 }
@@ -174,14 +174,14 @@ public class BilletService implements IService<Billet> {
                  if (rss.next())
                 {
                 InputStream stream = rss.getBinaryStream(1);
-                user.setIdU(rss.getInt("id"));
+                user.setId(rss.getInt("id"));
                 user.setNom(rss.getString(2));
                 user.setPrenom(rss.getString(3));
                 user.setEmail(rss.getString(4));
                 user.setDateNaissance(rss.getDate(5));
                 user.setNumTel(rss.getInt(6));
                 user.setVille(rss.getString(7));
-                user.setLogin(rss.getString(8));
+            //    user.setLogin(rss.getString(8));
                 user.setMdp(rss.getString(9));
                 user.setRole(Role.valueOf(rss.getString(10)));
                 }

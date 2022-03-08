@@ -158,6 +158,7 @@
                   <Button fx:id="SupPromo" layoutX="83.0" layoutY="345.0" mnemonicParsing="false" onAction="#SupPromo" prefHeight="25.0" prefWidth="155.0" text="Supprimer une promotion" />
                   <Button fx:id="AfficherP" layoutX="83.0" layoutY="405.0" mnemonicParsing="false" onAction="#Afficher" prefHeight="25.0" prefWidth="155.0" text="Afficher une promotion" />
                   <Button fx:id="rechercheP" layoutX="83.0" layoutY="460.0" mnemonicParsing="false" onAction="#rechercheP" prefHeight="25.0" prefWidth="155.0" text="Chercher une promotion" />
+                  <Button fx:id="PDF" layoutX="380.0" layoutY="96.0" mnemonicParsing="false" onAction="#PDF" text="Mettre sous forme PDF" />
                </children>
             </Pane>
          </children>

@@ -5,8 +5,22 @@
  */
 package view.gestion;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionPromoFactureReservation.services.PromotionService;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 //import java.sql.Date;
@@ -45,8 +59,11 @@ import javafx.util.Callback;
 import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javafx.embed.swing.SwingFXUtils;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -102,6 +119,8 @@ public class PromotionFXMLController implements Initializable {
   
     @FXML
     private Button rechercheP;
+    @FXML
+    private Button PDF;
 
     /**
      * Initializes the controller class.
@@ -155,7 +174,8 @@ public class PromotionFXMLController implements Initializable {
     @FXML
     private void AjoutP(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("PromotionAjouterFXML.fxml"));
+       loader.setLocation(getClass().getResource("PromotionAjouterFXML.fxml"));
+        // loader.setLocation(getClass().getResource("PromotionAjouterFXML.fxml"));
         Parent root = loader.load();
         // AjoutP.getScene().setRoot(root);
 
@@ -264,8 +284,100 @@ public class PromotionFXMLController implements Initializable {
        
 
     }
+
+    @FXML
+    private void PDF(ActionEvent event) throws DocumentException, SQLException, ClassNotFoundException {
+           try {
+              Class.forName("com.mysql.jdbc.Driver");
+                  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escapade", "root", "");
+      PreparedStatement pt = con.prepareStatement("select * from promotion");
+            ResultSet rs = pt.executeQuery();
+            
+                       /* Step-2: Initialize PDF documents - logical objects */
+
+                       Document my_pdf_report = new Document();
+
+                       PdfWriter.getInstance(my_pdf_report, new FileOutputStream("Table_des_promotions.pdf"));
+                       
+                        my_pdf_report.open();  
+                       my_pdf_report.add(new Paragraph(new Date().toString()));
+//                            Image img = Image.getInstance("C:\image.png");
+//                            my_pdf_report.add(img);
+                             my_pdf_report.add(new Paragraph("Listes des promotion"));
+                             
+                      my_pdf_report.addCreationDate();
+              
+                       
+                       //we have four columns in our table
+                       PdfPTable my_report_table = new PdfPTable(3);
+                             
+                       //create a cell object
+                       PdfPCell table_cell;
+                                          table_cell=new PdfPCell(new Phrase("taux"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                       
+                                         table_cell=new PdfPCell(new Phrase("dateDebut"));
+                                       table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       table_cell=new PdfPCell(new Phrase("dateFin"));
+                                      table_cell.setBackgroundColor(BaseColor.BLUE);
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       
+                                       
+                                       
+                                      while(rs.next()){
+                                        
+                                          String id=rs.getString("taux");
+                                       table_cell=new PdfPCell(new Phrase(id));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                          String dd=rs.getString("dateDebut");
+                                       table_cell=new PdfPCell(new Phrase(dd));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       String df= rs.getString("dateFin");
+                                       table_cell=new PdfPCell(new Phrase(df));
+                                       my_report_table.addCell(table_cell);
+                                       
+                                       
+                                       
+                                               
+                       }
+                       /* Attach report table to PDF */
+                       
+                       my_pdf_report.add(my_report_table); 
+             System.out.println(my_pdf_report);
+                       my_pdf_report.close();
+                       JOptionPane.showMessageDialog(null, "imprimer avec succés");
+
+                       /* Close all DB related objects */
+                       rs.close();
+                       pt.close(); 
+                       con.close();               
+
+
+       } catch (FileNotFoundException e) {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+       }
+    }
    
-     
+   /*   @FXML
+    private void Capture(ActionEvent event) {
+        try {
+            Robot robot = new Robot();
+            Rectangle rectangle = new Rectangle(180,0,1000,600);
+            BufferedImage image = robot.createScreenCapture(rectangle);
+            Image myImage = SwingFXUtils.toFXImage(image, null);
+            ImageIO.write(image, "jpg", new File("facture.jpg"));
+            System.out.println("capture");
+        } catch (Exception e) {
+        }
+    }
+     */
 
     
 

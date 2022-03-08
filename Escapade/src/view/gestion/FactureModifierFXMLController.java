@@ -192,7 +192,7 @@ public class FactureModifierFXMLController implements Initializable {
         UtilisateurService utilisateurService = new UtilisateurService();
         ObservableList<Utilisateur> list = FXCollections.observableArrayList();
         try {
-            String req = " select `idU`,`nom`,`prenom` from `utilisateur` ";
+            String req = " select `id`,`nom`,`prenom` from `utilisateur` ";
             PreparedStatement pst = utilisateurService.conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
