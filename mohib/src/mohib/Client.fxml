@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mohib.ClientController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="825.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="846.0" layoutX="-22.0" layoutY="-21.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../view/ressources/images/page1.png" />
+               </image>
+            </ImageView>
+            <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="-7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="825.0">
+                     <children>
+                        <Button fx:id="g" layoutX="143.0" layoutY="208.0" mnemonicParsing="false" onAction="#guide" prefHeight="70.0" prefWidth="170.0" text="Guide" textFill="#29c4a5">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="s" layoutX="446.0" layoutY="208.0" mnemonicParsing="false" onAction="#site" prefHeight="70.0" prefWidth="170.0" text="Site touristique" textFill="#29c4a5">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b" layoutX="719.0" layoutY="514.0" mnemonicParsing="false" onAction="#back" text="Retour">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

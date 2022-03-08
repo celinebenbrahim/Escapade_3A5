@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="847.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mohib.GuideClientController">
+   <children>
+      <ImageView id="bgimg" fitHeight="592.0" fitWidth="845.0" layoutX="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@../view/ressources/images/page1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="278.0" layoutY="20.0" text="Informations sur notre guide :" textFill="#df880e">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="b" layoutX="756.0" layoutY="528.0" mnemonicParsing="false" onAction="#back" text="Retour">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+      <Line endX="-100.0" endY="205.4000244140625" layoutX="537.0" layoutY="174.0" startX="-100.0" startY="-83.5999984741211" />
+      <ProgressBar layoutX="598.0" layoutY="299.0" prefHeight="27.0" prefWidth="194.0" progress="0.74" />
+      <Label layoutX="470.0" layoutY="300.0" text="Rating">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ImageView id="iconpers" fitHeight="52.0" fitWidth="50.0" layoutX="225.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../view/ressources/images/icons8_Person_32px.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="98.0" text="Nom : Mouhamed Mouhib">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="164.0" text="Prénom : Ben gayes">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="239.0" text="Email : mouhibbengayes7@gmail.com">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ImageView id="iconmail" fitHeight="38.0" fitWidth="32.0" layoutX="346.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../view/ressources/images/icons8_Open_Envelope_32px.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="50.0" layoutY="313.0" text="Nationnalité : Tunisien">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="463.0" layoutY="98.0" text="Langue :">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="98.0" text="Arab">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="151.0" text="Francais">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="584.0" layoutY="219.0" text="Anglais">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ProgressIndicator layoutX="696.0" layoutY="89.0" progress="1.0" />
+      <ProgressIndicator layoutX="696.0" layoutY="148.0" progress="0.64" />
+      <ProgressIndicator layoutX="696.0" layoutY="210.0" progress="0.92" />
+   </children>
+</AnchorPane>
