@@ -155,7 +155,7 @@ public class Destination {
 
     @Override
     public String toString() {
-        return  "Pays: " + pays + "\nVille: "+ville ;
+        return "Destination{" + "pays=" + pays + ", ville=" + ville + ", img=" + img + '}';
     }
 
     

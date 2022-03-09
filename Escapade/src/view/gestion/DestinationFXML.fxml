@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,19 +15,11 @@
          </image>
       </ImageView>
       <Button fx:id="Back" layoutX="29.0" layoutY="21.0" mnemonicParsing="false" onAction="#Back" text="Back" />
-      <Button fx:id="Next" layoutX="541.0" layoutY="31.0" mnemonicParsing="false" onAction="#Next" text="Next" />
+      <Button fx:id="Next" layoutX="543.0" layoutY="-26.0" mnemonicParsing="false" onAction="#Next" text="Next" />
       <Label layoutX="242.0" layoutY="17.0" text="Destination">
          <font>
             <Font name="System Bold Italic" size="22.0" />
          </font>
       </Label>
-      <TableView fx:id="tableDest" layoutX="23.0" layoutY="69.0" pickOnBounds="false" prefHeight="200.0" prefWidth="558.0" style="-fx-border-color: FFEFD9; -fx-background-color: FFEFD9; -fx-border-style: FFEFD9; -fx-region-background: FFEFD9;">
-        <columns>
-          <TableColumn fx:id="img" prefWidth="223.0" />
-          <TableColumn fx:id="pays" prefWidth="172.0" />
-            <TableColumn fx:id="ville" prefWidth="162.0" />
-        </columns>
-      </TableView>
-      <Button fx:id="showHotel" layoutX="356.0" layoutY="304.0" mnemonicParsing="false" text="Voir les Hôtels" />
    </children>
 </AnchorPane>

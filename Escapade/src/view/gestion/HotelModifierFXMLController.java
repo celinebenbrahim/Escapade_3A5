@@ -95,7 +95,7 @@ public class HotelModifierFXMLController implements Initializable {
     private TextField nbChambres;
     @FXML
     private Button annuler;
-    
+
     public static Hotel hotel;
     @FXML
     private TextArea description;
@@ -135,7 +135,7 @@ public class HotelModifierFXMLController implements Initializable {
         insérer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                 
+
                 FileChooser fc = new FileChooser();
                 fc.getExtensionFilters().addAll(
                         new FileChooser.ExtensionFilter("image", "*.jpg", "*.png")
@@ -164,46 +164,48 @@ public class HotelModifierFXMLController implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
-             
+
                 HotelService hotelService = new HotelService();
-                
+
                 int nb = Integer.parseInt(nbEtoiles.getText());
                 int nb1 = Integer.parseInt(nbChambresRes.getText());
                 int ch = Integer.parseInt(nbChambres.getText());
-                
+
                 Destination d = destination.getSelectionModel().getSelectedItem();
-                
-                Hotel h = new Hotel(hotel.getIdHotel(),matricule.getText(), nom.getText(), nb,
+
+                Hotel h = new Hotel(hotel.getIdHotel(), matricule.getText(), nom.getText(), nb,
                         description.getText(), ch, d, selectedfile.getName(), nb1);
-      if (!nbEtoiles.getText().equalsIgnoreCase("") && 
-                   !description.getText().equalsIgnoreCase("") &&
-                          !nom.getText().equalsIgnoreCase("") &&
-                         Float.parseFloat(nbChambres.getText()) > 0 &&
-                           Float.parseFloat(nbEtoiles.getText()) > 0 &&
-                            Float.parseFloat(nbEtoiles.getText()) < 6 &&
-                          !nbChambres.getText().equalsIgnoreCase("") &&
-                         !matricule.getText().equalsIgnoreCase("") 
-                         ) {
-                try {
-                  
-                    hotelService.modifier(h, hotel.getIdHotel());
-     
-                } catch (SQLException ex) {
-                    Logger.getLogger(HotelModifierFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                if (!nbEtoiles.getText().equalsIgnoreCase("")
+                        && !description.getText().equalsIgnoreCase("")
+                        && !nom.getText().equalsIgnoreCase("")
+                        && Float.parseFloat(nbChambres.getText()) > 0
+                        && Float.parseFloat(nbEtoiles.getText()) > 0
+                        && Float.parseFloat(nbEtoiles.getText()) < 6
+                        && !nbChambres.getText().equalsIgnoreCase("")
+                        && !matricule.getText().equalsIgnoreCase("")) {
+                    
+                    try {
+
+                        hotelService.modifier(h, hotel.getIdHotel());
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(HotelModifierFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    Alert alert0 = new Alert(Alert.AlertType.INFORMATION);
+                    alert0.setTitle("information Dialog");
+                    alert0.setHeaderText(null);
+                    alert0.setContentText("Votre modification est enregistrée avec succes ");
+                    alert0.show();
+                    ((Node) event.getSource()).getScene().getWindow().hide();
+                
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Echec de la modification");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Attention ! Verifier les données saisie (Pas de champs vides)");
+                    alert.showAndWait();
                 }
-                Alert alert0 = new Alert(Alert.AlertType.INFORMATION);
-                alert0.setTitle("information Dialog");
-                alert0.setHeaderText(null);
-                alert0.setContentText("Votre modification est enregistrée avec succes ");
-                alert0.show();
-                ((Node) event.getSource()).getScene().getWindow().hide();
-      }else{
-           Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Echec de la modification");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Attention ! Verifier les données saisie (Pas de champs vides)");
-                        alert.showAndWait();
-      }
             }
 
         });
@@ -247,12 +249,15 @@ public class HotelModifierFXMLController implements Initializable {
     }
 
     private void ListerDestination() {
+        
         DestinationService destinationService = new DestinationService();
         ObservableList<Destination> list = FXCollections.observableArrayList();
+        
         try {
             String req = " select id,pays,ville from `destination` order by pays DESC";
             PreparedStatement pst = destinationService.conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
+        
             while (rs.next()) {
                 Destination d = new Destination(rs.getInt(1), rs.getString(2), rs.getString(3));
 
@@ -262,8 +267,10 @@ public class HotelModifierFXMLController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    
         destination.setItems(null);
         destination.setItems(list);
+    
     }
 
 }

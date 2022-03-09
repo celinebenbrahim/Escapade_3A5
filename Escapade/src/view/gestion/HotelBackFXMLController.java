@@ -325,7 +325,12 @@ public class HotelBackFXMLController implements Initializable {
     }
 
     @FXML
-    private void count(ActionEvent event) {
+    private void count(ActionEvent event) throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("CountHFXML.fxml"));
+        Parent root = loader.load();
+        rechercherH.getScene().setRoot(root);
     }
 
 }

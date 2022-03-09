@@ -91,6 +91,8 @@ public class Destination_BackFXMLController implements Initializable {
     @FXML
     private Button rechercherD;
     public static Destination dest;
+    @FXML
+    private Button pdf;
 
     /**
      * Initializes the controller class.
@@ -262,6 +264,16 @@ public class Destination_BackFXMLController implements Initializable {
             Logger.getLogger(Destination_BackFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void pdfev(ActionEvent event) throws IOException {
+     Stage primaryStage = (Stage) pdf.getScene().getWindow();
+       Parent root = FXMLLoader.load(getClass().getResource("/view/gestion/Chart.fxml"));
+       Scene scene = new Scene (root);
+       primaryStage.setScene(scene);
+       primaryStage.show();
+       
     }
 
 }

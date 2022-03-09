@@ -66,7 +66,7 @@
                   <Insets left="50.0" />
                </padding>
             </Button>
-            <Button fx:id="btnOrders" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Chambre">
+            <Button fx:id="Chambre" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Chambre" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Chambre">
                <padding>
                   <Insets left="50.0" />
                </padding>

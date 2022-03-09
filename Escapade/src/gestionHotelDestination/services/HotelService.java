@@ -25,8 +25,9 @@ import java.util.stream.Collectors;
  */
 public class HotelService implements IService<Hotel> {
 
-    private Connection conn;
-    private PreparedStatement pst;
+    public Connection conn;
+    
+    public PreparedStatement pst;
 
     public HotelService() {
         conn = DataSource.getInstance().getCnx();

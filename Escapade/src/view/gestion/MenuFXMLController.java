@@ -28,6 +28,8 @@ public class MenuFXMLController implements Initializable {
     private Button Home;
       @FXML
     private Button Hotel;
+       @FXML
+    private Button Chambre;
     @FXML
     private ImageView home;
     @FXML
@@ -84,6 +86,14 @@ public class MenuFXMLController implements Initializable {
         loader.setLocation(getClass().getResource("HotelBackFXML.fxml"));
         Parent root = loader.load();
         Home.getScene().setRoot(root);
+    }
+     @FXML
+    private void Chambre(ActionEvent event) throws IOException {
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ChambreBackFXML.fxml"));
+        Parent root = loader.load();
+        Chambre.getScene().setRoot(root);
     }
     
     

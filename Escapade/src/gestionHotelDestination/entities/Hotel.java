@@ -48,10 +48,10 @@ public class Hotel {
     public Hotel(int id, String matriculeFiscale, String nom,
             int nbrEtoile, String description, int maxChambre,
             Destination destination, String img) {
+        
         this.idHotel = id;
         this.matriculeFiscale = matriculeFiscale;
         this.nom = nom;
-
         this.nbrEtoile = nbrEtoile;
         this.description = description;
         this.nbChambreTotal = 0;

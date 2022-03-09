@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -120,6 +119,7 @@
                         <TableColumn fx:id="imgDest" prefWidth="188.0" text="IMAGE" />
                     </columns>
                   </TableView>
+                  <Button fx:id="pdf" layoutX="345.0" layoutY="480.0" mnemonicParsing="false" onAction="#pdfev" prefHeight="25.0" prefWidth="108.0" text="Statistique" />
                </children>
             </Pane>
          </children>

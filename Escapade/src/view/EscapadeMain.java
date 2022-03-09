@@ -34,8 +34,8 @@ public class EscapadeMain extends Application {
         this.stage = primaryStage;
         try {
 
-            // parent = FXMLLoader.load(getClass().getResource("/view/gestion/DestinationFXML.fxml"));
-            parent = FXMLLoader.load(getClass().getResource("/view/gestion/BackFXML.fxml"));
+           // parent = FXMLLoader.load(getClass().getResource("/view/gestion/FrontFXML.fxml"));
+          parent = FXMLLoader.load(getClass().getResource("/view/gestion/BackFXML.fxml"));
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
