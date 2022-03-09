@@ -60,6 +60,8 @@ public class ProfilFXMLController implements Initializable {
     private Button boutonModifier;
     @FXML
     private Label labelMDP;
+    
+     private Utilisateur user;
     private int id;
 
     public int getId() {
@@ -69,6 +71,10 @@ public class ProfilFXMLController implements Initializable {
     public void setId(int id) {
         this.id = id;
     }
+      public void setUser(Utilisateur user) {
+        this.user = user;
+    }
+    
     
 
 //   private Utilisateur user;    
@@ -153,15 +159,15 @@ public class ProfilFXMLController implements Initializable {
 
     @FXML
     private void changerMdp(MouseEvent event) throws IOException {
-       // FXMLLoader loader = new FXMLLoader();
-//            UtilisateurService us = new UtilisateurService();
-//            loader.setLocation(getClass().getResource("ChangeMdpForm.fxml"));
-//            Parent root = loader.load();
-//            //tebaath el utilisateur
-//            ChangeMdpFormController controller=loader.getController();
-//            controller.setU(us.getUserByEmail(tfEmail.getText()));
-//            
-//            labelMDP.getScene().setRoot(root);
+        FXMLLoader loader = new FXMLLoader();
+            UtilisateurService us = new UtilisateurService();
+            loader.setLocation(getClass().getResource("ChangeMdpFXML.fxml"));
+            Parent root = loader.load();
+            //tebaath el utilisateur
+            ChangeMdpFXMLController controller=loader.getController();
+            controller.setU(us.getUserByEmail(tfEmail.getText()));
+            
+            labelMDP.getScene().setRoot(root);
         
     }
 

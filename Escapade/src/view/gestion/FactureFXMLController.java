@@ -49,6 +49,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -118,6 +119,7 @@ public class FactureFXMLController implements Initializable {
     @FXML
     private Button imprimerfacture;
 
+    ObservableList<Facture> obl = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
      */
@@ -125,6 +127,7 @@ public class FactureFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             // PrixT.setCellValueFactory(new PropertyValueFactory<>("PrixTotal"));
+            tableInit();
             Afficher();
         } catch (SQLException ex) {
             Logger.getLogger(FactureFXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,14 +239,34 @@ public class FactureFXMLController implements Initializable {
             alert.show();
         }
  }
+    public void tableInit() {
+
+        PrixT.setCellValueFactory(new PropertyValueFactory<>("prixTotal"));
+        date.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        idC.setCellValueFactory(new PropertyValueFactory<>("idClient"));
+        PrixF.setCellValueFactory(new PropertyValueFactory<>("PrixFinal"));
+        Taux.setCellValueFactory(new PropertyValueFactory<>("idPromotion"));
+        ObservableList<String> data = FXCollections.observableArrayList("prixT", "Date", "idC");
+       //triBox.setItems(data);
+
+    }
 
     @FXML
     public void Afficher() throws SQLException {
-        FactureService factureService = new FactureService();
+         obl = FXCollections.observableArrayList();
+      FactureService factureService = new FactureService();
+//        for (Facture facture : factureService.afficher()) {
+//            obl.add(facture);
+//            // code block to be executed
+//        }
+//        ListF.setItems(obl);
+//        
 
         /* add column to the tableview and set its items */
         ObservableList<Facture> facture = FXCollections.observableArrayList(factureService.afficher());
-        ListF.setItems(facture);
+       ListF.setItems(facture);
+      
+   
 
         PrixT.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Facture, Float>, ObservableValue<Float>>() {
             @Override
@@ -251,17 +274,19 @@ public class FactureFXMLController implements Initializable {
                 return new ReadOnlyObjectWrapper(param.getValue().getPrixTotal());
             }
         });
+        
         date.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Facture, Date>, ObservableValue<Date>>() {
             @Override
             public ObservableValue<Date> call(TableColumn.CellDataFeatures<Facture, Date> param) {
                 return new ReadOnlyObjectWrapper(param.getValue().getDate());
             }
         });
+        
 
         idC.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Facture, Utilisateur>, ObservableValue<Utilisateur>>() {
             @Override
             public ObservableValue<Utilisateur> call(TableColumn.CellDataFeatures<Facture, Utilisateur> param) {
-                return new ReadOnlyObjectWrapper(param.getValue().getClient());
+                return new ReadOnlyObjectWrapper(param.getValue().getClient().getNom());
             }
         });
 
@@ -275,7 +300,7 @@ public class FactureFXMLController implements Initializable {
         Taux.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Facture, Promotion>, ObservableValue<Promotion>>() {
             @Override
             public ObservableValue<Promotion> call(TableColumn.CellDataFeatures<Facture, Promotion> param) {
-                return new ReadOnlyObjectWrapper(param.getValue().getPromotion());
+                return new ReadOnlyObjectWrapper(param.getValue().getPromotion().getTaux());
             }
         });
 

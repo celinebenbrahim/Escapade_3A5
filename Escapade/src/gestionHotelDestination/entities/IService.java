@@ -5,6 +5,7 @@
  */
 package gestionHotelDestination.entities;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -13,11 +14,11 @@ import java.util.*;
  */
 public interface IService  <T>{
     
-    void supprimerId(int id);
-    void ajouter(T entity);
-    void supprimer(T entity);
-    void modifier(T entity,int id);
-    List<T> afficher();
-    List<T> tri();
-    void rechercher(String pays );
+    void supprimerId(int id)throws SQLException;
+    void ajouter(T entity)throws SQLException;
+    void supprimer(T entity)throws SQLException;
+    void modifier(T entity,int id)throws SQLException;
+    List<T> afficher()throws SQLException;
+    List<T> tri()throws SQLException;
+    void rechercher(String pays )throws SQLException;
 }

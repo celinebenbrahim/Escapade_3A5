@@ -14,6 +14,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -28,6 +31,26 @@ public class BackFXMLController implements Initializable {
     private Button Facture;
      @FXML
     private Button Promotion;
+    @FXML
+    private Button btnOverview;
+    @FXML
+    private ImageView home;
+    @FXML
+    private Button User;
+    @FXML
+    private Button btnSettings;
+    @FXML
+    private Button btnSignout;
+    @FXML
+    private Pane pnlCustomer;
+    @FXML
+    private Pane pnlOrders;
+    @FXML
+    private Pane pnlMenus;
+    @FXML
+    private Pane pnlOverview;
+    @FXML
+    private VBox pnItems;
 
     /**
      * Initializes the controller class.
@@ -60,6 +83,14 @@ public class BackFXMLController implements Initializable {
         loader.setLocation(getClass().getResource("PromotionFXML.fxml"));
         Parent root = loader.load();
         Promotion.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void User(ActionEvent event) throws IOException {
+         FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UserDetailsFXML.fxml"));
+        Parent root = loader.load();
+        User.getScene().setRoot(root);
     }
     
 }

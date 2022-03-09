@@ -90,6 +90,8 @@ public class FactureAjouterFXMLController implements Initializable {
     private ComboBox<Promotion> idPromo;
     @FXML
     private Button btnCustomers;
+    @FXML
+    private ComboBox<String> cb;
 
     /**
      * Initializes the controller class.
@@ -116,7 +118,7 @@ public class FactureAjouterFXMLController implements Initializable {
                 FactureService factureService = new FactureService();
 
                 try {
-                    if (Float.parseFloat(PrixT.getText())<=0 ) {
+                    if (Float.parseFloat(PrixT.getText()) <= 0) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Echec de l'ajout");
                         alert.setHeaderText(null);
@@ -195,7 +197,29 @@ public class FactureAjouterFXMLController implements Initializable {
         idC.setItems(null);
         idC.setItems(list);
     }
-   
+
+// private void ListerUtilisateur() {
+//
+//        UtilisateurService utilisateurService = new UtilisateurService();
+//        List<String> list = new ArrayList();
+//        String s="";
+//        try {
+//            String req = " select `nom`,`prenom` from `utilisateur` ";
+//            PreparedStatement pst = utilisateurService.conn.prepareStatement(req);
+//            ResultSet rs = pst.executeQuery();
+//            
+//            while (rs.next()) {
+//                s+=rs.getString(1)+""+rs.getString(2);
+//                //Utilisateur u = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3));
+//                list.add(s);
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        cb.setItems(null);
+//        cb.getItems().add(s);
+//    }
     private void ListerPromotion() {
         PromotionService destinationService = new PromotionService();
         ObservableList<Promotion> list = FXCollections.observableArrayList();

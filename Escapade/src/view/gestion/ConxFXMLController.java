@@ -120,10 +120,10 @@ public class ConxFXMLController implements Initializable {
 
     @FXML
     private void motDePasseOublié(MouseEvent event) throws IOException {
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getResource("/Gui/RestCodeForm.fxml"));
-//        Parent root = loader.load();
-//        labelMdpOublié.getScene().setRoot(root);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("RestCodeFXML.fxml"));
+        Parent root = loader.load();
+        labelMdpOublié.getScene().setRoot(root);
     }
         @FXML
     private void inscription(ActionEvent event) throws IOException {

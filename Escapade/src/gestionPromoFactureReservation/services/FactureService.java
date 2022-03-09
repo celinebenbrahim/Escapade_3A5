@@ -191,32 +191,34 @@ public class FactureService implements Iservice<Facture> {
         }
 
     }
-      public List<Facture> findFacture(float prixTotal, float prixFinal ) throws SQLException {
-
-        String req = "SELECT * FROM Facture WHERE prixTotal= ? or prixFinal=?  ";
-        
-        List<Facture> facture = new ArrayList<>();
-
-       pst = conn.prepareStatement(req);
-         pst.setFloat(1, prixTotal);
-         pst.setFloat(2, prixFinal);
       
-        ResultSet rs = pst.executeQuery();
-
-        while (rs.next()) {
+      
+   /*    public Facture getUserById(int id) {
+        String req = "SELECT * from `Facture` where idF=?";
+        Facture facture = new Facture();
+        try {
             pst = conn.prepareStatement(req);
-            pst.setFloat(1, prixTotal);
-             pst.setFloat(2, prixFinal);
-        
-       Facture f = new Facture();
-                f.setIdF(rs.getInt("idF"));
-               f.setPrixTotal((rs.getFloat(2)));
-                f.setPrixFinal(rs.getFloat(4));
-              
-                facture.add(f);
+            pst.setInt(1, id);
+            ResultSet fs = pst.executeQuery();
 
+            while (fs.next()) {
+                facture.setIdF(id);
+                facture.setPrixTotal(fs.getFloat(2));
+                 facture.setDate(fs.getDate(3));
+               facture.setPrixFinal(fs.getFloat(4));
+                Utilisateur u = new Utilisateur(fs.getString(5), fs.getString(6), fs.getString(7), fs.getInt(8), fs.getString(9));
+                facture.setClient(u);
+                Promotion p = new Promotion(fs.getFloat(10));
+                facture.setPromotion(p);
+              
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
+
         return facture;
-    }
+
+    }*/
 
 }

@@ -160,6 +160,7 @@
                   </Label>
                   <ComboBox fx:id="idC" layoutX="331.0" layoutY="276.0" prefHeight="25.0" prefWidth="174.0" />
                   <ComboBox fx:id="idPromo" layoutX="334.0" layoutY="335.0" prefHeight="25.0" prefWidth="174.0" />
+                  <ComboBox fx:id="cb" layoutX="92.0" layoutY="398.0" prefWidth="150.0" />
                </children>
             </Pane>
          </children>

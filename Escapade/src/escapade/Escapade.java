@@ -14,8 +14,6 @@ import java.util.*;
 import java.io.*;
 import gestionHotelDestination.services.DestinationService;
 import gestionHotelDestination.entities.Destination;
-import gestionHotelDestination.services.BilletService;
-import gestionHotelDestination.entities.Billet;
 import gestionHotelDestination.entities.Chambre;
 import gestionHotelDestination.services.HotelService;
 import gestionHotelDestination.entities.Hotel;
