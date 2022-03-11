@@ -15,25 +15,37 @@ public class Reclamation {
     private int id;
     private Date date;
     private String description;
-    private Utilisateur utilisateur;
-    
-    public Reclamation() {
+    private int idClient;
+
+    public Reclamation(int id, String description) {
+        this.id = id;
+        this.description = description;
     }
 
-    public Reclamation(int id, Date date, String description, Utilisateur utilisateur) {
+    public Reclamation(int id, Date date, String description) {
         this.id = id;
         this.date = date;
         this.description = description;
-        this.utilisateur = utilisateur;
     }
 
-    public Reclamation(Date date, String description, Utilisateur utilisateur) {
+
+
+
+    public Reclamation() {
+    }
+
+    public Reclamation(int id, Date date, String description, int idClient) {
+        this.id = id;
         this.date = date;
         this.description = description;
-        this.utilisateur = utilisateur;
+        this.idClient = idClient;
     }
-    
-    
+
+    public Reclamation(Date date, String description, int idClient) {
+        this.date = date;
+        this.description = description;
+        this.idClient = idClient;
+    }
 
     public int getId() {
         return id;
@@ -60,19 +72,17 @@ public class Reclamation {
         this.description = description;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
+    public int getIdClient() {
+        return idClient;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 
     @Override
     public String toString() {
-        return "Reclamation{" + "date=" + date + ", description=" + description + ", nom=" + utilisateur.getNom() +", prenom=" + utilisateur.getPrenom() +", email=" + utilisateur.getEmail() + '}';
+        return "reclamation{" + "id=" + id + ", date=" + date + ", description=" + description + ", idClient=" + idClient + '}';
     }
-
-
 
 }

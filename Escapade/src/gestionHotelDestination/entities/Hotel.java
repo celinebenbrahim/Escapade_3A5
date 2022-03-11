@@ -4,150 +4,49 @@
  * and open the template in the editor.
  */
 package gestionHotelDestination.entities;
-
-import java.io.File;
 import java.util.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  *
  * @author Meryem
  */
 public class Hotel {
-
-    private int idHotel;
+    
+    private int id;
     private String matriculeFiscale;
     private String nom;
-
+    private String adresse;
     private int nbrEtoile;
     private String description;
     private int nbChambreTotal;
-    private int maxChambre;
-    private Destination destination;
-    private String img;
-    private ImageView imgview;
+    private  int maxChambre;
+    private  Destination destination;
+     
 
     public Hotel() {
     }
 
-    public Hotel(String matriculeFiscale, String nom,
-            int nbrEtoile, String description, int maxChambre,
-            Destination destination, String img) {
+    public Hotel(String matriculeFiscale, String nom, String adresse, 
+            int nbrEtoile, String description, int nbChambreTotal, int maxChambre, 
+            Destination destination) {
         this.matriculeFiscale = matriculeFiscale;
         this.nom = nom;
-
-        this.nbrEtoile = nbrEtoile;
-        this.description = description;
-        this.nbChambreTotal = 0;
-        this.maxChambre = maxChambre;
-        this.destination = destination;
-        this.img = img;
-    }
-
-    public Hotel(int id, String matriculeFiscale, String nom,
-            int nbrEtoile, String description, int maxChambre,
-            Destination destination, String img) {
-        
-        this.idHotel = id;
-        this.matriculeFiscale = matriculeFiscale;
-        this.nom = nom;
-        this.nbrEtoile = nbrEtoile;
-        this.description = description;
-        this.nbChambreTotal = 0;
-        this.maxChambre = maxChambre;
-        this.destination = destination;
-        this.img = img;
-    }
-      
-
-    public Hotel( String matriculeFiscale, String nom,
-            int nbrEtoile, String description, int maxChambre,
-            Destination destination, String img, int nbChambreTotal) {
-   
-        this.matriculeFiscale = matriculeFiscale;
-        this.nom = nom;
-
+        this.adresse = adresse;
         this.nbrEtoile = nbrEtoile;
         this.description = description;
         this.nbChambreTotal = nbChambreTotal;
         this.maxChambre = maxChambre;
         this.destination = destination;
-        this.img = img;
     }
-     public Hotel( int id,String matriculeFiscale, String nom,
-            int nbrEtoile, String description, int maxChambre,
-            Destination destination, String img, int nbChambreTotal) {
+
    
-        this.matriculeFiscale = matriculeFiscale;
-        this.nom = nom;
-        this.idHotel=id;
-        this.nbrEtoile = nbrEtoile;
-        this.description = description;
-        this.nbChambreTotal = nbChambreTotal;
-        this.maxChambre = maxChambre;
-        this.destination = destination;
-        this.img = img;
+
+    public int getId() {
+        return id;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public ImageView getImgview() {
-        return imgview;
-    }
-
-    public void setImgview(ImageView imgview) {
-        this.imgview = imgview;
-        imgview.setFitHeight(100);
-        imgview.setFitWidth(100);
-        imgview.setPreserveRatio(false);
-    }
-
-    public int getIdHotel() {
-        return idHotel;
-    }
-
-    public static List<Hotel> generateImageViews(List<Hotel> hotels) {
-        List<Hotel> liste = new ArrayList<Hotel>();
-
-        for (Hotel hotel : hotels) {
-            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
-            hotel.setImgview(new ImageView(new Image(f.toURI().toString())));
-            liste.add(hotel);
-        }
-        return liste;
-    }
-
-    public static ArrayList<Hotel> generateImageViews(ArrayList<Hotel> hotels) {
-        ArrayList<Hotel> liste = new ArrayList<Hotel>();
-
-        for (Hotel hotel : hotels) {
-            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
-            hotel.setImgview(new ImageView(new Image(f.toURI().toString())));
-            liste.add(hotel);
-        }
-        return liste;
-    }
-
-    public static Hotel generateImageViews(Hotel hotel) {
-
-        Hotel h;
-
-        File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
-        hotel.setImgview(new ImageView(new Image(f.toURI().toString())));
-        h = hotel;
-
-        return h;
-    }
-
-    public void setIdHotel(int id) {
-        this.idHotel = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMatriculeFiscale() {
@@ -164,6 +63,14 @@ public class Hotel {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public int getNbrEtoile() {
@@ -208,17 +115,17 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{"+ idHotel+ "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom
-                + ", nb etoile=" + nbrEtoile + ", description="
-                + description + ", nbChambreTotal=" + nbChambreTotal
-                + "nb max chambre: " + maxChambre + "Emplacement:  Ville: " + destination.getVille()
-                + "Pays: " + destination.getPays() + ", img=" + img + ", imgview=" + imgview + '}';
+        return "Hotel{" + "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom 
+                + ", adresse=" + adresse + ", nbrEtoile=" + nbrEtoile + ", description=" +
+                description + ", nbChambreTotal=" + nbChambreTotal +
+                "nb max chambre: " + maxChambre + "Emplacement:  Ville: " +destination.getVille()+
+                "Pays: "+destination.getPays()+'}';
     }
 
     @Override
     public int hashCode() {
-
-        return idHotel + nbrEtoile + matriculeFiscale.hashCode() + maxChambre;
+      
+        return id+nbrEtoile+matriculeFiscale.hashCode()+maxChambre;
     }
 
     @Override
@@ -233,7 +140,7 @@ public class Hotel {
             return false;
         }
         final Hotel other = (Hotel) obj;
-        if (this.idHotel != other.idHotel) {
+        if (this.id != other.id) {
             return false;
         }
         if (this.nbrEtoile != other.nbrEtoile) {
@@ -242,18 +149,21 @@ public class Hotel {
         if (this.nbChambreTotal != other.nbChambreTotal) {
             return false;
         }
-
+       
         if (!Objects.equals(this.matriculeFiscale, other.matriculeFiscale)) {
             return false;
         }
         if (!Objects.equals(this.nom, other.nom)) {
             return false;
         }
-
+        if (!Objects.equals(this.adresse, other.adresse)) {
+            return false;
+        }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         return true;
     }
-
+    
+    
 }

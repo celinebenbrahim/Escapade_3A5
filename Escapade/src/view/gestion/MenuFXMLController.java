@@ -26,14 +26,10 @@ public class MenuFXMLController implements Initializable {
 
     @FXML
     private Button Home;
-      @FXML
-    private Button Hotel;
-       @FXML
-    private Button Chambre;
     @FXML
     private ImageView home;
     @FXML
-    private Button Destination;
+    private Button btnOverview;
     @FXML
     private Button btnCustomers;
     @FXML
@@ -62,39 +58,32 @@ public class MenuFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    } 
-    
+    }    
     @FXML
     private void Home(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(); 
+        FXMLLoader loader = new FXMLLoader();
+        
         loader.setLocation(getClass().getResource("BackFXML.fxml"));
         Parent root = loader.load();
         Home.getScene().setRoot(root);
     }
 
     @FXML
-    private void Destination(ActionEvent event) throws IOException {
-             FXMLLoader loader = new FXMLLoader(); 
-        loader.setLocation(getClass().getResource("Destination_BackFXML.fxml"));
+    private void guide_b(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        
+        loader.setLocation(getClass().getResource("GuideController.fxml"));
         Parent root = loader.load();
-        Home.getScene().setRoot(root);
+        btnOrders.getScene().setRoot(root);
     }
+
     @FXML
-    private void Hotel(ActionEvent event) throws IOException {
+    private void Site_b(ActionEvent event) throws IOException {
+           FXMLLoader loader = new FXMLLoader();
         
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("HotelBackFXML.fxml"));
+        loader.setLocation(getClass().getResource("SiteController.fxml"));
         Parent root = loader.load();
-        Home.getScene().setRoot(root);
+        btnSignout1.getScene().setRoot(root);
     }
-     @FXML
-    private void Chambre(ActionEvent event) throws IOException {
-        
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("ChambreBackFXML.fxml"));
-        Parent root = loader.load();
-        Chambre.getScene().setRoot(root);
-    }
-    
     
 }

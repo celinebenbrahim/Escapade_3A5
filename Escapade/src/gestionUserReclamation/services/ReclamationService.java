@@ -5,9 +5,8 @@
 package gestionUserReclamation.services;
 
 import escapade.utils.DataSource;
-import gestionUserReclamation.entities.IService;
+import gestionHotelDestination.entities.IService;
 import gestionUserReclamation.entities.Reclamation;
-import gestionUserReclamation.entities.Utilisateur;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -33,42 +32,40 @@ public class ReclamationService implements IService<Reclamation> {
     }
 
     @Override
-    public boolean ajouter(Reclamation r) {
-        String req = "INSERT INTO `reclamation` (`description`,`idClient`) VALUES (?,?)";
+    public void ajouter(Reclamation r) {
+        String req = "INSERT INTO `reclamation` (`description`,`date`,`idClient`) VALUES (?,?,?)";
 
         try {
             pst = conn.prepareStatement(req);
             pst.setString(1, r.getDescription());
             //pst.setDate(2, new java.sql.Date(r.getDate().getTime()));
-            //pst.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
-            pst.setInt(2, r.getUtilisateur().getId());
+            pst.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            pst.setInt(3, r.getIdClient());
             pst.executeUpdate();
             System.out.println("Reclamation ajoutée");
-            return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-            return false;
+
     }
 
     @Override
-    public boolean supprimer(Reclamation r) {
+    public void supprimer(Reclamation r) {
         try {
             PreparedStatement pre = conn.prepareStatement("Delete from reclamation where id=? ;");
             pre.setInt(1, r.getId());
             if (pre.executeUpdate() != 0) {
                 System.out.println("reclamation Deleted");
-                return true;
+
             }
 
         } catch (SQLException ex) {
             ex.getMessage();
         }
-        return false;
     }
 
-    @Override
-    public boolean modifier(Reclamation r) {
+  
+    public void modifier(Reclamation r) {
         String req;
 
         req = "UPDATE `reclamation` SET `description`=? WHERE id =?";
@@ -78,18 +75,16 @@ public class ReclamationService implements IService<Reclamation> {
             ps.setString(1, r.getDescription());
             ps.setInt(2, r.getId());
             ps.executeUpdate();
-            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false;
     }
 
     @Override
     public List<Reclamation> afficher() {
         List<Reclamation> reclamations = new ArrayList<>();
 
-        String req = "SELECT `Date`,`nom`,`prenom`,`email`,`description` FROM `reclamation` INNER JOIN `utilisateur` ON reclamation.idClient = utilisateur.id";
+        String req = "SELECT * from `reclamation`";
 
         try {
             pst = conn.prepareStatement(req);
@@ -97,10 +92,10 @@ public class ReclamationService implements IService<Reclamation> {
 
             while (rs.next()) {
                 Reclamation r = new Reclamation();
-                Utilisateur u=new Utilisateur(rs.getString(2),rs.getString(3),rs.getString(4));
-                r.setDate(rs.getDate(1));
-                r.setUtilisateur(u);
-                r.setDescription(rs.getString(5));
+                r.setId(rs.getInt("id"));
+                r.setDate(rs.getDate(2));
+                r.setIdClient(rs.getInt(3));
+                r.setDescription(rs.getString(4));
                 reclamations.add(r);
             }
         } catch (SQLException ex) {
@@ -108,6 +103,26 @@ public class ReclamationService implements IService<Reclamation> {
         }
 
         return reclamations;
+    }
+
+    @Override
+    public void supprimerId(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void modifier(Reclamation entity, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Reclamation> tri() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void rechercher(String pays) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

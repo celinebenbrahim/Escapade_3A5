@@ -3,19 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/gestionAgenceLocationMT/entities/Status.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/gestion/AgenceUpdateController.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/gestion/TransportFormController.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/gestion/FactureFrontFXMLController.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/gestionAgenceLocationMT/services/ServiceMDT.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/gestionAgenceLocationMT/entities/MoyenDeTrans.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/gestion/ListAgenceItemController.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/gestionAgenceLocationMT/entities/AgenceLoc.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/gestionAgenceLocationMT/services/ServiceAgenceLoc.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/gestionPromoFactureReservation/entities/Promotion.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/EscapadeMain.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/gestion/PromotionFXMLController.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/Escapade_3A5-Celine/Escapade_3A5-Celine/Escapade/src/view/gestion/AgenceFormController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/gestionHotelDestination/services/DestinationService.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/HotelFXMLController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/SiteControllerController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/MenuFXMLController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/FactureFXMLController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/Hotel_backFXMLController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/Sitestat.fxml</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/gestionGuideSiteTouristique/services/ServiceGuide.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/gestionGuideSiteTouristique/services/ServiceSiteTouristique.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/PromotionFXMLController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/MenuFXML.fxml</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/SiteController.fxml</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/GuideControllerController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/SitestatController.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/gestion/GuideController.fxml</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/escapade/utils/DataSource.java</file>
+            <file>file:/C:/Users/Amine/Desktop/Escapade/Escapade/src/view/EscapadeMain.java</file>
         </group>
     </open-files>
 </project-private>

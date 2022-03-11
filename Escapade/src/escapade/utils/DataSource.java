@@ -14,7 +14,7 @@ import java.sql.*;
  */
 public class DataSource {
     
-      private String url="jdbc:mysql://127.0.0.1:3306/escapade";
+      private String url="jdbc:mysql://127.0.0.1:3306/escp";
     private String user="root";
     private String password="";
     private Connection cnx; 
