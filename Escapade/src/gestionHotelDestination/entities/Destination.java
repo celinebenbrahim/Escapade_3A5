@@ -101,7 +101,7 @@ public class Destination {
         List<Destination> liste = new ArrayList<Destination>();
 
         for (Destination destination : Destinations) {
-            File f = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\Escapade\\src\\view\\ressources\\images\\"+destination.getImg());
+            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\"+destination.getImg());
             destination.setImgview(new ImageView(new Image(f.toURI().toString())));
             liste.add(destination);
         }
@@ -111,7 +111,7 @@ public class Destination {
          ArrayList<Destination> liste = new ArrayList<Destination>();
 
         for (Destination destination : Destinations) {
-            File f = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\Escapade\\src\\view\\ressources\\images\\"+destination.getImg());
+            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\"+destination.getImg());
             destination.setImgview(new ImageView(new Image(f.toURI().toString())));
             liste.add(destination);
         }
@@ -121,7 +121,7 @@ public class Destination {
         
          Destination d;
         
-            File f = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\Escapade\\src\\view\\ressources\\images\\" + destination.getImg());
+            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + destination.getImg());
             destination.setImgview(new ImageView(new Image(f.toURI().toString())));
             d=destination;
         

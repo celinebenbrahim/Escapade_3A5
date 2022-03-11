@@ -6,6 +6,7 @@
 package view.gestion;
 
 import static gestionUserReclamation.entities.Role.CLIENT;
+import gestionUserReclamation.entities.Session;
 import gestionUserReclamation.entities.Utilisateur;
 import gestionUserReclamation.services.UtilisateurService;
 import java.io.IOException;
@@ -78,20 +79,19 @@ public class ConxFXMLController implements Initializable {
 
         } else {
             if (us.authentification(email, mdp)) {
+                Session session=new Session();
+                session.setIdUser(us.getUserByEmail(email).getId());
                 if (us.getUserByEmail(email).getRole() == CLIENT) {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("Acceuil4FXML.fxml"));
                     Parent root = loader.load();
-                    Acceuil4FXMLController controller = loader.getController();
-                    controller.setId(us.getUserByEmail(email).getId());
-                    
                     boutonConnexion.getScene().setRoot(root);
 
                 } else {
-//                    FXMLLoader loader = new FXMLLoader();
-//                    loader.setLocation(getClass().getResource("Acceuil4.fxml"));
-//                    Parent root = loader.load();
-//                    boutonConnexion.getScene().setRoot(root);
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("BackFXML.fxml"));
+                    Parent root = loader.load();
+                   boutonConnexion.getScene().setRoot(root);
 
                 }
 

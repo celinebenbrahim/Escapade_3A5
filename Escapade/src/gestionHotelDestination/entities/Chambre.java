@@ -163,7 +163,7 @@ public class Chambre {
 
     @Override
     public String toString() {
-        return "Chambre{" + "num=" + num + ", type=" + type + ", vueSurMer=" + vueSurMer + ", description=" + description + ", prixNuit=" + prixNuit + ", status=" + status + ", hotel=" + hotel + ", img=" + img + ", imgview=" + imgview + '}';
+        return "Chambre{" + "num=" + num + ", type=" + type + ", vueSurMer=" + vueSurMer + ", description=" + description + ", prixNuit=" + prixNuit + ", status=" + status + ", img=" + img + ", imgview=" + imgview + '}';
     }
 
     public static List<Chambre> generateImageViews(List<Chambre> chambres) {

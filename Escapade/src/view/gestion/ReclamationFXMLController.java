@@ -32,6 +32,16 @@ public class ReclamationFXMLController implements Initializable {
     private Button Reservation;
     @FXML
     private Button btnSignout;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     /**
      * Initializes the controller class.

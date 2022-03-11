@@ -38,6 +38,11 @@ public class Facture {
         this.promotion = promotion;
     }
 
+    public Facture(Date date, Utilisateur client) {
+        this.date = date;
+        this.client = client;
+    }
+
     
 
     public Facture(float prixTotal, Date date, Utilisateur client, float prixFinal, Promotion promotion) {

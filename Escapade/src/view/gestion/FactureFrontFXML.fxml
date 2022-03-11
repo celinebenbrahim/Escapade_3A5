@@ -1,26 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="view.gestion.FactureFrontFXMLController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="1050.0" style="-fx-background-color: #ffefd9;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.gestion.FactureFrontFXMLController">
     <children>
-      <ImageView fitHeight="425.0" fitWidth="610.0" layoutX="-4.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="449.0" fitWidth="798.0" layoutX="251.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../ressources/images/page1.png" />
          </image>
       </ImageView>
-      <Button fx:id="Back" layoutX="29.0" layoutY="21.0" mnemonicParsing="false" text="Back" />
-      <Button fx:id="Next" layoutX="531.0" layoutY="21.0" mnemonicParsing="false" text="Next" />
-      <Label layoutX="230.0" layoutY="17.0" prefHeight="32.0" prefWidth="153.0" text="Facture" textAlignment="RIGHT">
-         <font>
-            <Font name="System Bold Italic" size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="ListFacture" layoutX="112.0" layoutY="80.0" prefHeight="181.0" prefWidth="384.0" />
+      <VBox alignment="TOP_CENTER" prefHeight="576.0" prefWidth="256.0" style="-fx-background-color: #ffefd9; -fx-padding: 12; -fx-border-style: solid inside; -fx-border-width: 4; -fx-border-insets: 5; -fx-border-radius: 5; -fx-border-color: #7eccc6;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="112.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ressources/images/logo2.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin></ImageView>
+            <Button fx:id="Home" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Home" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Accueil" textFill="#e7e5e5">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ressources/images/icons8_Home_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="Profil" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Profil" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Profil">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ressources/images/icons8_Person_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="Reclamation" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Reclamation">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ressources/images/icons8_Open_Envelope_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="Reservation" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Reservation" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Réservation">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ressources/images/icons8_Slider__32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+            <Button fx:id="btnSignout" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="259.0" stylesheets="@style.css" text="Déconnection">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../ressources/images/icons8_Sign_Out_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="580.0" layoutY="21.0" text="Facture" />
+      <VBox layoutX="312.0" layoutY="66.0" prefHeight="225.0" prefWidth="49.0" spacing="30.0">
+         <children>
+            <Label prefHeight="19.0" prefWidth="42.0" text="Nom :" />
+            <Label text="Prenom :" />
+            <Label text="Email :" />
+            <Label text="Tél :" />
+         </children>
+      </VBox>
+      <VBox layoutX="650.0" layoutY="63.0" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+         <children>
+            <Label text="check in :" />
+            <Label text="check out :" />
+            <Label text="Type:" />
+            <Label text="Vue sur Mer :" />
+         </children>
+      </VBox>
+      <TextField fx:id="tfNom" editable="false" layoutX="370.0" layoutY="66.0" prefHeight="25.0" prefWidth="176.0" />
+      <TextField fx:id="tfPrenom" editable="false" layoutX="370.0" layoutY="113.0" prefHeight="25.0" prefWidth="176.0" />
+      <TextField fx:id="tfEmail" editable="false" layoutX="370.0" layoutY="156.0" prefHeight="25.0" prefWidth="176.0" />
+      <TextField fx:id="tfNumTel" editable="false" layoutX="370.0" layoutY="205.0" prefHeight="25.0" prefWidth="176.0" />
+      <DatePicker fx:id="tfDateCheckIn" editable="false" layoutX="734.0" layoutY="63.0" />
+      <DatePicker fx:id="tfDateCheckOut" editable="false" layoutX="734.0" layoutY="106.0" />
+      <TextField fx:id="tfType" editable="false" layoutX="734.0" layoutY="155.0" prefHeight="25.0" prefWidth="176.0" />
+      <TextField fx:id="tfVueSurMer" editable="false" layoutX="734.0" layoutY="202.0" prefHeight="25.0" prefWidth="176.0" />
+      <Label layoutX="377.0" layoutY="299.0" text="Prix Totale :" />
+      <TextField fx:id="tfPrixTotale" editable="false" layoutX="498.0" layoutY="295.0" prefHeight="25.0" prefWidth="176.0" />
+      <Label layoutX="377.0" layoutY="336.0" text="Taux de promotion :" />
+      <TextField fx:id="tfTauxPromo" editable="false" layoutX="498.0" layoutY="332.0" prefHeight="25.0" prefWidth="176.0" />
+      <Label layoutX="378.0" layoutY="369.0" text="Prix Finale :" />
+      <TextField fx:id="tfPrixFinale" editable="false" layoutX="498.0" layoutY="365.0" prefHeight="25.0" prefWidth="176.0" />
+      <Button fx:id="confirmer" layoutX="448.0" layoutY="419.0" mnemonicParsing="false" onAction="#confirmer" text="Confirmer Réservation" />
+      <DatePicker fx:id="tfDate" editable="false" layoutX="498.0" layoutY="256.0" />
+      <Label layoutX="378.0" layoutY="261.0" text="Date :" />
+      <Button fx:id="Capture" layoutX="734.0" layoutY="419.0" mnemonicParsing="false" onAction="#Capture" text="Capture" />
    </children>
+   <effect>
+      <DropShadow color="#1b1eeb" />
+   </effect>
 </AnchorPane>

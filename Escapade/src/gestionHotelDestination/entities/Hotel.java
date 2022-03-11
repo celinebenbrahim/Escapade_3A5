@@ -117,7 +117,7 @@ public class Hotel {
         List<Hotel> liste = new ArrayList<Hotel>();
 
         for (Hotel hotel : hotels) {
-            File f = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
+            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
             hotel.setImgview(new ImageView(new Image(f.toURI().toString())));
             liste.add(hotel);
         }
@@ -128,7 +128,7 @@ public class Hotel {
         ArrayList<Hotel> liste = new ArrayList<Hotel>();
 
         for (Hotel hotel : hotels) {
-            File f = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
+            File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
             hotel.setImgview(new ImageView(new Image(f.toURI().toString())));
             liste.add(hotel);
         }
@@ -139,7 +139,7 @@ public class Hotel {
 
         Hotel h;
 
-        File f = new File("C:\\Users\\asus\\Documents\\NetBeansProjects\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
+        File f = new File("C:\\Users\\mahdi\\Desktop\\Escapade_3A5-Celine\\Escapade_3A5-Celine\\Escapade\\src\\view\\ressources\\images\\" + hotel.getImg());
         hotel.setImgview(new ImageView(new Image(f.toURI().toString())));
         h = hotel;
 
@@ -208,8 +208,8 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{" + "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom
-                + ", adresse=" + nbrEtoile + ", description="
+        return "Hotel{"+ idHotel+ "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom
+                + ", nb etoile=" + nbrEtoile + ", description="
                 + description + ", nbChambreTotal=" + nbChambreTotal
                 + "nb max chambre: " + maxChambre + "Emplacement:  Ville: " + destination.getVille()
                 + "Pays: " + destination.getPays() + ", img=" + img + ", imgview=" + imgview + '}';

@@ -107,14 +107,11 @@ public class FactureFXMLController implements Initializable {
     @FXML
     private Pane pnlOverview;
     @FXML
-    private VBox pnItems;
-    @FXML
     private Button Modif;
     @FXML
     private Button SupFac;
     @FXML
     private Button AjouterF;
-    @FXML
     private Button RechercheF;
     @FXML
     private Button imprimerfacture;
@@ -327,7 +324,6 @@ public class FactureFXMLController implements Initializable {
 
     }
 
-    @FXML
     private void RechercheF(ActionEvent event) throws IOException {
          FXMLLoader loader = new FXMLLoader();
 

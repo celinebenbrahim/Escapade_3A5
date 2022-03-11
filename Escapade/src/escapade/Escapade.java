@@ -47,10 +47,10 @@ public class Escapade {
     public static void main(String[] args) throws ParseException, SQLException {
         // TODO code application logic here
 
-        //Date
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateAller = format.parse("2022-02-18");
-        Date dateRetour = format.parse("2022-02-19");
+//        //Date
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        Date dateAller = format.parse("2022-02-18");
+//        Date dateRetour = format.parse("2022-02-19");
 
         //DESTINATION
 //        System.out.println("LISTE DESTINATION \n \n \n");
@@ -95,12 +95,14 @@ public class Escapade {
 
 //Utilisateur
 //System.out.println("\n \n LISTE UTILISATEUR \n \n \n");
-       UtilisateurService us = new UtilisateurService();
+       //UtilisateurService us = new UtilisateurService();
         //**********addUser*************
-
+     /*   ChambreService cs=new ChambreService();
+        
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateNaissance = simpleDateFormat.parse("2000-09-02");
-        Utilisateur u1 = new Utilisateur(98,"kk", "hemriti", "nour.boujmil@esprit.tn", dateNaissance, 26596, "tunis", "2000", "kkk", non, ADMIN);
+        Date dateNaissance = simpleDateFormat.parse("2022-09-02");
+        System.out.println(cs.rechercheChambre(dateNaissance, 3));*/
+        //Utilisateur u1 = new Utilisateur(98,"kk", "hemriti", "nour.boujmil@esprit.tn", dateNaissance, 26596, "tunis", "2000", "kkk", non, ADMIN);
         //us.ajouter(u1);
        //us.supprimer(u1);
         //**********showUser*************
@@ -163,48 +165,48 @@ public class Escapade {
         
         
          ////Promotion 
-        Date dateD = format.parse("2022-02-18");
-        Date dateF = format.parse("2022-02-19");
-       PromotionService promotionService = new PromotionService();
-//       Promotion p = new Promotion(10, dateD, dateF);
-//       promotionService.ajouter(p);
-//        Promotion p1 = new Promotion(20, dateD, dateF);
-//       promotionService.ajouter(p1);
-//        Promotion p2 = new Promotion(5, dateD, dateF);
-//       promotionService.ajouter(p2);
-//System.out.println(promotionService.afficher());
-//        System.out.println(promotionService.Tri());
-        // promotionService.rechercher(10);
-        //promotionService.chercher(3);
-        //promotionService.FindById(52);
-        //promotionService.FindByTaux(25);
-        
-
-//        promotionService.modifier(p, 1);
-//        promotionService.supprimer(p1);
-//       promotionService.supprimerId(8);
-
-        //Facture   
-        Date date = format.parse("2022-02-17");
-    // Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
-     //  userService.ajouter(u);
-        Promotion p1 = new Promotion(5, dateD, dateF);
-        promotionService.ajouter(p1);
-        FactureService factureService = new FactureService();
-      //  Facture f = new Facture(100, date, u,0,p1);
-       // factureService.ajouter(f);
-       // Facture f1 = new Facture(200, date, u, 1000, p1);
-      // factureService.ajouter(f1);
-      //  System.out.println(factureService.CalculerPrixF(f));
-      System.out.println(factureService.afficher());
-      factureService.CalculerPrixF();
-       System.out.println(factureService.afficher());
-        // System.out.println(factureService.Tri());
-        //factureService.rechercher(format.parse("2022-02-23"));
-       // factureService.chercher(3);
-     //  factureService.supprimerId(85);
-//        fs.supprimer(f);
-//        fs.modifier(f, 5);
+//        Date dateD = format.parse("2022-02-18");
+//        Date dateF = format.parse("2022-02-19");
+//       PromotionService promotionService = new PromotionService();
+////       Promotion p = new Promotion(10, dateD, dateF);
+////       promotionService.ajouter(p);
+////        Promotion p1 = new Promotion(20, dateD, dateF);
+////       promotionService.ajouter(p1);
+////        Promotion p2 = new Promotion(5, dateD, dateF);
+////       promotionService.ajouter(p2);
+////System.out.println(promotionService.afficher());
+////        System.out.println(promotionService.Tri());
+//        // promotionService.rechercher(10);
+//        //promotionService.chercher(3);
+//        //promotionService.FindById(52);
+//        //promotionService.FindByTaux(25);
+//        
+//
+////        promotionService.modifier(p, 1);
+////        promotionService.supprimer(p1);
+////       promotionService.supprimerId(8);
+//
+//        //Facture   
+//        Date date = format.parse("2022-02-17");
+//    // Utilisateur u = new Utilisateur("chennaoui", "celine", "celine@",date, 55989026, "nabeul", "cycy", "221017", Role.client);
+//     //  userService.ajouter(u);
+//        Promotion p1 = new Promotion(5, dateD, dateF);
+//        promotionService.ajouter(p1);
+//        FactureService factureService = new FactureService();
+//      //  Facture f = new Facture(100, date, u,0,p1);
+//       // factureService.ajouter(f);
+//       // Facture f1 = new Facture(200, date, u, 1000, p1);
+//      // factureService.ajouter(f1);
+//      //  System.out.println(factureService.CalculerPrixF(f));
+//      System.out.println(factureService.afficher());
+//      factureService.CalculerPrixF();
+//       System.out.println(factureService.afficher());
+//        // System.out.println(factureService.Tri());
+//        //factureService.rechercher(format.parse("2022-02-23"));
+//       // factureService.chercher(3);
+//     //  factureService.supprimerId(85);
+////        fs.supprimer(f);
+////        fs.modifier(f, 5);
 
     }
 

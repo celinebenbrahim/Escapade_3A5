@@ -11,20 +11,20 @@
 -fx-background-color : #065c55;
 }
 
-.scroll-pane {
+/*.scroll-pane {
     -fx-background-color: #02030A;
 }
 
 .scroll-bar:horizontal, .scroll-bar:vertical{
     -fx-background-color:transparent;
-}
+}*/
 
 .increment-button, .decrement-button {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
 
-.scroll-bar:horizontal .track,
+/*.scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -39,4 +39,17 @@
 
 .scroll-pane > .corner {
     -fx-background-color: black;
+}*/
+.scroll-pane > .viewport { 
+   -fx-background-color: transparent;
+}
+.scroll-pane{
+   -fx-background-color:transparent;
+}
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+.destination-item{
+    -fx-background-color: #FFFFFF;
+        -fx-background-radius: 30;
 }
