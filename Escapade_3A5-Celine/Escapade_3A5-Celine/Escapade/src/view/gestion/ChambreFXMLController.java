@@ -25,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -54,8 +55,6 @@ public class ChambreFXMLController implements Initializable {
     private ScrollPane scroll;
     @FXML
     private GridPane grid;
-    
-    private int id;
     @FXML
     private DatePicker checkIn;
     @FXML
@@ -81,14 +80,7 @@ public class ChambreFXMLController implements Initializable {
      private List<Chambre> listeChambre = new ArrayList<>();
     ChambreService cs= new ChambreService();
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-    
     
     /**
      * Initializes the controller class.
@@ -121,11 +113,11 @@ public class ChambreFXMLController implements Initializable {
 
     @FXML
     private void afficher(ActionEvent event) throws ParseException, SQLException {
-         LocalDate localDate = checkIn.getValue();
+         LocalDate localDate1 = checkIn.getValue();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
-        Date dateCheckIn = simpleDateFormat.parse(localDate.toString());
-        Date datecheckOut = simpleDateFormat.parse(localDate.toString());
+        LocalDate localDate2 = checkOut.getValue();
+        Date dateCheckIn = simpleDateFormat.parse(localDate1.toString());
+        Date datecheckOut = simpleDateFormat.parse(localDate2.toString());
         Type typee = type.getSelectionModel().getSelectedItem();
         VueSurMer vssmm = VuSurMer.getSelectionModel().getSelectedItem();
         
@@ -137,13 +129,23 @@ public class ChambreFXMLController implements Initializable {
 
             int column = 0;
             int row = 1;
+            grid.getChildren().clear();
+            if(listeChambre.size()==0){
+                
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("information Dialog");
+            alert.setContentText("Pas de chambre disponible dans cette date");
+            alert.show();
+            }
             for (int i = 0; i < listeChambre.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/view/gestion/ChambreItemsFXML.fxml"));
                 AnchorPane anchorpane = fxmlLoader.load();
                 ChambreItemsFXMLController itemController = fxmlLoader.getController();
                 itemController.setData(listeChambre.get(i));
-                itemController.setId(id);
+                itemController.setIdHotel(idHotel);
+                itemController.setDateAller(dateCheckIn);
+                itemController.setDateRetour(datecheckOut);
 
                 System.out.println(listeChambre.get(i));
                 if (column == 3) {

@@ -7,12 +7,21 @@ package view.gestion;
 
 import gestionHotelDestination.entities.Chambre;
 import gestionHotelDestination.entities.Hotel;
+import gestionUserReclamation.entities.ReservationChambre;
 import gestionUserReclamation.entities.Session;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,16 +44,37 @@ public class ChambreItemsFXMLController implements Initializable {
 
     private Chambre chambre;
 
-    private int id;
     @FXML
     private AnchorPane ch;
+    @FXML
+    private Button reserver;
+    private Date dateAller;
+    private Date dateRetour;
 
-    public int getId() {
-        return id;
+    public Date getDateAller() {
+        return dateAller;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDateAller(Date dateAller) {
+        this.dateAller = dateAller;
+    }
+
+    public Date getDateRetour() {
+        return dateRetour;
+    }
+
+    public void setDateRetour(Date dateRetour) {
+        this.dateRetour = dateRetour;
+    }
+    
+    private int idHotel;
+
+    public int getIdHotel() {
+        return idHotel;
+    }
+
+    public void setIdHotel(int idHotel) {
+        this.idHotel = idHotel;
     }
 
     /**
@@ -70,6 +100,21 @@ public class ChambreItemsFXMLController implements Initializable {
 
         image.setImage(new Image(f.toURI().toString()));
 
+    }
+
+    @FXML
+    private void reserver(ActionEvent event) throws IOException, ParseException, SQLException {
+        ReservationChambre reservation = new ReservationChambre(Session.getIdUser(),chambre.getId(), dateAller, dateRetour);
+         FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/view/gestion/FactureFrontFXML.fxml"));
+                Parent root = fxmlLoader.load();
+                FactureFrontFXMLController Controller = fxmlLoader.getController();
+                Controller.setReservation(reservation);
+                Controller.afficher();
+                reserver.getScene().setRoot(root);
+                
+                
+        
     }
 
 }

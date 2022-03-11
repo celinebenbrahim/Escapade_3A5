@@ -36,15 +36,6 @@ public class ReservationFXMLController implements Initializable {
     private Button Chambre;
     @FXML
     private Button btnSignout1;
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * Initializes the controller class.
@@ -68,8 +59,6 @@ public class ReservationFXMLController implements Initializable {
         loader.setLocation(getClass().getResource("DestinationFXML.fxml"));
         Parent root = loader.load();
         DestinationFXMLController controller = loader.getController();
-        System.out.println("idCLient2="+id);
-        controller.setId(id);
         controller.afficher();
         Hotel.getScene().setRoot(root);
     }

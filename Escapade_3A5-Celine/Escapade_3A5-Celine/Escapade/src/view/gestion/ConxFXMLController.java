@@ -85,16 +85,13 @@ public class ConxFXMLController implements Initializable {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("Acceuil4FXML.fxml"));
                     Parent root = loader.load();
-                    Acceuil4FXMLController controller = loader.getController();
-                    controller.setId(us.getUserByEmail(email).getId());
-                    
                     boutonConnexion.getScene().setRoot(root);
 
                 } else {
-//                    FXMLLoader loader = new FXMLLoader();
-//                    loader.setLocation(getClass().getResource("Acceuil4.fxml"));
-//                    Parent root = loader.load();
-//                    boutonConnexion.getScene().setRoot(root);
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("BackFXML.fxml"));
+                    Parent root = loader.load();
+                   boutonConnexion.getScene().setRoot(root);
 
                 }
 

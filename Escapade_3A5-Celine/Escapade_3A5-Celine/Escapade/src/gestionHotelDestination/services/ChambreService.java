@@ -62,7 +62,7 @@ public class ChambreService implements IService<Chambre> {
             pst.setDouble(5, ch.getPrixNuit());
             pst.setString(6, ch.getStatus().toString());
             pst.setInt(7, ch.getHotel().getIdHotel());
-             pst.setString(8, ch.getImg());
+            pst.setString(8, ch.getImg());
             pst.executeUpdate();
 
             ResultSet generatedKeys = pst.getGeneratedKeys();
@@ -77,7 +77,7 @@ public class ChambreService implements IService<Chambre> {
     }
 
     @Override
-    public void supprimer(Chambre ch) throws SQLException{
+    public void supprimer(Chambre ch) throws SQLException {
 
         String req = "delete from chambre where id = " + ch.getId();
         try {
@@ -91,7 +91,7 @@ public class ChambreService implements IService<Chambre> {
     }
 
     @Override
-    public void modifier(Chambre ch, int id) throws SQLException{
+    public void modifier(Chambre ch, int id) throws SQLException {
 
         String req = "update `chambre` SET num=?,type=?,vueSurMer=?,description=?,prixNuit=?,status=?,img=? where id=" + id;
         try {
@@ -129,7 +129,7 @@ public class ChambreService implements IService<Chambre> {
                 Hotel h = new Hotel();
                 if (rss.next()) {
                     InputStream stream = rss.getBinaryStream(1);
-                 
+
                     h.setMatriculeFiscale(rss.getString(1));
                     h.setNom(rss.getString(2));
                     h.setNbrEtoile(rss.getInt(3));
@@ -154,7 +154,7 @@ public class ChambreService implements IService<Chambre> {
     }
 
     @Override
-    public List<Chambre> tri() throws SQLException{
+    public List<Chambre> tri() throws SQLException {
         List<Chambre> LChambre = new ArrayList<>();
         String req = "select * from `chambre` order by prixNuit ASC";
         try {
@@ -171,7 +171,7 @@ public class ChambreService implements IService<Chambre> {
 
                 if (rss.next()) {
                     InputStream stream = rss.getBinaryStream(1);
-                   
+
                     h.setMatriculeFiscale(rss.getString(1));
                     h.setNom(rss.getString(2));
                     h.setNbrEtoile(rss.getInt(3));
@@ -187,7 +187,7 @@ public class ChambreService implements IService<Chambre> {
                 ch.setHotel(h);
                 ch.setImg(rs.getString(9));
                 LChambre.add(ch);
-                
+
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -197,7 +197,7 @@ public class ChambreService implements IService<Chambre> {
     }
 
     @Override
-    public void rechercher(String status) throws SQLException{
+    public void rechercher(String status) throws SQLException {
         List<Chambre> result = afficher().stream().
                 filter(line -> status.equals(line.getStatus().toString())).collect(Collectors.toList());
         System.out.println("----------");
@@ -205,30 +205,26 @@ public class ChambreService implements IService<Chambre> {
     }
 
     public void updateStatus(Chambre ch) throws SQLException {
-        
-        
 
-        String req = "select status from `chambre` where id=" + ch.getId();       
+        String req = "select status from `chambre` where id=" + ch.getId();
         String req1 = "update `chambre` SET status=? where id=" + ch.getId();
-      
+
         try {
-     
+
             pst = conn.prepareStatement(req);
-        
+
             PreparedStatement pst1 = conn.prepareStatement(req1);
-            
+
             ResultSet rs = pst.executeQuery();
-        
+
             rs.next();
-         
+
             if (Status.valueOf(rs.getString(1)).equals(Status.disponible)) {
-                  
+
                 pst1.setString(1, Status.indisponible.toString());
-            
-            } 
-            else
-            {
-                
+
+            } else {
+
                 pst1.setString(1, Status.disponible.toString());
 
             }
@@ -239,13 +235,13 @@ public class ChambreService implements IService<Chambre> {
         }
 
     }
-    
-     public Chambre getChambreById(int id) {
+
+    public Chambre getChambreById(int id) {
         String req = "SELECT * from `Chambre` where id=?";
         //Chambre chambre = new Chambre();
         Chambre ch = new Chambre();
-        
-          try {
+
+        try {
             pst = conn.prepareStatement(req);
             pst.setInt(1, id);
 
@@ -259,12 +255,12 @@ public class ChambreService implements IService<Chambre> {
                 Hotel h = new Hotel();
                 if (rss.next()) {
                     InputStream stream = rss.getBinaryStream(1);
-                 
+
                     h.setMatriculeFiscale(rss.getString(1));
                     h.setNom(rss.getString(2));
                     h.setNbrEtoile(rss.getInt(3));
                 }
-                
+
                 ch.setId(rs.getInt("id"));
                 ch.setNum(rs.getInt(2));
                 ch.setType(Type.valueOf(rs.getString(3)));
@@ -278,12 +274,11 @@ public class ChambreService implements IService<Chambre> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-          return ch;
-          
-          
-     }
-     
-     public List<Chambre> rechercheChambre(Date date,int id,Type type,VueSurMer vue ) throws SQLException {
+        return ch;
+
+    }
+
+    public List<Chambre> rechercheChambre(Date date, int id, Type type, VueSurMer vue) throws SQLException {
         List<Chambre> LChambre = new ArrayList<>();
         String req = "SELECT chambre.id, `num`, `Type`, `vueSurMer`, `description`, `prixNuit`, `status`, `idHotel`, `img`, `dateArrivee` , `dateAller` FROM `chambre` LEFT join `reservation_chambre` on chambre.id=reservation_chambre.idChambre WHERE idHotel=? and Type=? and vueSurMer=? and (dateAller <? or dateAller is NUll);";
         try {
@@ -291,7 +286,7 @@ public class ChambreService implements IService<Chambre> {
             pst.setInt(1, id);
             pst.setString(2, String.valueOf(type));
             pst.setString(3, String.valueOf(vue));
-            pst.setDate(4, new java.sql.Date(date.getTime()) );
+            pst.setDate(4, new java.sql.Date(date.getTime()));
             ResultSet rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -303,7 +298,7 @@ public class ChambreService implements IService<Chambre> {
                 ch.setDescription(rs.getString(5));
                 ch.setPrixNuit(rs.getDouble(6));
                 ch.setStatus(Status.valueOf(rs.getString(7)));
-                Hotel h=new Hotel();
+                Hotel h = new Hotel();
                 h.setIdHotel(id);
                 ch.setHotel(h);
                 ch.setImg(rs.getString(9));
@@ -315,6 +310,35 @@ public class ChambreService implements IService<Chambre> {
         return LChambre;
 
     }
+
+    public Chambre getChambre(int id) {
+        String req = "SELECT * from `Chambre` where id=?";
+        //Chambre chambre = new Chambre();
        
+        Chambre ch = new Chambre();
+
+        try {
+            pst = conn.prepareStatement(req);
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                 
+                Hotel h = new Hotel();
+                ch.setId(rs.getInt("id"));
+                ch.setType(Type.valueOf(rs.getString(3)));
+                ch.setVueSurMer(VueSurMer.valueOf(rs.getString(4)));
+                ch.setPrixNuit(rs.getDouble(6));
+                ch.setStatus(Status.valueOf(rs.getString(7)));
+                h.setIdHotel(rs.getInt(8));
+                ch.setHotel(h);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return ch;
+
+    }
 
 }

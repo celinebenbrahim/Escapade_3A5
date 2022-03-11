@@ -27,18 +27,18 @@ import java.util.stream.Collectors;
  * @author Meryem
  */
 public class HotelService implements IService<Hotel> {
-
+    
     public Connection conn;
     
     public PreparedStatement pst;
-
+    
     public HotelService() {
         conn = DataSource.getInstance().getCnx();
     }
-
+    
     @Override
-    public void supprimerId(int id) throws SQLException{
-
+    public void supprimerId(int id) throws SQLException {
+        
         String req = "delete from hotel where idHotel=" + id;
         try {
             PreparedStatement pst = conn.prepareStatement(req);
@@ -47,16 +47,16 @@ public class HotelService implements IService<Hotel> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
     }
-
+    
     @Override
-    public void ajouter(Hotel h) throws SQLException{
-
+    public void ajouter(Hotel h) throws SQLException {
+        
         String req = "insert into hotel  ( matriculeFiscale,nom,nbrEtoile,description,"
                 + "nbChambreTotal,idDestination,maxChambre,imgHotel)"
                 + " values(?,?,?,?,?,?,?,?)";
-
+        
         try {
             pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, h.getMatriculeFiscale());
@@ -76,11 +76,11 @@ public class HotelService implements IService<Hotel> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
     }
-
+    
     @Override
-    public void supprimer(Hotel h) throws SQLException{
+    public void supprimer(Hotel h) throws SQLException {
         String req = "delete from hotel where idHotel = " + h.getIdHotel();
         try {
             pst = conn.prepareStatement(req);
@@ -89,17 +89,17 @@ public class HotelService implements IService<Hotel> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
     }
-
+    
     @Override
-    public void modifier(Hotel h, int id) throws SQLException{
-
+    public void modifier(Hotel h, int id) throws SQLException {
+        
         String req = "update `hotel` SET matriculeFiscale=? ,nom=?,"
                 + "nbrEtoile=?,description=?,nbChambreTotal=?,idDestination=? ,maxChambre=?,imgHotel=? where idHotel=" + id;
         try {
-        pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
-             pst.setString(1, h.getMatriculeFiscale());
+            pst = conn.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, h.getMatriculeFiscale());
             pst.setString(2, h.getNom());
             pst.setInt(3, h.getNbrEtoile());
             pst.setString(4, h.getDescription());
@@ -109,7 +109,7 @@ public class HotelService implements IService<Hotel> {
             pst.setString(8, h.getImg());
             pst.executeUpdate();
             
-             ResultSet generatedKeys = pst.getGeneratedKeys();
+            ResultSet generatedKeys = pst.getGeneratedKeys();
             if (generatedKeys.next()) {
                 h.setIdHotel(generatedKeys.getInt(1));
             }
@@ -118,77 +118,74 @@ public class HotelService implements IService<Hotel> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
     }
-
+    
     @Override
-    public List<Hotel> afficher()throws SQLException {
-                 
-          List<Hotel> hotels = new ArrayList<>();
+    public List<Hotel> afficher() throws SQLException {
+        
+        List<Hotel> hotels = new ArrayList<>();
         String req = " select idHotel,matriculeFiscale,`nom`, `nbrEtoile`, `description`, "
                 + "`nbChambreTotal`, `maxChambre`, `imgHotel` ,`pays`, `ville` FROM `hotel` JOIN `destination`"
                 + " ON hotel.idDestination = destination.id ";
         try {
             pst = conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
-
+            
             while (rs.next()) {
                 Hotel h = new Hotel();
-                 h.setIdHotel(rs.getInt("idHotel"));
-              h.setMatriculeFiscale(rs.getString(2));
+                h.setIdHotel(rs.getInt("idHotel"));
+                h.setMatriculeFiscale(rs.getString(2));
                 h.setNom(rs.getString(3));
-            
+                
                 h.setNbrEtoile(rs.getInt(4));
                 h.setDescription(rs.getString(5));
                 h.setNbChambreTotal(rs.getInt(6));
                 h.setMaxChambre(rs.getInt(7));
                 h.setImg(rs.getString(8));
-                Destination d= new Destination(rs.getString(9),rs.getString(10));
+                Destination d = new Destination(rs.getString(9), rs.getString(10));
                 h.setDestination(d);
-               
+                
                 hotels.add(h);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
         return hotels;
-
+        
     }
     
-    public int countHotel(int nb)
-    {
-       int i=0;
-         String req = " select count(*) FROM `hotel` where nbrEtoile="+nb;    
-          try {
+    public int countHotel(int nb) {
+        int i = 0;
+        String req = " select count(*) FROM `hotel` where nbrEtoile=" + nb;        
+        try {
             pst = conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
-
+            
             while (rs.next()) {
-              
-                i=rs.getInt(1);
-               
-             
+                
+                i = rs.getInt(1);
+                
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
         return i;
-         
+        
     }
     
-    
-    public List<Hotel> afficherHotel(int id)throws SQLException {
-                 
-          List<Hotel> hotels = new ArrayList<>();
+    public List<Hotel> afficherHotel(int id) throws SQLException {
+        
+        List<Hotel> hotels = new ArrayList<>();
         String req = " select idHotel,matriculeFiscale,`nom`, `nbrEtoile`, `description`, "
-                + "`nbChambreTotal`, `maxChambre`, `imgHotel`  FROM `hotel` where idDestination="+id; 
-              
+                + "`nbChambreTotal`, `maxChambre`, `imgHotel`  FROM `hotel` where idDestination=" + id;        
+        
         try {
             pst = conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
-
+            
             while (rs.next()) {
                 Hotel h = new Hotel();
                 h.setIdHotel(rs.getInt("idHotel"));
@@ -199,20 +196,21 @@ public class HotelService implements IService<Hotel> {
                 h.setNbChambreTotal(rs.getInt(6));
                 h.setMaxChambre(rs.getInt(7));
                 h.setImg(rs.getString(8));
-                Destination d= new Destination(rs.getString(9),rs.getString(10));
+                Destination d = new Destination(rs.getString(9), rs.getString(10));
                 h.setDestination(d);
                 hotels.add(h);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
         return hotels;
-
+        
     }
-    @Override
-     public List<Hotel> tri()throws SQLException {
 
+    @Override
+    public List<Hotel> tri() throws SQLException {
+        
         List<Hotel> hotels = new ArrayList<>();
         String req = "SELECT  `matriculeFiscale`, `nom`, `nbrEtoile`, `description`, "
                 + "`nbChambreTotal`, `maxChambre`, `imgHotel` ,`pays`, `ville` FROM `hotel`  INNER JOIN `destination`"
@@ -220,10 +218,10 @@ public class HotelService implements IService<Hotel> {
         try {
             pst = conn.prepareStatement(req);
             ResultSet rs = pst.executeQuery();
-
+            
             while (rs.next()) {
                 Hotel h = new Hotel();
-         
+                
                 h.setMatriculeFiscale(rs.getString(1));
                 h.setNom(rs.getString(2));
                 h.setNbrEtoile(rs.getInt(3));
@@ -231,87 +229,111 @@ public class HotelService implements IService<Hotel> {
                 h.setNbChambreTotal(rs.getInt(5));
                 h.setMaxChambre(rs.getInt(6));
                 h.setImg(rs.getString(7));
-                Destination d= new Destination(rs.getString(8),rs.getString(9));
+                Destination d = new Destination(rs.getString(8), rs.getString(9));
                 h.setDestination(d);
                 hotels.add(h);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
         return hotels;
-
-
-    }
-
-    @Override
-    public void rechercher(String nom)throws SQLException {
-               List<Hotel> result = afficher().stream().
-                filter(line -> nom.equals(line.getNom())).collect(Collectors.toList());
-                    System.out.println("----------");
-                    result.forEach(System.out::println);
+        
     }
     
-     public List<Hotel> findHotel(String matriculeFiscale, String nom ,int nbrEtoile ) throws SQLException {
-
+    @Override
+    public void rechercher(String nom) throws SQLException {
+        List<Hotel> result = afficher().stream().
+                filter(line -> nom.equals(line.getNom())).collect(Collectors.toList());
+        System.out.println("----------");
+        result.forEach(System.out::println);
+    }
+    
+    public List<Hotel> findHotel(String matriculeFiscale, String nom, int nbrEtoile) throws SQLException {
+        
         String req = "SELECT * FROM Hotel WHERE matriculeFiscale= ? or nom=? or nbrEtoile=? ";
-       
+        
         List<Hotel> hotel = new ArrayList<>();
-
-       pst = conn.prepareStatement(req);
+        
+        pst = conn.prepareStatement(req);
         pst.setString(1, matriculeFiscale);
         pst.setString(2, nom);
-       pst.setInt(3, nbrEtoile);
-
+        pst.setInt(3, nbrEtoile);
+        
         ResultSet rs = pst.executeQuery();
-
+        
         while (rs.next()) {
             pst = conn.prepareStatement(req);
-           pst.setString(1, matriculeFiscale);
-        pst.setString(2, nom);
-       pst.setInt(3, nbrEtoile);
-       Hotel h = new Hotel();
-             h.setIdHotel(rs.getInt("idHotel"));
-               h.setMatriculeFiscale(rs.getString(1));
-                h.setNom(rs.getString(2));
-                h.setNbrEtoile(rs.getInt(3));
-                hotel.add(h);
-
+            pst.setString(1, matriculeFiscale);
+            pst.setString(2, nom);
+            pst.setInt(3, nbrEtoile);
+            Hotel h = new Hotel();
+            h.setIdHotel(rs.getInt("idHotel"));
+            h.setMatriculeFiscale(rs.getString(1));
+            h.setNom(rs.getString(2));
+            h.setNbrEtoile(rs.getInt(3));
+            hotel.add(h);
+            
         }
         return hotel;
     }
-     
-     public List<Hotel> afficherByDestination(int id) {
+    
+    public List<Hotel> afficherByDestination(int id) {
         List<Hotel> hotels = new ArrayList<>();
-         System.out.println("id d="+id);
+        System.out.println("id d=" + id);
         String req = "SELECT * from `Hotel` where idDestination=? ;";
-
+        
         try {
             pst = conn.prepareStatement(req);
-            pst.setInt(1,id);
+            pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
-
+            
             while (rs.next()) {
                 Hotel h = new Hotel();
-                 h.setIdHotel(rs.getInt(1));
-              h.setMatriculeFiscale(rs.getString(2));
+                h.setIdHotel(rs.getInt(1));
+                h.setMatriculeFiscale(rs.getString(2));
                 h.setNom(rs.getString(3));
-            
+                
                 h.setNbrEtoile(rs.getInt(4));
                 h.setDescription(rs.getString(5));
                 h.setNbChambreTotal(rs.getInt(6));
                 h.setMaxChambre(rs.getInt(8));
                 h.setImg(rs.getString(9));
-                Destination d= new Destination();
+                Destination d = new Destination();
                 d.setId(id);
                 h.setDestination(d);
-               
+                
                 hotels.add(h);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
         return hotels;
+    }
+    
+    public Hotel getHotelById(int id) {
+        String req = " select * from hotel where id=?";
+        Hotel h = new Hotel();
+        try {
+            pst = conn.prepareStatement(req);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                h.setIdHotel(rs.getInt("idHotel"));
+                h.setMatriculeFiscale(rs.getString(2));
+                h.setNom(rs.getString(3));
+                h.setNbrEtoile(rs.getInt(4));
+                h.setDescription(rs.getString(5));
+                h.setNbChambreTotal(rs.getInt(6));
+                h.setMaxChambre(rs.getInt(7));
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return h;
+        
     }
 }

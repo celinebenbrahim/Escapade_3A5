@@ -5,6 +5,7 @@
  */
 package view.gestion;
 
+import gestionUserReclamation.entities.Session;
 import gestionUserReclamation.entities.Utilisateur;
 import gestionUserReclamation.services.UtilisateurService;
 import java.io.IOException;
@@ -37,15 +38,6 @@ public class Acceuil4FXMLController implements Initializable {
     private Button Reclamation;
     @FXML
     private Button Reservation;
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * Initializes the controller class.
@@ -64,8 +56,6 @@ public class Acceuil4FXMLController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Acceuil4FXML.fxml"));
         Parent root = loader.load();
-        Acceuil4FXMLController controller = loader.getController();
-        controller.setId(id);
         Home.getScene().setRoot(root);
 
     }
@@ -77,7 +67,6 @@ public class Acceuil4FXMLController implements Initializable {
         loader.setLocation(getClass().getResource("ProfilFXML.fxml"));
         Parent root = loader.load();
         ProfilFXMLController controller = loader.getController();
-        controller.setId(id);
         controller.Profil();
         Profil.getScene().setRoot(root);
 
@@ -88,8 +77,6 @@ public class Acceuil4FXMLController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("ReclamationFXML.fxml"));
         Parent root = loader.load();
-        ReclamationFXMLController controller = loader.getController();
-        controller.setId(id);
         Reclamation.getScene().setRoot(root);
     }
 
@@ -98,9 +85,6 @@ public class Acceuil4FXMLController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("ReservationFXML.fxml"));
         Parent root = loader.load();
-        ReservationFXMLController controller = loader.getController();
-        controller.setId(id);
-        System.out.println("idCLient1="+id);
         Reservation.getScene().setRoot(root);
 
     }

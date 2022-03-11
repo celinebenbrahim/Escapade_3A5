@@ -16,6 +16,8 @@ import gestionPromoFactureReservation.entities.Iservice;
 import gestionPromoFactureReservation.entities.Promotion;
 import gestionUserReclamation.entities.Utilisateur;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +47,13 @@ public class FactureService implements Iservice<Facture> {
             pst.setDate(2, new java.sql.Date(f.getDate().getTime()));
             pst.setInt(3, f.getClient().getId());
             pst.setFloat(4, f.getPrixFinal());
-            pst.setInt(5, f.getPromotion().getId());
+            if(f.getPromotion()!=null){
+                pst.setInt(5, f.getPromotion().getId());
+            }
+            else{
+                pst.setNull(5, 0);
+            }
+            
             ResultSet generatedKeys = pst.getGeneratedKeys();
             if (generatedKeys.next()) {
 
@@ -220,5 +228,16 @@ public class FactureService implements Iservice<Facture> {
         return facture;
 
     }*/
+    
+    
+    public double calculerPrixTotale(double prixNuit,LocalDate checkIn,LocalDate CheckOut){
+
+        return ChronoUnit.DAYS.between(checkIn, CheckOut)*prixNuit;
+        
+    }
+     public double calculerPrixFinale(float prixTotale,Promotion p){
+        return prixTotale-(prixTotale*p.getTaux()/100);
+        
+    }
 
 }

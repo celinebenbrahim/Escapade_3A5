@@ -53,16 +53,6 @@ public class DestinationFXMLController implements Initializable {
     @FXML
     private Button Chambre;
     
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
     /**
      * Initializes the controller class.
      */
@@ -104,9 +94,6 @@ public class DestinationFXMLController implements Initializable {
                 AnchorPane anchorpane = fxmlLoader.load();
                 DestinationItemsFXMLController itemController = fxmlLoader.getController();
                 itemController.setData(listeDestination.get(i));
-                itemController.setId(id);
-                System.out.println("idCLient3="+id);
-                System.out.println(listeDestination.get(i));
                 if (column == 3) {
                     column = 0;
                     row++;

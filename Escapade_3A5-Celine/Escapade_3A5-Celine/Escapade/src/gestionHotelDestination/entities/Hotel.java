@@ -208,7 +208,7 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{" + "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom
+        return "Hotel{"+ idHotel+ "matriculeFiscale=" + matriculeFiscale + ", nom=" + nom
                 + ", nb etoile=" + nbrEtoile + ", description="
                 + description + ", nbChambreTotal=" + nbChambreTotal
                 + "nb max chambre: " + maxChambre + "Emplacement:  Ville: " + destination.getVille()

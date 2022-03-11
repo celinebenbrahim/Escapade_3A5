@@ -36,15 +36,6 @@ public class HotelItemFXMLController implements Initializable {
     @FXML
     private Label description;
     private Hotel hotel;
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
     /**
      * Initializes the controller class.
      */
@@ -76,9 +67,7 @@ public class HotelItemFXMLController implements Initializable {
         fxmlLoader.setLocation(getClass().getResource("/view/gestion/ChambreFXML.fxml"));
         Parent root = fxmlLoader.load();
         ChambreFXMLController controller = fxmlLoader.getController();
-        controller.setId(id);
         controller.setIdHotel(hotel.getIdHotel());
-        System.out.println("idCLient"+id);
         //controller.setIdDestination(idDestination);
         //controller.afficher();
         image.getScene().setRoot(root);

@@ -52,7 +52,6 @@ public class HotelFXMLController implements Initializable {
     private List<Hotel> listeHotel = new ArrayList<>();
     HotelService hs = new HotelService();
 
-    private int id;
     private int idDestination;
 
     public int getIdDestination() {
@@ -61,14 +60,6 @@ public class HotelFXMLController implements Initializable {
 
     public void setIdDestination(int idDestination) {
         this.idDestination = idDestination;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -100,7 +91,7 @@ public class HotelFXMLController implements Initializable {
     public void afficher(){
         try {
             // TODO
-            System.out.println("aaa"+id);
+
             listeHotel = hs.afficherByDestination(idDestination);
             System.out.println(listeHotel);
 
@@ -112,7 +103,6 @@ public class HotelFXMLController implements Initializable {
                 AnchorPane anchorpane = fxmlLoader.load();
                 HotelItemFXMLController itemController = fxmlLoader.getController();
                 itemController.setData(listeHotel.get(i));
-                itemController.setId(id);
 
                 System.out.println(listeHotel.get(i));
                 if (column == 3) {

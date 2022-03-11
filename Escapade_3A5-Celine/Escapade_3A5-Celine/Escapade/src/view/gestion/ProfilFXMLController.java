@@ -5,6 +5,7 @@
  */
 package view.gestion;
 
+import gestionUserReclamation.entities.Session;
 import gestionUserReclamation.entities.Utilisateur;
 import gestionUserReclamation.services.UtilisateurService;
 import java.io.IOException;
@@ -62,15 +63,6 @@ public class ProfilFXMLController implements Initializable {
     private Label labelMDP;
     
      private Utilisateur user;
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
       public void setUser(Utilisateur user) {
         this.user = user;
     }
@@ -124,7 +116,7 @@ public class ProfilFXMLController implements Initializable {
 
     public void Profil() {
         UtilisateurService us=new UtilisateurService();
-        Utilisateur user=us.getUserById(id);
+        Utilisateur user=us.getUserById(Session.getIdUser());
         
         tfNom.setText(user.getNom());
         tfPrenom.setText(user.getPrenom());
@@ -150,7 +142,7 @@ public class ProfilFXMLController implements Initializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date dateNaissance = simpleDateFormat.parse(localDate.toString());
         int numTel = Integer.parseInt(tfNumTel.getText());
-        Utilisateur user = new Utilisateur(id,nom, prenom, email, dateNaissance, numTel, ville);
+        Utilisateur user = new Utilisateur(Session.getIdUser(),nom, prenom, email, dateNaissance, numTel, ville);
         UtilisateurService us = new UtilisateurService();
         us.modifier(user);
      

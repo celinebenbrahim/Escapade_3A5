@@ -36,7 +36,6 @@ public class DestinationItemsFXMLController implements Initializable {
     private Destination destination;
     @FXML
     private AnchorPane dest;
-    private int id;
     
     private int idDestination;
 
@@ -48,13 +47,6 @@ public class DestinationItemsFXMLController implements Initializable {
         this.idDestination = idDestination;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * Initializes the controller class.
@@ -84,8 +76,6 @@ public class DestinationItemsFXMLController implements Initializable {
         fxmlLoader.setLocation(getClass().getResource("/view/gestion/HotelFXML.fxml"));
         Parent root = fxmlLoader.load();
         HotelFXMLController controller = fxmlLoader.getController();
-        controller.setId(id);
-        System.out.println("idDest="+idDestination);
         controller.setIdDestination(idDestination);
         controller.afficher();
         dest.getScene().setRoot(root);
