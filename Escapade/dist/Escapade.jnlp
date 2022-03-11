@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Escapade.jnlp">
+  <information>
+    <title>Escapade</title>
+    <vendor>KattaX</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Escapade.jar" size="6858496" download="eager" />
+    <jar href="lib\TrayNotification-5393c3a54f.jar" size="42522" download="eager" />
+    <jar href="lib\controlsfx-8.40.15.jar" size="1402490" download="eager" />
+    <jar href="lib\java-json.jar" size="84697" download="eager" />
+    <jar href="lib\jfoenix-8.0.2.jar" size="2442326" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.28.jar" size="2476480" download="eager" />
+    <jar href="lib\protobuf-java-3.11.4.jar" size="1660960" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="escapade.Escapade"  name="Escapade" />
+  <update check="always"/>
+</jnlp>
